@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Question Bridge</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<link rel="stylesheet" href="./lib/jquery.mobile-1.3.2.min.css" />
+	<link rel="stylesheet" href="./css/fonts.css" />
+	<link rel="stylesheet" href="./css/style.css" />
+	<link rel="stylesheet" href="./css/iPhone.css" />
+	<link rel="stylesheet" href="./css/iPad.css" />
+	<link rel="stylesheet" href="./css/android.css" />
+
+	<script src="./lib/jquery-1.9.1.min.js"></script>
+	<script src="./lib/jquery.mobile-1.3.2.min.js"></script>
+	<script src="./lib/spin.min.js"></script>
+	<!-- <script src="./lib/SocialSharing.js"></script> -->
+	<script src="./lib/jquery.cookie.js"></script>
+	<script src="./lib/jquery.validate.min.js"></script>
+	<script src="./lib/touchit-1.0.0.js"></script>
+	<script src="./lib/json2.js"></script>
+
+	<script src="./js/kaltura.js"></script>
+	<script src="./js/video.capture.js"></script>
+	<script src="./js/main.js"></script>
+
+	<script src="cordova.js"></script>
+	<!-- cordova facebook plugin -->
+	<script src="cdv-plugin-fb-connect.js"></script>
+	<!-- facebook js sdk -->
+	<script src="facebook-js-sdk.js"></script>
+</head>
+
+<body>
+	<img id="bg-img" src="./images/bg-body.jpg" alt="background" />
+
+	<div class="page page-home" data-role="page" id="page-home">
+		<div class="header" data-role="header" data-position="fixed" data-tap-toggle="false">
+			<h1 class="logo">Question Bridge</h1>
+			<a href="#main-menu" class="main-menu ui-btn-right">Menu</a>
+		</div>
+
+		<div data-role="content" class="content">
+			<div data-role="fieldcontain" class="search-container">
+				<input type="search" name="search" id="edit-search-home" value="" placeholder="Search" />
+			</div>
+
+			<div class="content-primary">
+				<ul data-role="listview" class="questions"></ul>
+			</div>
+
+		</div>
+
+		<div data-role="panel" id="main-menu" class="main-menu" data-position="right" data-display="push" data-position-fixed="true">
+			<ul data-role="listview">
+				<li class="ask-question"><a href="#page-ask-question-step-1" data-transition="slide" data-direction="reverse">Ask a Question</a></li>
+				<li class="latest"><a href="#page-home?order=latest" data-transition="slide" data-direction="reverse">Latest</a></li>
+				<li class="featured"><a href="#page-home?order=featured" data-transition="slide" data-direction="reverse">Featured</a></li>
+				<li class="popular"><a href="#page-home?order=popular" data-transition="slide" data-direction="reverse">Trending</a></li>
+				<li class="local"><a href="#page-home?order=local" data-transition="slide" data-direction="reverse">Local</a></li>
+				<li class="favourites"><a href="#page-home?order=favourites" data-transition="slide" data-direction="reverse">Favorites</a></li>
+				<li class="about"><a href="#page-about" data-transition="slide" data-direction="reverse">About</a></li>
+				<li class="sing-in">
+					<a href="#page-sing-in" data-transition="slide" data-direction="reverse">Sign in / Sign up</a>
+				</li>
+				<li class="ipad-sing-in">
+					<a href="#ipad-login" data-transition="pop" data-direction="reverse" data-rel="popup" data-transition="pop" data-position-to="window">Sign in / Sign up</a>
+				</li>
+				<li class="log-out"><a href="#" data-transition="slide" data-direction="reverse">Sign Out</a></li>
+			</ul>
+
+			<p class="privacy-policy">
+			&copy; 2013 Question Bridge<br />
+			<a href="#terms-conditions" data-transition="slide" class="terms-conditions-link">Terms & Conditions  <!-- |  Privacy Policy --></a><br /><br />
+			Designed by Uncharted Digital
+			</p>
+
+			<div data-role="popup" id="ipad-page-forgot-password" class="ipad-page-forgot-password" data-overlay-theme="a">
+				<a href="#" data-rel="back" data-role="none" data-theme="a" data-icon="delete" data-iconpos="notext" class="login-close">&times</a>
+				<div data-role="content" class="content">
+					<h2>Forgot your password?</h2>
+					<form id="forgot-password-form">
+						<fieldset>
+							<input  type="text" name="restore" class="form-text" placeholder="Email Address/Username" required>
+							<input data-role="none" class="form-submit" type="submit" value="Email new Password" />
+						</fieldset>
+					</form>
+					<div class="sign-in">
+						<span>Already have a profile?</span>
+						<a href="#ipad-login" data-transition="pop" data-direction="reverse" data-rel="popup" data-transition="pop" data-position-to="window" >Sign in</a>
+					</div>
+
+				</div>
+			</div>
+
+			<div data-role="popup" id="ipad-login" class="ipad-login" data-overlay-theme="a">
+				<a href="#" data-rel="back" data-role="none" data-theme="a" data-icon="delete" data-iconpos="notext" class="login-close">&times</a>
+				<div data-role="content" class="content">
+					<div class="description">
+					Sign in to join the conversation and record your own questions and answers.
+					</div>
+					<div class="social">
+						<div id="fb-root"></div>
+						<a href="#twitter-login" data-transition="slide" data-direction="reverse" class="twitter">TWITTER</a>
+						<a href="#facebook-login" data-transition="slide" data-direction="reverse" class="facebook">FACEBOOK</a>
+					</div>
+					<div class="or">OR</div>
+					<form id="login-form">
+						<fieldset>
+							<input  type="text" name="login" class="login" placeholder="Email Address/Username" required>
+							<input  type="password" name="pass" class="login" placeholder="Password"  minlength="5" required>
+							<a href="#ipad-page-forgot-password" class="forgot" data-transition="pop" data-direction="reverse" data-rel="popup" data-transition="pop" data-position-to="window">Forgot your password?</a>
+							<input data-role="none" class="sing-in" type="submit" value="SIGN IN &gt;" />
+						</fieldset>
+					</form>
+					<div class="create">
+						<span>Don't have a profile?</span>
+						<a href="#ipad-registration" id="open_popup" data-role="none" data-inline="true" data-rel="popup" data-transition="pop" data-position-to="window">
+						 Create one now.
+						</a>
+					</div>
+				</div>
+			</div>
+			<div data-role="popup" id="ipad-registration" data-overlay-theme="a">
+				<div data-role="content">
+					<a href="#" data-rel="back" data-role="none" data-theme="a" data-icon="delete" data-iconpos="notext" class="registration-close">&times</a>
+					<form id="ipadForm">
+						<div class="left-block">
+							<div class="block-wrapper">
+								<h2>
+									Create an account to processus dynamicus, qui sequitur mutationem.
+								</h2>
+								<fieldset>
+									<input  type="text" name="user_first_name" class="registration" placeholder="First Name" required>
+									<input  type="text" name="user_last_name" class="registration" placeholder="Last Name" required>
+								</fieldset>
+								<fieldset>
+									<input  type="email" name="email" class="registration" placeholder="Email Address" required>
+									<input  type="text" name="zip_code" class="registration" placeholder="ZIP Code" required>
+									<div data-role="fieldcontain" class="date-of-birth">
+										<label for="date_of_birth">Date of Birth</label>
+										<input  type="date" name="date_of_birth" id="date_of_birth" class="registration" placeholder="Date of Birth" required>
+									</div>
+								</fieldset>
+								<fieldset>
+									<input  type="password" id="password" name="password" class="registration" placeholder="Choose a password"  minlength="5" required>
+									<input  type="password" id="re_password" equalto="#password" name="re_password" class="registration" placeholder="Confirm your password"  minlength="5" required>
+								</fieldset>
+								<div class="black-identify">
+									<label data-role="none"><input data-role="none" type="checkbox" name="black-identify">Yes, I identify as a black male.</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="right-block">
+							<div class="block-wrapper">
+								<h2>
+									Who are you? What words authentically define you? Use single words or hyphenate.
+									<p>Examples: father, student, loyal, black-belt, etc.</p>
+								</h2>
+								<fieldset>
+									<input type="text" name="identity_tag_1" class="registration" placeholder="1">
+									<input type="text" name="identity_tag_2" class="registration" placeholder="2">
+									<input type="text" name="identity_tag_3" class="registration" placeholder="3">
+									<input type="text" name="identity_tag_4" class="registration" placeholder="4">
+									<input type="text" name="identity_tag_5" class="registration" placeholder="5">
+									<input type="text" name="identity_tag_6" class="registration" placeholder="6">
+								</fieldset>
+								<input id="ipad-user-profile-photo-id" type="hidden" name='profile_fid' value='0'>
+								<input data-role="none" class="make-portrait" type="submit" value="Make a self portrait &gt;" />
+								<p>By completing the sign up process, you consent to the
+									<a href="#terms-conditions" data-transition="slide" class="terms-conditions-link">Terms & Conditions.</a>
+								</p>
+							</div>
+						</div>
+						<div class="ipad-profile-image-wrapper">
+							<div class="ipad-profile-image">
+								<img src="#" alt="#" id="ipad-smallImage">
+							</div>
+							<input data-role="none" class="registration-finish" type="submit" value="Finish &gt;" />
+						</div>
+					</form>
+					<div class="footer">
+						<p>Already have a profile?
+							<a href="#ipad-login" data-transition="pop" data-direction="reverse" data-rel="popup" data-transition="pop" data-position-to="window">Sign in</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="page page-tutorial" data-role="page" id="page-tutorial-1">
+		<div data-role="content" class="content">
+			<img src="images/tutorial-1.png" alt="">
+			<h2>Browse question by subject, keyword, or location.</h2>
+		</div>
+		<div data-role="footer" data-id="foo1" data-position="fixed">
+			<ul class="tutorial-slide">
+				<li class="active">
+					<a href="#page-tutorial-1" data-transition="slidefade">1</a>
+				</li>
+				<li>
+					<a href="#page-tutorial-2" data-transition="slidefade">2</a>
+				</li>
+				<li>
+					<a href="#page-tutorial-3" data-transition="slidefade">3</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="page page-tutorial" data-role="page" id="page-tutorial-2">
+		<div data-role="content" class="content">
+			<img src="images/tutorial-2.png" alt="">
+			<h2>Sign up to follow your favorite conversations.</h2>
+		</div>
+		<div data-role="footer" data-id="foo1" data-position="fixed">
+			<ul class="tutorial-slide">
+				<li>
+					<a href="#page-tutorial-1" data-transition="slidefade" data-direction="reverse">1</a>
+				</li>
+				<li class="active">
+					<a href="#page-tutorial-2" data-transition="slidefade">2</a>
+				</li>
+				<li>
+					<a href="#page-tutorial-3" data-transition="slidefade">3</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="page page-tutorial" data-role="page" id="page-tutorial-3">
+		<div data-role="content" class="content">
+			<h2>And if you identity as a Black male...</h2>
+			<img src="images/tutorial-3.png" alt="">
+			<h2>Sign up to follow your favorite conversations.</h2>
+		</div>
+		<div data-role="footer" data-id="foo1" data-position="fixed">
+			<ul class="tutorial-slide">
+				<li>
+					<a href="#page-tutorial-1" data-transition="slidefade" data-direction="reverse">1</a>
+				</li>
+				<li>
+					<a href="#page-tutorial-2" data-transition="slidefade" data-direction="reverse">2</a>
+				</li>
+				<li class="active">
+					<a href="#page-tutorial-3" data-transition="slidefade">3</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="page page-search" data-role="page" id="page-search" data-add-back-btn="true">
+		<div class="header" data-role="header" data-position="fixed" data-tap-toggle="false">
+			<h1 class="logo">Question Bridge</h1>
+			<a href="#main-menu" class="main-menu ui-btn-right" data-icon="bars">Menu</a>
+		</div>
+		<div data-role="content" class="content">
+			<div data-role="fieldcontain" class="search-container">
+				<input type="search" name="search" id="edit-search-results" value="" placeholder="Search" />
+			</div>
+			<div class="content-primary">
+				<ul data-role="listview" class="search-results"></ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="page page-about" data-role="page" id="page-about" data-add-back-btn="true">
+		<div class="header" data-role="header" data-position="fixed" data-tap-toggle="false">
+			<h1 class="logo">Question Bridge</h1>
+			<a href="#main-menu" class="main-menu ui-btn-right" data-icon="bars">Menu</a>
+		</div>
+		<div data-role="content" class="content">
+			<div class="content-primary">
+				<p>
+					Question Bridge: Black Males is a platform for black men of all ages and backgrounds to ask and candidly respond to questions that are rarely discussed in public. To connect with a wide audience, the project takes on many forms; an art installation, educational curriculum, community engagement program, and interactive digital experience.
+				</p>
+				<p>
+					Our app allows mobile users to easily discover new conversations, contribute their own questions and answers, create and share playlists of their favorite conversations and tag videos with relevant themes. All content is synced with questionbridge.com, where users can explore the conversations, and see data visualizations of the dialogue and an interactive identity map.
+				</p>
+				<p>
+					In providing a stage for these deeply personal conversations, Question Bridge invites audiences and participants to uncover the many surprising truths about what it means to be a black man in America today.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="page page-terms-conditions" data-role="page" id="terms-conditions" data-add-back-btn="true">
+		<div class="header" data-role="header" data-position="fixed" data-tap-toggle="false">
+			<h1 class="logo">Question Bridge</h1>
+			<a href="#main-menu" class="main-menu ui-btn-right" data-icon="bars">Menu</a>
+		</div>
+		<div data-role="content" class="content">
+			<div class="content-primary">
+				<h2>Terms and conditions</h2>
+				<h3>Agreement between user and www.questionbridge.com</h3>
+				<p>&emsp;&emsp;Welcome to www.questionbridge.com. The www.questionbridge.com website (the “Site”) is comprised of various
+					web pages operated by Songha & Company, LLC (“Songha & Co”). www.questionbridge.com is offered to you
+					conditioned on your acceptance without modification of the terms, conditions, and notices contained herein
+					(the “Terms”). Your use of www.questionbridge.com constitutes your agreement to all such Terms. Please read
+					these terms carefully, and keep a copy of them for your reference.</p>
+				<p>www.questionbridge.com is a Social Networking Site, ecommerce, and news and information site.
+					Questionbridge.com exists to provide information about the transmedia art project Question Bridge: Black
+					Males and all derivative works; and to allow them a platform to expand the project by contributing content,
+					participating in dialogue, access education resources, and purchase related products and services. The Site
+					allows users to view and explore content from the project; create identity profiles; contribute video
+					questions, answers, and statements; contribute to the semantic categorization of content; register for access
+					to education curriculum, professional development training, and other academic resources for secondary and
+					post-secondary level students; deliver reports and evaluation metrics related to student assessment,
+					curriculum improvement, and user satsfaction.</p>
+					<h3>Privacy</h3>
+					<p>Your use of www.questionbridge.com is subject to Songha & Co’s Privacy Policy. Please review our Privacy Policy, which also governs the Site and informs users of our data collection practices.</p>
+					<h3>Electronic Communications</h3>
+					<p>Visiting www.questionbridge.com or sending emails to Songha & Co constitutes electronic communications. You consent to receive electronic communications and you agree that all agreements, notices, disclosures and other communications that we provide to you electronically, via email and on the Site, satisfy any legal requirement that such communications be in writing.</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="page page-question" data-role="page" id="page-question" data-add-back-btn="true">
+		<div class="header" data-role="header" data-position="fixed" data-tap-toggle="false">
+			<h1 class="logo">Question Bridge</h1>
+			<a href="#main-menu" class="main-menu ui-btn-right" data-icon="bars">Menu</a>
+		</div>
+
+		<div data-role="content" class="content">
+			<div class="content-primary"></div>
+		</div>
+	</div>
+
+	<div class="page page-ask-question" data-role="page" id="page-ask-question-step-1" data-add-back-btn="true">
+		<div class="header" data-role="header" data-position="fixed" data-tap-toggle="false">
+			<h1 class="logo">Question Bridge</h1>
+			<a href="#main-menu" class="main-menu ui-btn-right">Menu</a>
+		</div>
+
+		<div data-role="content" class="content">
+			<div class="content-primary">
+				<form class="new-question-form-1" data-next="#page-ask-question-step-2">
+					<div class="description">
+						Start a conversation by asking a new question to the Black male community. Questions are limited to 90 seconds and you will be asked to summarize the question in 140 characters or less after recording.
+					</div>
+					<div class="black-identify">
+						<label data-role="none"><input data-role="none" type="checkbox" class="checkbox" name="black-identify">Yes, I identify as a black male.</label>
+					</div>
+					<input data-role="none" class="record-question" type="submit" value="RECORD &gt;" />
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="page page-ask-question" data-role="page" id="page-ask-question-step-2" data-add-back-btn="true">
+		<div class="header" data-role="header" data-position="fixed" data-tap-toggle="false">
+			<h1 class="logo">Question Bridge</h1>
+			<a href="#main-menu" class="main-menu ui-btn-right" data-icon="bars">Menu</a>
+		</div>
+
+		<div data-role="content" class="content">
+			<div class="content-primary">
+				<form class="new-question-form-2">
+					<div class="question-summarize-col">
+						<h2>Summarize your question.</h2>
+						<div class="help-text">120 character limit.</div>
+						<textarea name="question-summarize" cols="30" rows="10" required></textarea>
+					</div>
+					<div class="question-tags-col">
+						<h2>Choose some theme tags so people can find your submission.</h2>
+						<div class="help-text">Examples: parenthood, drugs, honor, etc.</div>
+						<fieldset>
+							<input type="text" name="tag1" placeholder="1">
+							<input type="text" name="tag2" placeholder="2">
+							<input type="text" name="tag3" placeholder="3">
+							<input type="text" name="tag4" placeholder="4">
+							<input type="text" name="tag5" placeholder="5">
+						</fieldset>
+						<input data-role="none" class="registr-btn form-submit" type="submit" value="submit" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="page take-me-back" data-role="page" id="take-me-back" data-add-back-btn="true">
+		<div class="header" data-role="header" data-position="fixed" data-tap-toggle="false">
+			<h1 class="logo">Question Bridge</h1>
+			<a href="#main-menu" class="main-menu ui-btn-right" data-icon="bars">Menu</a>
+		</div>
+
+		<div data-role="content" class="content">
+			<div class="content-primary">
+				<h2>Congratulations! We’ve received your video.</h2>
+				<div class="help-text">
+					<p>Thank you for contributing to the conversation on QuestionBridge.com and
+						adding your story to our campaign to represent & redefine black male identity in America.</p>
+
+					<p>Your video is currently being processed to fit all digital device
+						formats and may take up to 12 hours to appear on our site.</p>
+				</div>
+				<a href="#" data-role="none" class="return-back">Take me back</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="page page-sing-in" data-role="page" id="page-sing-in" data-add-back-btn="true">
+		<div class="header" data-role="header" data-position="fixed" data-tap-toggle="false">
+			<h1 class="logo">Question Bridge</h1>
+			<a href="#main-menu" class="main-menu ui-btn-right">Menu</a>
+		</div>
+
+		<div data-role="content" class="content">
+			<div class="description">
+				Sign in to join the conversation and record your own questions and answers.
+			</div>
+			<div class="social">
+				<a href="#twitter-login" data-transition="slide" data-direction="reverse" class="twitter">TWITTER</a>
+				<a href="#facebook-login" data-transition="slide" data-direction="reverse" class="facebook">FACEBOOK</a>
+			</div>
+			<div class="or">OR</div>
+			<form id="login-form">
+				<fieldset>
+					<input  type="text" name="login" class="login" placeholder="Email Address/Username" required>
+					<input  type="password" name="pass" class="login" placeholder="Password"  minlength="5" required>
+					<a href="#page-forgot-password" class="forgot">Forgot your password?</a>
+					<input data-role="none" class="log-in" type="submit" value="SIGN IN &gt;" />
+				</fieldset>
+			</form>
+
+
+			<div class="create">
+				<span>Don't have a profile?</span>
+				<a href="#registration-step-0" data-transition="slide">
+				 Create one now.
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="page page-forgot-password" data-role="page" id="page-forgot-password" data-add-back-btn="true">
+		<div class="header" data-role="header" data-position="fixed" data-tap-toggle="false">
+			<h1 class="logo">Question Bridge</h1>
+			<a href="#main-menu" class="main-menu ui-btn-right">Menu</a>
+		</div>
+
+		<div data-role="content" class="content">
+
+			<div class="description">
+				Forgot your password?
+			</div>
+
+			<form id="forgot-password-form">
+				<fieldset>
+					<input  type="text" name="restore" class="form-text" placeholder="Email Address/Username" required>
+					<input data-role="none" class="form-submit" type="submit" value="Email new Password" />
+				</fieldset>
+			</form>
+
+		</div>
+	</div>
+
+	<div class="page page-registration" data-role="page" id="registration-step-0" data-add-back-btn="true">
+		<div class="header" data-role="header" data-position="fixed" data-tap-toggle="false">
+			<h1 class="logo">Question Bridge</h1>
+			<a href="#main-menu" class="main-menu ui-btn-right">Menu</a>
+		</div>
+
+		<div data-role="content" class="content">
+			<form id="register-0" class="registration-form" data-next="#registration-step-1">
+				<div class="description">
+					Question Bridge is a place for black males to openly discuss ideas around black male identity. While anyone is welcome to create an account to favorite and follow conversations, we are limiting participation to those who identify as black males.
+				</div>
+				<div class="black-identify">
+					<label data-role="none"><input data-role="none" type="checkbox" class="checkbox" name="black-identify">Yes, I identify as a black male.</label>
+				</div>
+				<input data-role="none" class="registr-btn" type="submit" value="CONTINUE &gt;" />
+			</form>
+			<div class="footer">
+				<p>Already have a profile? <a href="#page-sing-in" data-role="none" data-transition="slide" data-direction="reverse">Sign in</a></p>
+			</div>
+		</div>
+	</div>
+
+	<div class="page page-registration" data-role="page" id="registration-step-1" data-add-back-btn="true">
+		<div class="header" data-role="header" data-position="fixed" data-tap-toggle="false">
+			<h1 class="logo">Question Bridge</h1>
+			<a href="#main-menu" class="main-menu ui-btn-right">Menu</a>
+		</div>
+
+		<div data-role="content" class="content">
+			<h2>
+				Please complete the following to join the conversation on Question Bridge.
+			</h2>
+			<form id="register-1" class="registration-form" data-next="#registration-step-2">
+				<fieldset>
+					<input  type="text" name="user_first_name" class="registration" placeholder="First Name" required>
+					<input  type="text" name="user_last_name" class="registration" placeholder="Last Name" required>
+				</fieldset>
+				<fieldset>
+					<input  type="email" name="email" class="registration" placeholder="Email Address" required>
+					<input  type="text" name="zip_code" class="registration" placeholder="ZIP Code" required>
+					<div data-role="fieldcontain" class="date-of-birth">
+						<label for="date_of_birth">Date of Birth</label>
+						<input  type="date" name="date_of_birth" id="date_of_birth" class="registration" placeholder="Date of Birth">
+					</div>
+				</fieldset>
+				<input data-role="none" class="registr-btn" type="submit" value="NEXT &gt;" />
+			</form>
+			<div class="footer">
+				<p>Already have a profile? <a href="#page-sing-in" data-role="none" data-transition="slide" data-direction="reverse">Sign in</a></p>
+			</div>
+		</div>
+	</div>
+
+	<div class="page page-registration" data-role="page" id="registration-step-2" data-add-back-btn="true">
+		<div class="header" data-role="header" data-position="fixed" data-tap-toggle="false">
+			<h1 class="logo">Question Bridge</h1>
+			<a href="#main-menu" class="main-menu ui-btn-right">Menu</a>
+		</div>
+
+		<div data-role="content" class="content">
+				<h2>
+					Who are you? What words authentically define you? Use single words or hyphenate.
+				</h2>
+				<div class="examples">Examples: father, student, loyal, black-belt, etc.</div>
+			<form id="register-2" class="registration-form" data-next="#registration-step-3">
+				<fieldset>
+					<input  type="text" name="identity_tag_1" class="registration" placeholder="1" required>
+					<input  type="text" name="identity_tag_2" class="registration" placeholder="2" required>
+					<input  type="text" name="identity_tag_3" class="registration" placeholder="3" required>
+					<input  type="text" name="identity_tag_4" class="registration" placeholder="4" required>
+					<input  type="text" name="identity_tag_5" class="registration" placeholder="5" required>
+					<input  type="text" name="identity_tag_6" class="registration" placeholder="6" required>
+				</fieldset>
+				<input data-role="none" class="registr-btn" type="submit" value="NEXT &gt;" />
+			</form>
+			<div class="footer">
+				<div class="step">Step 2 of 4</div>
+				<p>Already have a profile? <a href="#" data-role="none">Sign in</a></p>
+			</div>
+		</div>
+	</div>
+
+	<div class="page page-registration" data-role="page" id="registration-step-3" data-add-back-btn="true">
+		<div class="header" data-role="header" data-position="fixed" data-tap-toggle="false">
+			<h1 class="logo">Question Bridge</h1>
+			<a href="#main-menu" class="main-menu ui-btn-right">Menu</a>
+		</div>
+
+		<div data-role="content" class="content">
+			<h2>Make a self portrait.</h2>
+			<div class="help-text">
+				Take a photo to be used as your profile image.
+			</div>
+			<div class="profile-image">
+				<img src="#" alt="#" id="smallImage">
+			</div>
+			<form id="register-3" class="registration-form" data-next="#registration-step-4">
+				<fieldset>
+					<a href="#" class="make-portrait" id="make-portrait">Make portrait</a>
+					<input id="user-profile-photo-id" type="hidden" name='profile_fid' value='0'>
+					<input data-role="none" class="registr-btn" type="submit" value="NEXT &gt;" />
+				</fieldset>
+			</form>
+			<div class="footer">
+				<div class="step">Step 3 of 4</div>
+				<p>Already have a profile? <a href="#" data-role="none">Sign in</a></p>
+			</div>
+		</div>
+	</div>
+
+	<div class="page page-registration" data-role="page" id="registration-step-4" data-add-back-btn="true">
+		<div class="header" data-role="header" data-position="fixed" data-tap-toggle="false">
+			<h1 class="logo">Question Bridge</h1>
+			<a href="#main-menu" class="main-menu ui-btn-right">Menu</a>
+		</div>
+
+		<div data-role="content" class="content">
+			<h2>You're almost done.</h2>
+			<form id="register-4" class="registration-form" data-next="#page-home">
+				<fieldset>
+					<input  type="password" id="phone-password" name="password" class="registration" placeholder="Choose a password"  minlength="5" required>
+					<input  type="password" id="re-phone-password" equalto="#phone-password" name="re_password" class="registration" placeholder="Confirm your password"  minlength="5" required>
+				</fieldset>
+				<div class="black-identify">
+					<label data-role="none">
+						<input data-role="none" type="checkbox" class="checkbox" name="terms-conditions" required>
+						I agree to the <a href="#terms-conditions" data-transition="slide" class="terms-conditions-link">Terms and Conditions</a>
+					</label>
+				</div>
+				<input data-role="none" class="registr-btn" type="submit" value="FINISH &gt;" />
+			</form>
+<!-- 			<div class="terms-conditions">
+	<p>By completing the sign up process, you consent to the <a href="#terms-conditions" data-transition="slide" class="terms-conditions-link">Terms & Conditions.</a></p>
+</div> -->
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+.android .new-tag-form-helptext{
+  bottom: auto;
+  top: 0;
+  margin-top: 50px;
+}
+.android .new-tag-form{
+  bottom: auto;
+  top: 0px;
+}
+
+.android .ui-input-text{
+  background: #cccccc !important;
+  border-radius: 4px !important;
+  border-top: 1px solid #7f7f7f;
+  margin-bottom: 5px;
+  margin-bottom: 5px;
+}
+.android .page-sing-in input[type="text"],
+.android .page-sing-in input[type="password"]{
+  width: 95% !important;
+  margin: 5px 0 0 5% !important;
+  border-radius: 0 !important;
+  border-top: none !important;
+  text-indent: 0 !important;
+  text-indent: 0 !important;
+  padding: 0 !important;
+  height: 35px !important;
+  min-height: 35px !important;
+  border-bottom-right-radius: 4px !important;
+}
+
+.android .page-registration input[type="text"],
+.android .page-registration input[type="password"],
+.android .page-registration input[type="email"],
+.android .page-ask-question input[type="text"]{
+  width: 97% !important;
+  margin: 5px 0 0 3% !important;
+  border-radius: 0 !important;
+  border-top: none !important;
+  text-indent: 0 !important;
+  text-indent: 0 !important;
+  padding: 0 !important;
+  height: 35px !important;
+  min-height: 35px !important;
+  border-bottom-right-radius: 4px !important;
+}
+.android .page-sing-in input.filled{
+  margin: 3px 0 2px 3% !important;
+  text-indent: 7px !important;
+}

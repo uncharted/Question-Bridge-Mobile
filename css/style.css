@@ -1,0 +1,1318 @@
+/*Global styles*/
+body,
+body.ui-overlay-c {
+	background: #121213;
+	font-family: 'Gotham Light',Arial,sans-serif;
+}
+input.error::-webkit-input-placeholder{ color : red}
+input.error:-moz-placeholder{ color : red}
+input.error::-moz-placeholder{ color : red}
+input.error:-ms-input-placeholder{ color : red}
+input.error{color: red !important;}
+#bg-img {
+	left: 0;
+	position: fixed;
+	right: 0;
+	width: 100%;
+	height: 100%;
+}
+div.content-primary .qb-loader{
+  position: absolute;
+  top: 50%;
+  margin-top: -18px;
+  left: 50%;
+  margin-left: -18px;
+}
+div.content-primary li.answer .qb-loader {
+	width: 100%;
+	height: 100%;
+	bottom: 0;
+	left: 0;
+	z-index: 999;
+	margin-left: 0;
+
+}
+div.content-primary li.answer {
+	background: url('../lib/images/new-loader.GIF') no-repeat 50% 50%;
+  background-size: 22px;
+}
+
+.ui-page { -webkit-backface-visibility: hidden; }
+
+.ui-body-c,
+.ui-overlay-c {
+	background: none;
+	text-shadow: none;
+}
+.ui-panel-content-wrap {
+	background: none;
+}
+.ui-content {
+	min-height: 100%;
+	padding: 0;
+	/* overflow: hidden; */
+}
+.ui-loading .ui-loader {
+	background: #000;
+	opacity: 0.5;
+}
+/* #loader {
+	/* margin: 0 auto; */
+} */
+.content-primary #loader {
+	clear: both;
+}
+.page-home .content #loader {
+	clear: both;
+}
+
+.ui-loading .ui-loader #loader {
+	margin: 5px 0 0 0;
+}
+
+.spinner {
+	width: 36px !important;
+	height: 36px;
+	margin: 0 auto;
+	left: 18px !important;
+	top: 18px !important;
+	z-index: 0 !important;
+}
+
+/*Header*/
+.header {
+	height: 61px;
+	background: url('../images/bg-body.jpg') no-repeat 0 -20px;
+	background-size:100% 1136px;
+	border: none;
+}
+
+/*Menu*/
+#main-menu {
+	position: fixed;
+}
+#main-menu .ui-li a.active {
+	color: #ffffff;
+}
+
+/*Search container*/
+.search-container {
+	height: 90px;
+	margin: 0;
+	padding: 0 20px;
+	border: none;
+	display: none;
+}
+#page-search .search-container {
+	display: block;
+}
+.search-container .ui-input-search {
+	border-radius: 4px;
+	padding: 0 50px;
+}
+.search-container .ui-shadow-inset {
+	background: #fff;
+	box-shadow: none;
+	border: none;
+}
+.search-container input.ui-input-text {
+	font: 24px/36px 'Gotham Book', Arial, sans-serif;
+	color: #000;
+	padding: 0;
+	height: 50px;
+	border: none;
+	padding: 4px;
+}
+.search-container .ui-icon-searchfield:after {
+	width: 36px;
+	height: 36px;
+	background: url('../images/icon-search.png') no-repeat 0 0;
+	opacity: 1;
+	border-radius: 0;
+	top: 20px;
+	left: 9px;
+	background-size: cover;
+}
+.search-container .ui-input-clear {
+	width: 28px;
+	height: 28px;
+	border: medium none;
+	box-shadow: none;
+	right: 7px;
+}
+.search-container .ui-input-clear .ui-btn-inner {
+	border: none;
+}
+.search-container .ui-input-clear .ui-icon {
+	background: url('../images/icon-close.png') no-repeat 0 0;
+	height: 28px;
+	width: 28px;
+	margin: 0;
+	background-size: cover;
+}
+.make-portrait{
+	background: url('../images/phone/make-portrait-btn.png') no-repeat;
+	background-size: cover;
+	text-indent: -9999px;
+	width: 300px;
+	height: 35px;
+	display: block;
+	margin: 20px auto 0;
+	border: none;
+}
+
+/*Questions list*/
+.ui-content ul.questions {
+	padding: 0;
+	margin: 0;
+	background: none;
+	min-height: 100%;
+}
+ul.questions > li.question {
+	padding: 0 0 1px 0;
+	margin: 0 0 0 0;
+	overflow: hidden;
+	list-style: none;
+	border: 0;
+	background: none;
+	position: relative;
+	width: 100%;
+	float: left;
+	/*box-shadow:inset 0px -100px 90px rgba(0,0,0,.5);*/
+	max-height: 240px;
+}
+/*ul.questions > li.question img {
+	z-index: -1;
+	position: relative;
+}*/
+
+
+ul.questions > li.question:nth-child(2n + 1) {
+	clear: both;
+}
+ul.questions > li.question:nth-child(2n + 1) img{
+	border-right: 1px solid black;
+	margin-left: -1px;
+}
+ul.questions > li.question img {
+	width: 100%;
+	max-width: 100%;
+	height: auto;
+	max-height: none;
+	position: relative;
+	left: 0;
+	min-height: 180px;
+	background: url('../lib/images/new-loader.GIF') no-repeat 50% 50%;
+	background-size: 22px;
+}
+ul.questions > li.question div.shadow {
+	position: absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:url('../images/bg-gradient-ipad.png') repeat-x 0 100%;
+}
+ul.questions > li.question h2,
+div.question h2 {
+	font: 24px/30px 'Gotham Book', Arial, sans-serif;
+	color: #ffffff;
+	padding: 0;
+	position: absolute;
+	bottom: 40px;
+	left: 0;
+	margin: 0 20px;
+	text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+	text-overflow: none;
+	white-space: normal;
+	text-transform: uppercase;
+}
+ul.questions > li.question .submitted,
+div.question .submitted {
+	font: 18px/22px 'Gotham Book', Arial, sans-serif;
+	color: #FFF;
+	text-align: right;
+	display: block;
+	position: absolute;
+	bottom: 18px;
+	right: 0;
+	margin: 0 20px;
+	text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+div.question div.video-wrapper {
+	position: relative;
+	border-top: 1px solid #000000;
+	padding: 1px 0 1px 0;
+	border-bottom: 1px solid #2b2b2b;
+	float: left;
+	width: 66%;
+	z-index: 100;
+	overflow: hidden;
+	background: #000;
+	max-height: 576px;
+}
+div.question div.video-wrapper:before {
+	border-top: 1px solid #252525;
+	position: absolute; display: block; content: '';
+	top: 0;
+	left: 0;
+	height: 1px; width: 100%;
+	box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
+}
+div.question div.video-wrapper:after {
+	border-top: 1px solid #000000;
+	position: absolute; display: block; content: '';
+	bottom: 0;
+	left: 0;
+	height: 1px; width: 100%;
+	box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
+}
+
+div.question div.video-wrapper.processing img,
+div.question div.video-wrapper.processing video {
+	opacity: 0.5;
+}
+div.question div.video-wrapper.processing p {
+	color: #FFFFFF;
+	font: 24px/30px 'Gotham Book',Arial,sans-serif;
+	height: 100%;
+	left: 0;
+	margin: 25px 0 0;
+	padding: 0;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	width: 100%;
+	z-index: 2;
+	line-height: 350px;
+}
+
+div.question video {
+	width: 100%;
+	display: block;
+	background: url('../lib/images/new-loader.GIF') no-repeat 50% 50%;
+	background-size: 22px;
+	margin: 0;
+	min-height: 180px;
+	z-index: 1;
+	/*position: absolute;*/
+	top: 0;
+	left: 0;
+	visibility: hidden;
+}
+div.question div.video-wrapper img.thumb {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	margin: 1px 0 0 0;
+	background: url('../lib/images/new-loader.GIF') no-repeat 50% 50%;
+	background-size: 22px;
+}
+div.question div.video-wrapper.processing video,
+div.question div.video-wrapper.processing img.thumb {
+	background: none;
+}
+
+div.question h2 {
+	position: static;
+	bottom: 0;
+	margin: 0;
+	padding: 0;
+	float: right;
+	width: 100%;
+	line-height: 27px;
+}
+div.question .submitted {
+	position: static;
+	bottom: 0;
+	color: #666666;
+	float: right;
+	font: 15px/18px 'Gotham Book', Arial, sans-serif;
+	margin: 10px 0 16px;
+	display: block;
+}
+
+
+/*Search Results*/
+.ui-content ul.search-results {
+	padding: 0;
+	margin: 0;
+	background: none;
+	min-height: 100%;
+	border-top: 1px solid #000;
+}
+ul.search-results > li.question {
+	padding: 20px;
+	margin: 0;
+	overflow: hidden;
+	list-style: none;
+	border-top: 1px solid #2a2b2c;
+	border-bottom: 1px solid #000;
+	background: none;
+}
+ul.search-results > li.question img {
+	width: 192px;
+	height: 108px;
+	float: left;
+	margin: 0 20px 0 0;
+	box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.5);
+	max-width: 100%;
+	height: auto;
+	max-height: none;
+	position: relative;
+}
+ul.search-results > li.question h2 {
+	font: 24px/28px 'Gotham Light',Arial,sans-serif;
+	color: #ffffff;
+	margin: 0 0 0 0;
+	padding: 0;
+	text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+	text-overflow: none;
+	white-space: normal;
+	text-transform: uppercase;
+}
+ul.search-results > li.question .submitted {
+	font: 18px/24px 'Gotham Light',Arial,sans-serif;
+	color: #666666;
+	text-align: right;
+	display: block;
+	margin: 10px 0 0 0;
+	text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+/*About Page*/
+.page-about .content-primary,
+.page-privacy-policy .content-primary,
+.page-terms-conditions .content-primary {
+	padding: 20px;
+	font: 18px/22px 'Gotham Light',Arial,sans-serif;
+	color: #FFFFFF;
+	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+.page-about .content-primary a,
+.page-about .content-primary a:visited {
+	color: #E0A125;
+}
+.page-about .content-primary a:hover {
+	text-decoration: none;
+}
+
+.header .logo{
+	background: url('../images/ipad/ipad-icon-logo.png') no-repeat;
+	background-size: cover;
+	text-indent: -9999px;
+	width: 261px;
+	height: 20px;
+}
+.header a.main-menu{
+	text-indent: -9999px;
+	/*background: url('../images/ipad/ipad-btn-menu.png') no-repeat;
+	background-size: 18px 16px;*/
+	background: url('../images/icon-hamburger.png') no-repeat;
+	background-size: 22px 22px;
+	height: 60px;
+	width: 94px;
+	margin: 0px 0px 0 0;
+	-ms-background-position-x: 21px;
+	background-position: 48px 16px;
+	box-shadow: none;
+	border: none;
+}
+@media (-webkit-min-device-pixel-ratio: 2) {
+	.header a.main-menu{
+		background: url('../images/icon-hamburger@2x.png') no-repeat;
+		background-size: 22px 22px;
+		background-position: 48px 16px;
+	}
+}
+
+.header a[data-rel="back"]{
+	/*background: url('../images/ipad/ipad-btn-arrow.png') no-repeat;
+	background-size: 10.5px 19px;*/
+	background: url('../images/icon-arrow.png') no-repeat;
+	background-size: 22px 22px;
+	width: 60px;
+	height: 37px;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	-ms-box-shadow: none;
+	-o-box-shadow: none;
+	box-shadow:none;
+	margin: 9px 0 0 0px;
+	border: none;
+	background-position: 5px 6px;
+}
+@media (-webkit-min-device-pixel-ratio: 2) {
+	.header a[data-rel="back"]{
+		background: url('../images/icon-arrow@2x.png') no-repeat;
+		background-size: 22px 22px;
+		background-position: 5px 6px;
+	}
+}
+
+.header .ui-btn span,
+#main-menu .ui-icon-arrow-r {
+	display: none;
+}
+#main-menu{
+	box-shadow: aliceblue;
+	border: none;
+	/* background: url('../images/bg-body.jpg') no-repeat; */
+	background-size: cover;
+	/* position: relative; */
+}
+#main-menu .ui-panel-inner{
+	margin-top: 4px;
+}
+#main-menu ul li {
+	background: none;
+	border-bottom: 1px solid #000000;
+
+	border-top: none;
+	text-shadow: none;
+	width: 238px;
+	height: 44px;
+	margin-left: 20px;
+}
+#main-menu .ui-li .ui-btn-inner{
+	border-bottom-width:1px;
+	border-bottom: 1px solid #333333;
+	/* border-color: rgba(240,255,255,.3); */
+	border-top: none;
+}
+#main-menu .ui-li a{
+	font: 18px/20px 'Gotham Book';
+	color: #888888;
+	text-transform: uppercase;
+	margin-left: -14px;
+}
+#main-menu .ui-btn-hover-c a{
+	color: #ffffff;
+	font-family: 'Gotham Book';
+}
+.privacy-policy {
+	font: 12px/16px 'Gotham Book';
+	color: #888888;
+	margin-top: -10px;
+}
+.page-ask-question fieldset{
+	float: left;
+	margin: 10px 0 20px;
+	width: 100%;
+}
+.no-results {
+	text-align: center;
+	color: white;
+	font: 18px/20px 'Gotham Book',Arial,sans-serif;
+	color: #888888;
+}
+.no-results a {
+	color: #E0A125;
+}
+.new-tag-form-wrapper{
+	display: none;
+}
+.new-tag-form{
+	z-index: 101;
+	height: 44px;
+	float: left;
+	position: absolute;
+	width: 100%;
+	overflow: hidden;
+	bottom: 0;
+	left: 0;
+}
+.new-tag-form-overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0.6;
+    z-index: 100;
+}
+.new-tag-form-helptext{
+    position: absolute;
+    bottom: 0px;
+    color: white;
+    z-index: 102;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 50px;
+}
+.new-tag-form-helptext p{
+	margin: 0;
+	padding: 0 20px;
+}
+.new-tag-form input{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.new-tag-form .new-tag{
+    z-index: 2;
+    height: 44px;
+    border: 7px solid #222930;
+}
+.portrait .new-tag-form .new-tag,
+.landscape .new-tag-form .new-tag{
+/*	position: absolute;
+	left: 0;
+	right: 0;*/
+	width: 100%;
+	-webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* .page-question{
+	padding-top: 0px !important;
+}
+.page-question .header{
+	position: relative;
+} */
+input.form-submit{
+		background: url('../images/bg-sing-in.png') no-repeat;
+		background-size: 300px 40px;
+		height: 40px;
+		width: 100%;
+		margin: 12px auto 0;
+		border: none;
+		font: 18px/20px 'Gotham Book';
+		color: white;
+		box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.15);
+		text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+		display: block;
+		text-transform: uppercase;
+		border-radius: 4px;
+		max-width: 300px;
+}
+/*---------------------------------------------------------SING IN---------------------------------------------------------*/
+.page-sing-in .content{
+	font: 36px/40px 'Gotham Light';
+	color: white;
+}
+.page-sing-in .content form input.login{
+ 	font: 36px 'Gotham Light';
+	color:#666666;
+	border-radius:4px;
+	background: #cccccc;
+ 	width: 100%;
+
+ 	height: 69px;
+ 	/* min-height: 40px; */
+ 	margin-bottom: 10px;
+ 	text-indent: 17px;
+ 	border: none;
+ 	border-top: 1px solid #7f7f7f;
+ 	padding: 0;
+}
+ .page-sing-in .description{
+	margin: 75px auto 33px;
+	width: 600px;
+}
+.page-sing-in .social a,
+.page-sing-in .social a:hover,
+.page-sing-in .social a:visited{
+	color:#222222;
+}
+.page-sing-in .social{
+    margin: 0 auto;
+    width: 600px;
+    height: 70px;
+}
+.page-sing-in form{
+    width: 600px;
+    margin: 30px auto 0;
+}
+.page-sing-in form div{
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+.page-sing-in form div.ui-focus{
+	-webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+.page-sing-in form label{
+	float: left;
+	margin-bottom: 10px;
+	color: red;
+}
+.page-sing-in .social a{
+	text-decoration: none;
+	width: 293px;
+	height: 70px;
+	float: left;
+	line-height: 72px;
+	text-indent: 54px;
+	text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.25);
+}
+.page-sing-in .social .twitter{
+	background: url('../images/btn-social-twitter.png') no-repeat;
+	background-size: cover;
+	pointer-events: none;
+	cursor: default;
+	display: none;
+}
+.page-sing-in .social .facebook{
+	margin: 0 auto;
+	left: 50%;
+	background: url('../images/btn-social-facebook.png') no-repeat;
+	background-size: cover;
+	display: none;
+}
+.page-sing-in .or{
+	color:#444444;
+	width: 57px;
+	margin: 0 auto;
+	height: 43px;
+	margin-top: 34px;
+	display: none;
+}
+.page-sing-in .forgot{
+	font-size: 18px;
+	color: #666666;
+	line-height: 14px;
+	width: 300px;
+	margin: 0px auto 0px;
+	padding-right: 300px;
+	display: block;
+	text-decoration: none;
+}
+.page-sing-in .create{
+	font-size: 24px;
+	margin: 154px auto 0;
+	width: 486px;
+	height: 36px;
+}
+.page-sing-in .create a,
+.page-sing-in .create a:visited,
+.page-sing-in .create a:hover{
+	color: #e0a125;
+	text-decoration: none;
+}
+.page-sing-in .create a:hover {
+	text-decoration: underline;
+}
+.page-sing-in input.log-in{
+	background: url('../images/bg-sing-in.png') no-repeat;
+	height: 70px;
+	width: 600px;
+	margin: 24px auto 0;
+	border: none;
+	font: 36px/40px 'Gotham Book';
+	color: white;
+	cursor: pointer;
+}
+li.sing-in{
+	display: none;
+}
+li.log-out,
+body.logged-in .sing-in, body.logged-in li.ipad-sing-in{
+	display: none;
+}
+body.logged-in li.log-out{
+	display: block;
+}
+
+/*---------------------------------------------------------Forgot password---------------------------------------------------------*/
+.page-forgot-password .content {
+	font: 36px/40px 'Gotham Light';
+	color: white;
+}
+.page-forgot-password .content form input.form-text {
+	font: 36px/40px 'Gotham Light';
+	color:#666666;
+	border-radius:4px;
+	background: #cccccc;
+	width: 100%;
+	height: 69px;
+	margin-bottom: 10px;
+	text-indent: 17px;
+	border: none;
+	border-top: 1px solid #7f7f7f;
+	padding: 0;
+}
+.page-forgot-password .description{
+	margin: 75px auto 33px;
+	width: 600px;
+}
+
+/*---------------------------------------------------------QUESTION---------------------------------------------------------*/
+.ui-panel-content-wrap{
+	box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.8)
+}
+.video-respond,
+.record-question{
+	background: url('../images/btn-respond-repeatable.png');
+	background-size: cover;
+	font: 18px/20px 'Gotham Light',Arial,sans-serif;
+	color: white;
+	text-decoration: none;
+	width: 100%;
+	height: 35px;
+	border-radius: 4px;
+	margin: 25px auto 0;
+	overflow: hidden;
+	display: block;
+	background-position: -10px 0;
+}
+
+.video-respond span{
+	/* float: left; */
+	margin: 8px 0 0 119px;
+	text-transform: uppercase;
+	color: #fff;
+}
+.page-question .question{
+	float: left;
+	box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 1);
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 9px;
+	width: 100%;
+}
+.question-info{
+
+    margin: 0px 20px 0;
+}
+.question-info-wrapper{
+	float: left;
+	width: 34%;
+	min-height: 384px;
+	position: relative;
+}
+.question .qiestion-navigation{
+    z-index: 100;
+    width: 34%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.question .qiestion-navigation a{
+	width: 100%;
+	height: 100%;
+	float: left;
+	border-right: 1px solid #000;
+	border-left: 1px solid #373838;
+	border-top: 1px solid #373838;
+	text-indent: -9999px;
+}
+.question .qiestion-navigation a span{
+	text-indent: -9999px;
+	background: url('../images/ipad/ipad-question-sprite2.png') no-repeat;
+	background-size: 296px 28px;
+	height: 29px;
+	width: 32px;
+	margin: 27px auto;
+	display: block;
+}
+.landscape .question .qiestion-navigation a:before{
+	border-bottom: 1px solid #000;
+	position: absolute; display: block; content: '';
+	top: -1px;
+	left: 0;
+	height: 0; width: 100%;
+}
+.video-wrapper .qiestion-navigation.video-paying{
+	display: none;
+}
+.question .navigation{
+    float: left;
+
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.question .navigation li{
+    display: inline-block;
+    width: 25%;
+    float: left;
+    position: relative;
+    z-index: 3;
+}
+.question .qiestion-navigation .nav-theme span{
+    background-position: 0px 0px;
+}
+.question .qiestion-navigation .nav-favorite span{
+    background-position: -86px 0px;
+}
+.question .qiestion-navigation .nav-flag span{
+	background-position: -174px 0px;
+	visibility: hidden;
+}
+.question .qiestion-navigation .nav-share span{
+	background-position: -264px 0px;
+	visibility: hidden;
+}
+.portrait .question .qiestion-navigation a.is-favorite span{
+	background: url('../images/ipad/ipad-question-sprite2-active.png') no-repeat;
+	background-size: 296px 28px;
+	background-position: -86px 0;
+}
+
+
+/*---------------------------------------------------------ANSWERS & TAGS---------------------------------------------------------*/
+/*------------------TAGS--------------------*/
+.question-additional-wrapper .themes-wrapper ul.themes li.theme{
+    list-style: none;
+    float: left;
+    padding: 0 11px;
+	margin-right: 1px;
+    background: url('../images/bg-tags.png');
+	background-size: cover;
+    border-radius: 2px;
+}
+.question-additional-wrapper .themes-wrapper ul.themes li.theme a{
+	font: 10px/22px 'Gotham Book',Arial,sans-serif;
+	color: #ffffff;
+	text-transform: uppercase;
+	text-decoration: none;
+	float: left;
+	padding-bottom: 1px;
+}
+.question-additional-wrapper ul.themes{
+	margin: 0px 0 20px 0;
+	float: left;
+	padding: 0;
+}
+.question-additional-wrapper {
+	float: left;
+	position: relative;
+	width: 100%;
+	min-height: 100px;
+}
+.question-additional-wrapper .right-inner-shadow,
+.question-additional-wrapper .left-inner-shadow{
+	position: absolute;
+	top: 40px;
+	height: 100%;
+	width: 0px;
+	z-index: 1;
+}
+.question-additional-wrapper .left-inner-shadow{
+	left: 0;
+	-webkit-box-shadow: 0px 0px 40px 40px #000;
+	-moz-box-shadow: 0px 0px 40px 40px #000;
+	box-shadow: 0px 0px 40px 40px #000;
+	z-index: 3;
+}
+.question-additional-wrapper .right-inner-shadow{
+	right: 0;
+	-webkit-box-shadow: 0px 0px 40px 40px #000;
+	-moz-box-shadow: 0px 0px 40px 40px #000;
+	box-shadow: 0px 0px 40px 40px #000;
+	z-index: 5;
+}
+
+/*------------------ANSWERS--------------------*/
+.question-additional-wrapper .answers-wrapper h3,
+.question-additional-wrapper .themes-wrapper h3{
+	font: 15px/20px 'Gotham Light',Arial,sans-serif;
+	color: #666666;
+	text-transform: uppercase;
+	background: none;
+	margin: 19px 0 11px 0px;
+	position: relative;
+	z-index: 5;
+}
+
+/*Question Answers*/
+ .question-additional-wrapper .answers-wrapper, .question-additional-wrapper .themes-wrapper{
+	float: left;
+    width: 100%;
+	padding-left: 20px;
+	position: relative;
+	overflow: hidden;
+}
+.question-additional-wrapper .answers-wrapper{
+	border-bottom: 1px solid #000;
+}
+.question-additional-wrapper .answers-wrapper:after{
+	border-bottom: 1px solid #303030;
+	position: absolute; display: block; content: '';
+	bottom: -2px;
+	left: 0;
+	height: 0; width: 100%;
+	box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
+}
+.question-additional-wrapper ul.answers li.answer {
+	position: relative;
+}
+.question-additional-wrapper ul.answers li.answer.hidden {
+	display: none;
+}
+.question-additional-wrapper li.answer video {
+	width: 100%;
+	height: 100%;
+	display: block;
+/* 	background: url('../lib/images/new-loader.GIF') no-repeat 50% 50%;
+background-size: 22px; */
+	margin: 0;
+	z-index: 1;
+	visibility: hidden;
+	position: relative;
+}
+.question-additional-wrapper li.answer img {
+	width: 100%;
+	display: block;
+	z-index: 2;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.question-additional-wrapper li.answer.processing img,
+.question-additional-wrapper li.answer.processing video {
+	opacity: 0.5;
+}
+.question-additional-wrapper li.answer.processing p {
+	color: #FFFFFF;
+	font: 15px/20px 'Gotham Book',Arial,sans-serif;
+	height: 100%;
+	left: 0;
+	margin: 25px 0 0;
+	padding: 0;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	width: 100%;
+	z-index: 2;
+}
+
+.question-additional-wrapper ul.answers{
+	padding-bottom: 1px;
+	list-style-type: none;
+	overflow: hidden;
+	margin: 0 0 0px 0;
+	padding: 0 20px 25px 10px;
+	height: 90px;
+}
+.question-additional-wrapper ul.answers li.answer{
+	overflow: hidden;
+	float: left;
+	margin-right: 1px;
+	width: 160px;
+	height: 90px;
+}
+.question-additional-wrapper li.answer img{
+	width: 100%;
+	display: block;
+}
+
+
+/*---------------------------------PORTRAIT & LANDSCAPE---------------------------------*/
+/* .portrait div.question h2{
+	font-size: 16px;
+	line-height: 20px;
+} */
+/*---------------------------------PRE VIDEO RECORD ROTATE---------------------------------*/
+#orientation-message {
+	/* this is the black base of the message itself, containing all other elements of the message */
+	width: 100%;
+	height: 115px;
+	background-color: black;
+	position: fixed;
+	top: 40%;
+	display: block;
+	opacity: 0;
+	animation:portrait 4s linear 2s  alternate;
+	/* Firefox: */
+	-moz-animation:portrait 4s linear 0s  alternate;
+	/* Safari and Chrome: */
+	-webkit-animation:portrait 4s linear 0s  alternate;
+}
+
+#orientation-elements {
+	/* includes the device and the text message */
+	position: relative;
+	margin: auto;
+	width: 80px;
+	height: 70px;
+	background-color: none;
+	margin-top: 20px;
+	width: 500px;
+}
+
+#orientation-message-ico{
+	width: 121px;
+	margin:0 auto;
+}
+#orientation-message-ico img{
+	height: 60px;
+}
+
+#orientation-text {
+	text-align: center;
+	color: white;
+	font-size: 120%;
+	margin: 0;
+	padding: 0;
+	font-family:"Arial";
+}
+
+#orientation-text p{
+	margin: 0;
+	padding: 0;
+}
+
+
+#orientation-message {
+	opacity: 0;
+	animation:fade 4s linear 0s;
+	/* Firefox: */
+	-moz-animation:fade 4s linear 0s;
+	/* Safari and Chrome: */
+	-webkit-animation:fade 4s linear 0s;
+
+	-webkit-animation-fill-mode: forwards;
+}
+
+
+@keyframes fade
+/*this is the fade-out animation for the message */
+{
+	0%   {opacity: 0;}
+	40%  {opacity: 1.0;}
+	60%  {opacity: 1.0;}
+	100% {display: none;}
+}
+
+@-moz-keyframes fade /* Firefox */
+{
+	0%   {opacity: 0;}
+	40%  {opacity: 1.0;}
+	60%  {opacity: 1.0;}
+	100% {display: none;}
+}
+
+@-webkit-keyframes fade /*Safari and Chrome */
+{
+	0%   {opacity: 0;}
+	40%  {opacity: 1.0;}
+	60%  {opacity: 1.0;}
+	100% {display: none;}
+}
+
+ #ipad-login .content form input:not(.sing-in),
+ .page-ask-question form.new-question-form-2 input:not(.registr-btn),
+ .page-ask-question form.new-question-form-2 textarea,
+ #ipad-page-forgot-password input[type="text"]{
+ 	font: 18px/20px 'Gotham Light';
+	color:#666666;
+	background: #cccccc;
+ 	width: 100%;
+ 	height: 15px;
+ 	min-height: 15px;
+ 	border: none;
+ 	border-top: 1px solid #7f7f7f;
+ 	padding: 10px 0 10px 10px;
+ 	margin-bottom: 5px;
+}
+.page-ask-question .content .description{
+	font:18px/24px 'Gotham Light';
+	color: white;
+	margin: 13px 0 32px 0;
+}
+.page-ask-question form textarea{
+    box-shadow: none !important;
+    resize: none;
+    height: 60px !important;
+    padding: 5px !important;
+}
+.page fieldset > div,
+.page fieldset > div > div.ui-input-text {
+	border: none !important;
+	overflow: hidden;
+	box-shadow: none !important;
+	padding: 0;
+	margin: 0;
+	border-radius: 0;
+}
+.page fieldset .date-of-birth label.ui-input-text {
+	color: #666666;
+	font: 18px/36px 'Gotham Light';
+	height: 35px;
+	left: 0;
+	position: absolute;
+	text-indent: 10px;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+	opacity: 0.35;
+}
+.page fieldset .date-of-birth div.ui-input-text {
+	width: 100%;
+}
+#ipad-registration fieldset .date-of-birth div.ui-input-text .ui-input-text {
+	font: 18px/36px 'Gotham Light';
+}
+
+
+
+															/*----------------TAKE ME BACK----------*/
+.take-me-back .return-back{
+	float: left;
+	text-decoration: none;
+}
+.take-me-back h2{
+	font: 18px/20px 'Gotham Light';
+	color: white;
+	margin: 7px 0 7px 0;
+	float: left;
+	width: 100%;
+	font-weight: bold;
+	text-align: center;
+}
+.take-me-back .help-text{
+	font: 12px/18px 'Gotham Light';
+	color: #666666;
+	color: white;
+}
+.take-me-back .content-primary{
+    margin: 10px;
+}
+.take-me-back .content-primary .return-back{
+  width: 100%;
+  background-size: cover;
+  text-align: center;
+  border-radius: 2px;
+  text-transform: uppercase;
+  height: 29px;
+  padding-top: 6px;
+  background: url('../images/bg-sing-in.png') no-repeat;
+  margin: 27px auto 0;
+	border: none;
+  font: 18px 'Gotham Book';
+	color: white;
+	box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.15);
+	text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+  max-width: 600px;
+}
+
+#ipad-login .sing-in {
+	display: block;
+}
+.page-ask-question h2 {
+	font: 18px/20px 'Gotham Light';
+	color: white;
+	margin: 7px 0 7px 0;
+	float: left;
+	width: 100%;
+}
+
+span.play-pause {
+	background: url('../images/phone/phone-question-sprite.png') no-repeat;
+	text-indent: -9999px;
+	display: block;
+	width: 30px;
+	height: 37px;
+	background-position: 0 -228px;
+	position: absolute;
+	z-index: 100;
+	background-size: cover;
+	left: 20px;
+	top: 50%;
+	margin-top: -18px;
+	cursor: pointer;
+}
+
+.video-respond-repeatable{
+	background: url('../images/btn-respond-repeatable.png');
+	background-size: cover;
+	font: 18px/20px 'Gotham Light',Arial,sans-serif;
+	color: white;
+	text-decoration: none;
+	height: 35px;
+	border-radius: 4px;
+	margin: 25px auto 0;
+	overflow: hidden;
+	display: block;
+	width: 262px;
+	background-position-x: -66px;
+}
+
+.video-respond-repeatable span{
+	text-transform: uppercase;
+	color: #fff;
+	line-height: 34px;
+}
+
+/**************************************Jquery mobile*************************************/
+.ui-icon-loading{
+	background: url('../lib/images/new-loader.GIF') no-repeat 50% 50% !important;
+	background-size: 22px !important;
+}
+
+/**************************************not-black-male*************************************/
+body.not-black-male #main-menu ul li.ask-question,
+body.not-black-male div.page-question .video-respond {
+	display: none;
+}
+
+.page-terms-conditions h2,
+.page-terms-conditions h3 {
+	text-align: center;
+}
+.terms-conditions-link {
+	color: #e0a125 !important;
+	text-decoration: none !important;
+}
+
+#edit-search-home,
+#edit-search-results {
+	background: none !important;
+}
+
+/**************************************page-tutorial*************************************/
+/* .page-tutorial {
+	padding: 0 !important;
+	height: 100% !important;
+	overflow: hidden !important;
+} */
+.page-tutorial .ui-panel-content-wrap {
+	box-shadow: none;
+}
+.page-tutorial .content {
+	width: 68%;
+	max-width: 400px;
+	margin: 5% auto 0;
+}
+.page-tutorial .content img {
+	display: block;
+	width: 92%;
+	margin: 0 auto 10%;
+}
+.page-tutorial .content h2 {
+	color: white;
+	font: 15px/20px 'Gotham Light';
+	text-align: center;
+}
+.ui-footer .tutorial-slide {
+	width: 100%;
+	padding: 0;
+	display: block;
+	text-align: center;
+}
+.ui-footer .tutorial-slide li {
+	display: inline-block;
+	width: 12px;
+}
+.ui-footer .tutorial-slide li a {
+ 	background: black;
+	text-indent: -9999px;
+	display: block;
+	width: 8px;
+	height: 8px;
+	border-radius: 5px;
+}
+.ui-footer .tutorial-slide li.active a {
+	background: gray;
+}
+.ui-footer {
+	background: none;
+	border:none;
+}

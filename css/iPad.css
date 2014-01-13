@@ -1,0 +1,534 @@
+@media only screen and (min-width: 767px) {
+												/*-------------SING IN ------------*/
+	ul.questions > li.question{
+		max-height: 430px;
+	}
+	#ipad-login,
+	#ipad-page-forgot-password{
+		background: url('../images/bg-ipad-login.jpg') no-repeat;
+		background-size: cover;
+		width: 424px;
+		height: 568px;
+		border: none;
+	}
+	#ipad-login .content,
+	#ipad-page-forgot-password-popup .content{
+		font: 36px/40px 'Gotham Light';
+		color: white;
+		margin: 0px 62px 0px;
+		float: left;
+		padding-top: 54px;
+	}
+	.ui-popup-container{
+		position: fixed;
+	}
+
+	 #ipad-login .description{
+	    font:18px/20px 'Gotham Light';
+	    color: white;
+	    margin-bottom: 18px;
+}
+	#ipad-login .social a, #ipad-login .social a:hover, #ipad-login .social a:visited{
+		color:#222222;
+		font:18px/20px 'Gotham Light';
+	}
+	#ipad-login .social{
+	    float: left;
+	    text-align: center;
+	    width: 100%;
+}
+	#ipad-login form{
+	    float: left;
+	    width: 100%;
+	    margin-top: 20px;
+	}
+	#ipad-login form div, .page-ask-question form.new-question div{
+	    margin: 0;
+	    padding: 0;
+	    border: none;
+	    position: relative;
+	    float: left;
+	    width: 100%;
+	    box-shadow: none;
+	}
+	#ipad-login form div.ui-focus{
+		-webkit-box-shadow: none;
+	    -moz-box-shadow: none;
+	    box-shadow: none;
+	}
+	#ipad-login .social a{
+		font: 18px/20px 'Gotham Light';
+		text-decoration: none;
+		float: left;
+		padding: 7px 32px 8px 27px;
+		text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.25);
+	}
+	#ipad-login .social .twitter{
+		background: url('../images/btn-social-twitter.png') no-repeat;
+		background-size: cover;
+		pointer-events: none;
+   	cursor: default;
+
+		display: none;
+	}
+	#ipad-login .social .facebook{
+		background: url('../images/btn-social-facebook.png') no-repeat;
+		background-size: cover;
+	  padding: 7px 23px 8px 16px;
+		margin-left: 9px;
+		float: none;
+		display: inline-block;
+		text-indent: 3px;
+		display: none;
+}
+	#ipad-login .or{
+		font: 18px/12px 'Gotham Light';
+		color:#444444;
+		float: left;
+		width: 100%;
+		text-align: center;
+		margin-top: 20px;
+		display: none;
+}
+	#ipad-login .forgot{
+		font: 12px/18px 'Gotham Light';
+		color: #e0a125;
+		display: block;
+		text-decoration: none;
+		margin: 5px 0 10px 0;
+		float: left;
+		width: 100%;
+	}
+	#ipad-login .create,
+	#ipad-page-forgot-password-popup .sign-in{
+		font: 12px/12px 'Gotham Light';
+		color: white;
+		float: left;
+		width: 100%;
+		margin-top: 145px;
+		text-align: center;
+	}
+	#ipad-login .create a,
+	#ipad-page-forgot-password-popup .sign-in a{
+		color: #e0a125;
+	}
+	#ipad-login input.sing-in{
+		background: url('../images/bg-registration-ipad-finish.png') no-repeat;
+		background-size: cover;
+		height: 35px;
+		width: 100%;
+		border: none;
+		font: 18px/20px 'Gotham Book';
+		color: white;
+		cursor: pointer;
+		margin: 23px 0 0 0;
+		text-indent: -7px;
+		padding: 0;
+		box-shadow: 0px 8px 4px 0px rgba(0, 0, 0, 0.15);
+		text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+
+		display: block;
+}
+														/*-------------REGISTRATION ------------*/
+	.ui-focus{
+		outline: none !important;
+		outline-width: 0px !important;
+	}
+	#ipad-registration{
+		background: url('../images/bg-registration-ipad.jpg') no-repeat;
+		background-size: cover;
+		width: 720px;
+		height: 593px;
+		position: relative;
+		border: none;
+	}
+	#ipadForm{
+	    margin: 0;
+
+	    padding: 0;
+	    width: 100%;
+	    height: 100%;
+	}
+	#ipad-registration .left-block, #ipad-registration .right-block{
+	    width: 50%;
+	    float: left;
+	}
+	.registration-close, .login-close{
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		background: url('../images/bg-ipad-close.png') no-repeat;
+		background-size: cover;
+		text-indent: -9999px;
+		height: 18px;
+		width: 18px;
+	}
+	#ipad-registration h2,
+	#ipad-page-forgot-password h2{
+		color: white;
+		font: 18px/20px 'Gotham Light';
+		margin-bottom: 20px;
+	}
+	#ipad-registration h2 p{
+		font: 9px/18px 'Gotham Light';
+		color: #666666;
+	}
+	#ipad-registration .left-block .block-wrapper{
+	    margin: 45px 15px 0 45px;
+
+	}
+	#ipad-registration .right-block .block-wrapper{
+	    margin: 45px 45px 0 15px;
+
+	}
+	#ipad-registration .left-block .block-wrapper{
+		font: 12px/20px 'Gotham Light';
+	}
+	#ipad-registration .right-block .block-wrapper p{
+		font: 12px/15px 'Gotham Book';
+		color: #888888;
+		margin: 22px 0 0 36px;
+	}
+	#ipad-registration .right-block .block-wrapper h2 p{
+		margin: 9px 0 -4px 0;
+	}
+	#ipad-registration .footer p{
+		font: 12px/12px 'Gotham Book';
+		color: white;
+	}
+	#ipad-registration .footer p a{
+		color: #e0a125;
+	}
+	#ipad-registration fieldset input{
+	 	font: 18px/20px 'Gotham Light';
+		color:#666666;
+		background: #cccccc;
+	 	width: 100%;
+	 	height: 35px;
+	 	min-height: 35px;
+	 	text-indent: 10px;
+	 	border: none;
+	 	border-top: 1px solid #7f7f7f;
+	 	padding: 0;
+	 	margin-bottom: 5px;
+	}
+
+	#ipad-registration .right-block fieldset input{
+	    margin-bottom: 10px;
+	}
+	#ipad-registration input.registration-finish{
+		background: url('../images/bg-registration-ipad-finish.png') no-repeat;
+		background-size: cover;
+		height: 35px;
+		width: 100%;
+		border: none;
+		font: 18px/20px 'Gotham Book';
+		color: white;
+		cursor: pointer;
+		margin: 3px 0 0 0;
+		text-transform: uppercase;
+		text-indent: -7px;
+		box-shadow: 0px 8px 4px 0px rgba(0, 0, 0, 0.15);;
+		padding: 0;
+		text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+	}
+	#ipad-registration form fieldset{
+		margin-bottom: 25px;
+	}
+	#ipad-registration .black-identify{
+		float: left;
+		width: 100%;
+		margin: -1px 0 0 0;
+	}
+	#ipad-registration .black-identify input{
+		width: 22px;
+	    height: 22px;
+	    padding: 0;
+	    margin:0;
+	    vertical-align: bottom;
+	    position: relative;
+		top: 1px;
+	    overflow: hidden;
+		margin-right: 10px;
+	}
+	#ipad-registration .black-identify label {
+	    display: block;
+	    padding-left: 15px;
+	    text-indent: -15px;
+	    color:#888888;
+	}
+	#ipad-registration .footer{
+	    width: 100%;
+	    text-align: center;
+
+	    position: absolute;
+	    bottom: 14px;
+}
+	.video-wrapper, .video-wrapper img, .video-wrapper video{
+		background: url('../lib/images/ajax-loader.gif') no-repeat 50% 50%;
+	}
+	.video-wrapper.processing,
+	.video-wrapper.processing img,
+	.video-wrapper.processing video{
+		background: none;
+	}
+
+	.question-info-wrapper{
+		min-height: 287px;
+
+		position: relative;
+	}
+	.video-respond{
+    background-position: -43px 0;
+
+	}
+	.video-respond span{
+    margin: 8px auto 0;
+    display: block;
+    width: 92px;
+    padding-left: 36px;
+
+}
+	.question-additional-wrapper .left-inner-shadow{
+		-webkit-box-shadow: 0px 0px 30px 40px #000;
+		-moz-box-shadow: 0px 0px 30px 40px #000;
+		box-shadow: 0px 0px 30px 40px #000;
+
+		z-index: 5;
+		}
+	.question-additional-wrapper .right-inner-shadow{
+		-webkit-box-shadow: 0px 0px 30px 40px #000;
+		-moz-box-shadow: 0px 0px 30px 40px #000;
+		box-shadow: 0px 0px 30px 40px #000;
+
+		z-index: 5;
+	}
+	.content ul.questions > li.question{
+		height: 430px;
+		margin-bottom: 1px;
+		width: 100%;
+	}
+	.search-container .ui-input-search{
+		width: 100%;
+	}
+	.ipad-profile-image-wrapper{
+    margin-top: 50px;
+    max-width: 400px;
+    margin: 0 auto;
+    padding-top: 50px;
+
+    display: none;
+}
+	.ipad-profile-image{
+    width: 400px;
+    margin: 0 auto 0;
+    overflow: hidden;
+    height: 400px;
+	}
+	.ipad-profile-image img{
+    display: block;
+    width: 100%;
+	}
+	.ipad-profile-image-wrapper input.registration-finish{
+		margin: 20px 0 0 50px !important;
+
+		width: 300px !important;
+}
+															/*----------------RESTORE PASSWORD----------*/
+	#ipad-page-forgot-password-popup input[type="submit"]{
+		font: 18px/20px 'Gotham Book';
+		height: 35px;
+
+		margin-top: 20px;
+}
+															/*----------------ADDITIONAL----------*/
+	.page-ask-question .content-primary {
+		width: 300px;
+		width: 622px;
+		margin: 56px auto 20px;
+		overflow: hidden;
+	}
+	.page-ask-question .content-primary .black-identify {
+		width: 300px;
+		margin: 0 auto;
+	}
+	.page-ask-question .content-primary .black-identify label input {
+		margin-right: 10px;
+	}
+	.record-question{
+	    text-align: center;
+	    text-indent: 23px;
+	    border: 0;
+			width: 300px;
+	}
+	.page-ask-question .content-primary .question-summarize-col {
+		padding: 0 15px 0 0;
+		width: 296px;
+		float: left;
+	}
+	.page-ask-question .content-primary .question-tags-col {
+		padding: 0 0 0 15px;
+		width: 296px;
+		float: left;
+	}
+	.page-ask-question .content-primary .question-summarize-col textarea {
+		margin: 29px 0 0 0;
+		border-radius: 0;
+		height: 202px !important;
+	}
+	.page-ask-question form.new-question textarea {
+	    height: 100px;
+	    border-radius: 0;
+	    resize: none;
+	}
+	.take-me-back .help-text{
+		font-size: 18px;
+		line-height: 26px;
+	}
+	.take-me-back .content-primary{
+		text-align: center;
+	}
+	.take-me-back .return-back{
+    width: 300px !important;
+    margin: 20px auto;
+    display: block;
+    float: none;
+	}
+	.no-results a.video-respond span{
+    width: auto;
+    /* text-indent: 60px; */
+	}
+
+	.page-tutorial .content h2 {
+		font: 18px/20px 'Gotham Book';
+	}
+}
+
+														/*----------------PORTRAITE----------*/
+
+@media only screen and (min-width: 767px) and (max-width: 770px){
+	.portrait div.question div.video-wrapper{
+		width: 100%;
+		min-height: 420px;
+}
+	.portrait .question-info{
+		margin: 22px 25px 0;
+	}
+	.portrait .question-info-wrapper{
+		width: 100%;
+		min-height: 0px;
+}
+	.portrait .video-respond{
+		width: 300px;
+		background-position: 0;
+		margin-bottom: 40px;
+}
+	.portrait div.question .submitted{
+		width: 100%;
+	}
+	.portrait .question .navigation{
+		height: 100%;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 100px;
+		z-index: 100;
+}
+	.PORTRAITE.question .qiestion-navigation a{
+		float: right;
+		height: 100%;
+		border: none;
+		margin-bottom: 20px;
+	}
+	.portrait .question .navigation li{
+		float: none;
+		display: list-item;
+		list-style: none;
+		width: 100%;
+		float: left;
+		height: 25%;
+}
+.question .qiestion-navigation a{
+	border: none;
+}
+	.portrait .question .qiestion-navigation{
+		top: 0;
+		width: 100%;
+		right: 0;
+		height: 100%;
+		position: static;
+}
+	.portrait .question .qiestion-navigation a span{
+		float: right;
+		background: url('../images/phone/phone-question-sprite-white1.png') no-repeat;
+		background-size: inherit;
+		height: 60px;
+		width: 64%;
+		margin: 30px 0 0 0px;
+
+}
+	.portrait .question .qiestion-navigation .nav-theme span{
+		background-position: 0px 27px;
+	}
+	.portrait .question .qiestion-navigation .nav-favorite span{
+		background-position: 0px -42px;
+	}
+	.portrait .question .qiestion-navigation .nav-flag span{
+		background-position: 0px -109px;
+	}
+	.portrait .question .qiestion-navigation .nav-share span{
+		background-position: 0px -168px;
+	}
+	.portrait .question .qiestion-navigation a.is-favorite span{
+		background: url('../images/phone/phone-question-sprite-white1-active.png') no-repeat;
+		background-position: 0 -40px !important;
+}
+	div.content-primary div.question ul.navigation:after{
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 100%;
+		width: 100px;
+		height: 100%;
+		background: black;
+		opacity: 0.25;
+		z-index: 2;
+		margin-left: -100px;
+	}
+}
+
+
+														/*----------------LANDSCAPE----------*/
+@media only screen and (min-width: 1024px) {
+	.content ul.questions > li.question{
+		height: 286px;
+		overflow: hidden;
+	}
+	.question-info-wrapper{
+		min-height: 384px;
+	}
+	.video-respond{
+		width: 262px;
+	}
+	.video-respond span{
+		padding: 0;
+	}
+	.content ul.questions > li.question{
+		width: 50%;
+	}
+	ul.questions > li.question:nth-child(2n + 1) img{
+		border: none;
+		margin-left: 0;
+	}
+	span.play-pause{
+		display: none;
+	}
+	div.question div.video-wrapper{
+		min-height: 380px;
+	}
+	.question .qiestion-navigation a.is-favorite span{
+		background: url('../images/ipad/ipad-question-sprite2-active.png') no-repeat;
+		background-size: 296px 28px;
+		background-position: -86px 0;
+	}
+}
