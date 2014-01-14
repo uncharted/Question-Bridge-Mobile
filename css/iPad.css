@@ -93,7 +93,7 @@
 	#ipad-login .forgot{
 		font: 12px/18px 'Gotham Light';
 		color: #e0a125;
-		display: block;
+		display: none;
 		text-decoration: none;
 		margin: 5px 0 10px 0;
 		float: left;

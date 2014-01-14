@@ -79,6 +79,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		    }, 600);
 				initTutorialPage();
 		}*/
+		initTutorialPage();
 		setTimeout(function() {
 			navigator.splashscreen.hide();
     }, 2000);
@@ -96,9 +97,8 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	}
 
 	function initTutorialPage() {
-		$('body')
-			.one('swipeleft', function() {
-
+/*		$('body')
+			.one('swipeleft', function(event) {
 				var activePageId = $.mobile.activePage.attr( "id" ),
 						$nextPageLink = $('#' + activePageId).find('ul.tutorial-slide li.active a').parent().next().find('a');
 				if($nextPageLink.length) {
@@ -108,13 +108,34 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 					$.mobile.changePage('#page-home', {transition: "slidefade"});
 					$('body').off('swipeleft swiperight');
 				}
+				event.stopImmediatePropagation();
 			})
-			.one('swiperight', function() {
-				alert(1)
+			.one('swiperight', function(event) {
 				var activePageId = $.mobile.activePage.attr( "id" ),
 						$prevPageLink = $('#' + activePageId).find('ul.tutorial-slide li.active a').parent().prev().find('a');
 				if($prevPageLink.length) $prevPageLink.trigger('click');
-			});
+				event.stopImmediatePropagation();
+			});*/
+		$('div.page-tutorial').on({
+		    swipeleft: function(event){
+		        var activePageId = $.mobile.activePage.attr( "id" ),
+						$nextPageLink = $('#' + activePageId).find('ul.tutorial-slide li.active a').parent().next().find('a');
+				if($nextPageLink.length) {
+					$nextPageLink.trigger('click');
+				}
+				else {
+					$.mobile.changePage('#page-home', {transition: "slidefade"});
+					$('body').off('swipeleft swiperight');
+				}
+		        event.stopImmediatePropagation();
+		    },
+		    swiperight: function(event){
+		        var activePageId = $.mobile.activePage.attr( "id" ),
+						$prevPageLink = $('#' + activePageId).find('ul.tutorial-slide li.active a').parent().prev().find('a');
+				if($prevPageLink.length) $prevPageLink.trigger('click');
+		        event.stopImmediatePropagation();
+		    }
+		});
 	}
 
 

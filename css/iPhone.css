@@ -344,7 +344,7 @@ div.content-primary div.question ul.navigation:after{
 		line-height: 18px;
 		width: 180px;
 		padding-right: 109px;
-		display: block;
+		display: none;
 		color:#e0a125;
 
 		margin-top: 5px;

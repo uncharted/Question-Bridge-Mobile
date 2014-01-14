@@ -673,7 +673,7 @@ input.form-submit{
 	margin-top: 34px;
 	display: none;
 }
-.page-sing-in .forgot{
+.page-sing-in {
 	font-size: 18px;
 	color: #666666;
 	line-height: 14px;
@@ -682,6 +682,7 @@ input.form-submit{
 	padding-right: 300px;
 	display: block;
 	text-decoration: none;
+	display: none;
 }
 .page-sing-in .create{
 	font-size: 24px;
