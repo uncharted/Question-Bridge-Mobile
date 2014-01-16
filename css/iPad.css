@@ -324,6 +324,7 @@
     margin: 0 auto 0;
     overflow: hidden;
     height: 400px;
+    visibility: hidden;
 	}
 	.ipad-profile-image img{
     display: block;

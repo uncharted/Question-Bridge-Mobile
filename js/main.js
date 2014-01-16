@@ -1752,7 +1752,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		$inputProfileFid.attr('value', response.profile_fid);
 		var src = qbApp.settings.serverUrl+'sites/default/files/users/'+response.user_photo;
 		$profileAvatar.attr('src', src);
-		$profileAvatar.parent().show().css('visibility', 'hidden');
 		//calculate image margin-top offset to centered image
 		$profileAvatar.on('load', function(){
 			var imageHeight = $profileAvatar.height(),
