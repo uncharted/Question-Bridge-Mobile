@@ -7,9 +7,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.buttonMarkup.hoverDelay = 25;
 
 
-	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
+	qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	qbApp.settings.serverUrl = 'http://107.21.242.74/';
+	//qbApp.settings.serverUrl = 'http://107.21.242.74/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
@@ -1349,12 +1349,11 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					break;
 				case 'ipad-registration':
 					if(qbApp.formReset === true) {
+						var $ipadForm  = $response.find('form#ipadForm');
 						$ipadForm.find('div.ipad-profile-image-wrapper').hide();
 						$ipadForm.find('div.left-block, div.right-block').show();
-						var $ipadForm  = $response.find('form#ipadForm');
 						$ipadForm.get(0).reset();
 						$ipadForm.find('#ipad-user-profile-photo-id').val(0);
-
 						qbApp.formReset = false;
 					}
 					initIPadRegistrationForm($response);
@@ -1753,12 +1752,14 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		$inputProfileFid.attr('value', response.profile_fid);
 		var src = qbApp.settings.serverUrl+'sites/default/files/users/'+response.user_photo;
 		$profileAvatar.attr('src', src);
-		$profileAvatar.parent().show();
+		$profileAvatar.parent().show().css('visibility', 'hidden');
 		//calculate image margin-top offset to centered image
 		$profileAvatar.on('load', function(){
 			var imageHeight = $profileAvatar.height(),
 					imageWrapperHeight = $profileAvatar.parent().height(),
 					topOffset = (imageHeight - imageWrapperHeight)/2;
+
+			$profileAvatar.parent().css('visibility', 'visible');
 
 			if(topOffset > 0){
 				topOffset *= -1;
