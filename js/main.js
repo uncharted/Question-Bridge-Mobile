@@ -1758,7 +1758,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					imageWrapperHeight = $profileAvatar.parent().height(),
 					topOffset = (imageHeight - imageWrapperHeight)/2;
 
-			$profileAvatar.parent().css('visibility', 'visible');
+			$profileAvatar.parent().show().css('visibility', 'visible');
 
 			if(topOffset > 0){
 				topOffset *= -1;
