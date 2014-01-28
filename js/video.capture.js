@@ -146,7 +146,7 @@ function askQuestionAftercapture($video){
 			return false;  // suppresses error message text
 		},
 		submitHandler: function(form) {
-			qbApp.showLoading($('body > div.ui-loader'), 'html');
+			qbApp.showLoading($('body > div.ui-loader'), 'html', true);
 			var $form = $(form);
 			var formData = $form.serialize();
 			qbApp.capture.url = qbApp.settings.serverUrl + 'qb/rest/video/question?' + formData;

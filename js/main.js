@@ -1154,7 +1154,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	}
 
 
-	qbApp.showLoading = function($container, insertMethod) {
+	qbApp.showLoading = function($container, insertMethod, overlay) {
 		if($container.hasClass('ui-loader')) {
 			$.mobile.loading('show');
 		}
@@ -1182,6 +1182,11 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		if(insertMethod==undefined) insertMethod = 'append';
 
 		$container[insertMethod]($loader);
+
+		if(overlay == true) {
+			var $overlay = $('<div class="overlay"></div>');
+			$container.append($overlay);
+		}
 
 		var target = document.getElementById('loader');
 		var spinner = new Spinner(opts).spin(target);
