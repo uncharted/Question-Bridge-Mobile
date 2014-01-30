@@ -475,7 +475,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 				$activePage.find('div[data-role="content"]').css('min-height', pageContentMinHeight);
 			}
 		}*/
-		if($activePage.hasClass("page-registration")) {
+/*		if($activePage.hasClass("page-registration")) {
 			var pageContentHeight = $activePage.find('div.ui-panel-content-wrap').height(),
 					contentHeight = $activePage.find('div.ui-content').height(),
 					$footer = $activePage.find('div.footer'),
@@ -485,7 +485,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 				$footer.css('marginTop', pageContentHeight - contentHeight);
 			}
 			//$activePage.find('div[data-role="content"]').css('min-height', pageContentMinHeight);
-		}
+		}*/
 	});
 
 	/*Hide search box on homepage hide*/
@@ -1485,6 +1485,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			//var activePageId = $.mobile.activePage.attr( "id" );
 			//$('#'+activePageId).find('#main-menu').panel( "close" );
 			$.mobile.changePage( "#page-home", {transition: "slide"});
+			initQuestionsList('#page-home', {order:'latest'}, 'replace');
 		});
 	}
 
