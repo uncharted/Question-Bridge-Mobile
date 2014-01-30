@@ -108,6 +108,9 @@ div.content-primary div.question ul.navigation:after{
 			width: 320px !important;
 			overflow: hidden !important;
 	 }*/
+.page-registration form.registration-form {
+	padding-bottom: 30px;
+}
 .page-registration .content,
 .page-ask-question .content{
 		padding: 0px 10px 0px 10px;
@@ -295,7 +298,7 @@ div.content-primary div.question ul.navigation:after{
 	}
 	.page-sing-in form{
 		width: 300px;
-		padding: 0;
+		padding: 0 0 30px 0;
 		margin: 15px auto 0;
 	}
 	.page-sing-in .content form input.login{

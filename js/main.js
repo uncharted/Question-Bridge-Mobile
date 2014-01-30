@@ -1484,8 +1484,13 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			//Some action after user logout
 			//var activePageId = $.mobile.activePage.attr( "id" );
 			//$('#'+activePageId).find('#main-menu').panel( "close" );
-			$.mobile.changePage( "#page-home", {transition: "slide"});
-			initQuestionsList('#page-home', {order:'latest'}, 'replace');
+			var activePageId = $.mobile.activePage.attr( "id" );
+			if(activePageId == 'page-home') {
+				initQuestionsList('#page-home', {order:'latest'}, 'replace');
+				$('#page-home #main-menu' ).panel("close");
+			} else {
+				$.mobile.changePage( "#page-home", {transition: "slide"});
+			}
 		});
 	}
 

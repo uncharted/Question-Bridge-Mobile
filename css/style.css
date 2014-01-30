@@ -752,9 +752,9 @@ body.logged-in li.log-out{
 }
 
 /*---------------------------------------------------------QUESTION---------------------------------------------------------*/
-.ui-panel-content-wrap{
+/* .ui-panel-content-wrap{
 	box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.8)
-}
+} */
 .video-respond,
 .record-question{
 	background: url('../images/btn-respond-repeatable.png');
