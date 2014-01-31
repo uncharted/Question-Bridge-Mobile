@@ -1735,7 +1735,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		}
 	}
 	function uploadPhoto(imageURI){
-		alert(imageURI)
 		var options = new FileUploadOptions();
 		options.fileKey = "file";
 		options.fileName = imageURI.substr(imageURI.lastIndexOf('/')+1)+'.png';
