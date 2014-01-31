@@ -283,13 +283,6 @@ function uploadFile(mediaFile) {
 		path = mediaFile.fullPath,
 		name = mediaFile.name;
 
-	$.ajax({
-		url: qbApp.settings.serverUrl + 'qb/rest/debug',
-		type: 'POST',
-		dataType: 'json',
-		data: mediaFile,
-	});
-
 	var options = new FileUploadOptions();
 		options.chunkedMode = false;
 		options.fileName = name;
@@ -301,4 +294,17 @@ function uploadFile(mediaFile) {
 	//Additional data for send
 	options.params = qbApp.capture;
 	ft.upload(path, qbApp.capture.url, uploadSuccess, uploadFail, options);
+
+	//Remove temp video file
+	setTimeout( function() {
+		window.resolveLocalFileSystemURI(path, onResolveSuccess, fail);
+		var onResolveSuccess = function (fileEntry) {
+					entry.remove();
+					alert('removed');
+				};
+	  var fail = function (error) {
+
+				};
+	});
+
 }
