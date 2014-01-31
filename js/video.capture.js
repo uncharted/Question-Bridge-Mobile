@@ -296,15 +296,13 @@ function uploadFile(mediaFile) {
 	ft.upload(path, qbApp.capture.url, uploadSuccess, uploadFail, options);
 
 	//Remove temp video file
-	setTimeout( function() {
-		window.resolveLocalFileSystemURI(path, onResolveSuccess, fail);
-		var onResolveSuccess = function (fileEntry) {
-					entry.remove();
-					alert('removed');
-				};
-	  var fail = function (error) {
+	window.resolveLocalFileSystemURI(mediaFile, onSuccess, function() { alert('error: unable to resovle local fs uri'); });
 
-				};
-	});
-
+	function onSuccess(entry) {
+		entry.remove(function (entry) {
+			alert('removal succeeded');
+		}, function (error) {
+			alert('Error removing file: ' + error.code);
+		});
+	}
 }
