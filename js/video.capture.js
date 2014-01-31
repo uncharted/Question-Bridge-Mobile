@@ -296,7 +296,7 @@ function uploadFile(mediaFile) {
 	ft.upload(path, qbApp.capture.url, uploadSuccess, uploadFail, options);
 
 	//Remove temp video file
-	window.resolveLocalFileSystemURI(mediaFile, function() {
+	window.resolveLocalFileSystemURI(mediaFile, function(entry) {
 		entry.remove(function (entry) {
 			alert('removal succeeded');
 		}, function (error) {
