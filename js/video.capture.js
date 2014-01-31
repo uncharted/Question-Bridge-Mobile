@@ -224,9 +224,9 @@ function captureSuccess(mediaFiles) {
 	qbApp.showLoading($('body > div.ui-loader'), 'html');
 	var i, len;
 	for (i = 0, len = mediaFiles.length; i < len; i += 1) {
-		var mediaFile = mediaFiles[1];
+		var mediaFile = mediaFiles[i];
 		//qbApp.capture.mediaFile = mediaFile;
-		qbApp.capture.type == 'answer' ? 	uploadFile(mediaFiles[1]) : askQuestionAftercapture(mediaFiles[1]);
+		qbApp.capture.type == 'answer' ? 	uploadFile(mediaFiles[i]) : askQuestionAftercapture(mediaFiles[i]);
 	}
 }
 
@@ -295,8 +295,10 @@ function uploadFile(mediaFile) {
 	options.params = qbApp.capture;
 	ft.upload(path, qbApp.capture.url, uploadSuccess, uploadFail, options);
 
+	alert(path);
+
 	//Remove temp video file
-	window.resolveLocalFileSystemURI(path, function(entry) {
+	window.resolveLocalFileSystemURI(mediaFile, function() {
 		entry.remove(function (entry) {
 			alert('removal succeeded');
 		}, function (error) {
