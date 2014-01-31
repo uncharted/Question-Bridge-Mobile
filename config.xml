@@ -42,7 +42,7 @@
 		<access origin="*" />
 
 		<!-- <gap:plugin name="nl.x-services.plugins.socialsharing" /> -->
-		<gap:plugin name="nl.x-services.plugins.ipadlandscapeenabler" />
+		<!-- <gap:plugin name="nl.x-services.plugins.ipadlandscapeenabler" /> -->
 
 		<!-- <gap:plugin name="org.apache.cordova.media-capture" /> -->
 		<gap:plugin name="org.apache.cordova.device" />
