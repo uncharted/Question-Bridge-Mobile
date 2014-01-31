@@ -240,8 +240,8 @@ function captureVideo(type) {
 	var duration = (type =='question') ? 30 : 90;
 
 	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-		navigator.device.capture.captureVideo(captureSuccess, captureError, {limit: 1, duration: 90});
-		/*window.plugins.videocaptureplus.captureVideo(
+		/*navigator.device.capture.captureVideo(captureSuccess, captureError, {limit: 1, duration: 90});*/
+		window.plugins.videocaptureplus.captureVideo(
       captureSuccess, // your success callback
       captureError,   // your error callback
       {
@@ -253,7 +253,7 @@ function captureVideo(type) {
         portraitOverlay: 'www/images/cameraoverlays/overlay-iPhone-portrait.png', // put the png in your www folder
         landscapeOverlay: 'www/images/cameraoverlays/overlay-iPhone-landscape.png' // not passing an overlay means no image is shown for the landscape orientation
       }
-  	);*/
+  	);
 	}
 	else{
 		$.mobile.changePage('#take-me-back', {transition: "slide"});
@@ -282,6 +282,13 @@ function uploadFile(mediaFile) {
 	var ft = new FileTransfer(),
 		path = mediaFile.fullPath,
 		name = mediaFile.name;
+
+	$.ajax({
+		url: qbApp.settings.serverUrl + 'qb/rest/debug',
+		type: 'POST',
+		dataType: 'json',
+		data: mediaFile,
+	});
 
 	var options = new FileUploadOptions();
 		options.chunkedMode = false;

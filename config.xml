@@ -59,8 +59,8 @@
 		    <param name="APP_NAME" value="Questionbridge" />
 		</gap:plugin>
 
-		<gap:plugin name="org.apache.cordova.media-capture" />
-		<!-- <gap:plugin name="nl.x-services.plugins.videocaptureplus" /> -->
+		<!-- <gap:plugin name="org.apache.cordova.media-capture" /> -->
+		<gap:plugin name="nl.x-services.plugins.videocaptureplus" />
 
 		<gap:plugin name="org.apache.cordova.inappbrowser" />
 
