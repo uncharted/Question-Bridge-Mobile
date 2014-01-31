@@ -28,6 +28,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	qbApp.captureType = null;
 	qbApp.requestingPage = null;
 	qbApp.formReset = false;
+	qbApp.captureCounter = 0;
 	qbApp.wideWidthHeight = ($(window).width()/16)*9;
 
 	if("deviceready" in window) {

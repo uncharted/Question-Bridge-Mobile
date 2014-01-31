@@ -222,12 +222,13 @@ function checkAuthentication(){
 
 function captureSuccess(mediaFiles) {
 	qbApp.showLoading($('body > div.ui-loader'), 'html');
-	var i, len;
-	for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+	var i = qbApp.captureCounter;
+	/*for (i = 0, len = mediaFiles.length; i < len; i += 1) {*/
 		var mediaFile = mediaFiles[i];
 		//qbApp.capture.mediaFile = mediaFile;
 		qbApp.capture.type == 'answer' ? 	uploadFile(mediaFiles[i]) : askQuestionAftercapture(mediaFiles[i]);
-	}
+		qbApp.captureCounter++;
+	/*}*/
 }
 
 function captureError(error) {
@@ -296,7 +297,7 @@ function uploadFile(mediaFile) {
 	ft.upload(path, qbApp.capture.url, uploadSuccess, uploadFail, options);
 
 	//Remove temp video file
-	window.resolveLocalFileSystemURI(mediaFile, onSuccess, function() { alert('error: unable to resovle local fs uri'); });
+/*	window.resolveLocalFileSystemURI(mediaFile, onSuccess, function() { alert('error: unable to resovle local fs uri'); });
 
 	function onSuccess(entry) {
 		entry.remove(function (entry) {
@@ -304,5 +305,5 @@ function uploadFile(mediaFile) {
 		}, function (error) {
 			alert('Error removing file: ' + error.code);
 		});
-	}
+	}*/
 }
