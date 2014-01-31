@@ -139,6 +139,10 @@ function initAsqQuestion(){
 
 function askQuestionAftercapture($video){
 	$.mobile.changePage('#page-ask-question-step-2', {transition: "slide"/*, reloadPage: true*/});
+	var $questionSubmitPage = $( '#page-ask-question-step-2' ),
+			$questionSubmitBtn = $questionSubmitPage.find( 'form input[type="submit"]' );
+
+	$questionSubmitBtn.css( 'visibility' , 'visible' );
 	$('#page-ask-question-step-2').find("form.new-question-form-2").on('submit', function(event) {
 		event.preventDefault();
 	}).validate({
@@ -147,6 +151,7 @@ function askQuestionAftercapture($video){
 		},
 		submitHandler: function(form) {
 			qbApp.showLoading($('body > div.ui-loader'), 'html', true);
+			$questionSubmitBtn.css( 'visibility' , 'hidden' );
 			var $form = $(form);
 			var formData = $form.serialize();
 			qbApp.capture.url = qbApp.settings.serverUrl + 'qb/rest/video/question?' + formData;
@@ -235,8 +240,8 @@ function captureVideo(type) {
 	var duration = (type =='question') ? 30 : 90;
 
 	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-		/*navigator.device.capture.captureVideo(captureSuccess, captureError, {limit: 1, duration: 90});*/
-		window.plugins.videocaptureplus.captureVideo(
+		navigator.device.capture.captureVideo(captureSuccess, captureError, {limit: 1, duration: 90});
+		/*window.plugins.videocaptureplus.captureVideo(
       captureSuccess, // your success callback
       captureError,   // your error callback
       {
@@ -248,7 +253,7 @@ function captureVideo(type) {
         portraitOverlay: 'www/images/cameraoverlays/overlay-iPhone-portrait.png', // put the png in your www folder
         landscapeOverlay: 'www/images/cameraoverlays/overlay-iPhone-landscape.png' // not passing an overlay means no image is shown for the landscape orientation
       }
-  	);
+  	);*/
 	}
 	else{
 		$.mobile.changePage('#take-me-back', {transition: "slide"});
