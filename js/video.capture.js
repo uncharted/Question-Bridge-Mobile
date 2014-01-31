@@ -295,13 +295,14 @@ function uploadFile(mediaFile) {
 	options.params = qbApp.capture;
 	ft.upload(path, qbApp.capture.url, uploadSuccess, uploadFail, options);
 
-	videoURI = mediaFile.substr(8, text.length-8);
+	//Remove temp video file
+/*	videoURI = mediaFile.substr(8, text.length-8);
 
 	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){alert(fileSystem.name)}, fail);
-	//Remove temp video file
+
 	window.resolveLocalFileSystemURI(videoURI, function(fileEntry){alert(fileEntry.name)}, fail);
 
 	var fail = function(error) {
         console.log(error.code);
-    }
+    }*/
 }
