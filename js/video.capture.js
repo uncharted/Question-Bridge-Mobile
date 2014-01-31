@@ -137,7 +137,7 @@ function initAsqQuestion(){
 	});
 }
 
-function askQuestionAftercapture($video){
+function askQuestionAftercapture(mediaFiles){
 	$.mobile.changePage('#page-ask-question-step-2', {transition: "slide"/*, reloadPage: true*/});
 	var $questionSubmitPage = $( '#page-ask-question-step-2' ),
 			$questionSubmitBtn = $questionSubmitPage.find( 'form input[type="submit"]' );
@@ -159,7 +159,7 @@ function askQuestionAftercapture($video){
 			qbApp.returnPageId = '#page-home';
 			qbApp.capture.questionData = formData;
 
-			uploadFile($video);
+			uploadFile(mediaFiles);
 		}
 	});
 }
