@@ -1107,8 +1107,8 @@ background-size: 22px; */
 }
 
  #ipad-login .content form input:not(.sing-in),
- .page-ask-question form.new-question-form-2 input:not(.registr-btn),
- .page-ask-question form.new-question-form-2 textarea,
+ .page-ask-question form.new-question-form-1 input:not(.registr-btn),
+ .page-ask-question form.new-question-form-1 textarea,
  #ipad-page-forgot-password input[type="text"]{
  	font: 18px/20px 'Gotham Light';
 	color:#666666;

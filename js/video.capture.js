@@ -97,6 +97,7 @@ function submitHandlerCaptureVideo() {
 }
 
 function initAsqQuestion(){
+
 	$('#page-ask-question-step-1').find("form.new-question-form-1").on('submit', function(event) {
 		event.preventDefault();
 	}).validate({
@@ -104,8 +105,28 @@ function initAsqQuestion(){
 			return false;  // suppresses error message text
 		},
 		submitHandler: function(form) {
+			qbApp.showLoading($('body > div.ui-loader'), 'html', true);
+			//$questionSubmitBtn.css( 'visibility' , 'hidden' );
+			var $form = $(form);
+			var formData = $form.serialize();
+			qbApp.capture.url = qbApp.settings.serverUrl + 'qb/rest/video/question?' + formData;
+			qbApp.capture.uid = qbApp.cookie.user.uid;
+			qbApp.returnPageId = '#page-home';
+			qbApp.capture.questionData = formData;
+
+			$.mobile.changePage( "#page-ask-question-step-2", {transition: "slide"});
+		}
+	});
+
+	$('#page-ask-question-step-2').find("form.new-question-form-2").on('submit', function(event) {
+		event.preventDefault();
+	}).validate({
+		errorPlacement: function(){
+			return false;  // suppresses error message text
+		},
+		submitHandler: function(form) {
 			//Reset #page-ask-question-step-1 form
-			var $input = $('#page-ask-question-step-2').find("form.new-question-form-2 input:text, form.new-question-form-2 textarea");
+			var $input = $('#page-ask-question-step-1').find("form.new-question-form-1 input:text, form.new-question-form-1 textarea");
 			$.each($input, function(index, field) {
 				 $(field).val('');
 			});
@@ -133,34 +154,6 @@ function initAsqQuestion(){
 				submitHandlerCaptureVideo();
 			}
 			return false;
-		}
-	});
-}
-
-function askQuestionAftercapture(mediaFiles){
-	$.mobile.changePage('#page-ask-question-step-2', {transition: "slide"/*, reloadPage: true*/});
-	var $questionSubmitPage = $( '#page-ask-question-step-2' ),
-			$questionSubmitBtn = $questionSubmitPage.find( 'form input[type="submit"]' );
-
-	$questionSubmitBtn.css( 'visibility' , 'visible' );
-	$('#page-ask-question-step-2').find("form.new-question-form-2").on('submit', function(event) {
-		event.preventDefault();
-	}).validate({
-		errorPlacement: function(){
-			return false;  // suppresses error message text
-		},
-		submitHandler: function(form) {
-			qbApp.showLoading($('body > div.ui-loader'), 'html', true);
-			$questionSubmitBtn.css( 'visibility' , 'hidden' );
-			var $form = $(form);
-			var formData = $form.serialize();
-			qbApp.capture.url = qbApp.settings.serverUrl + 'qb/rest/video/question?' + formData;
-			qbApp.capture.uid = qbApp.cookie.user.uid;
-			qbApp.returnPageId = '#page-home';
-			qbApp.capture.questionData = formData;
-
-			alert(mediaFiles.fullPath);
-			uploadFile(mediaFiles);
 		}
 	});
 }
@@ -227,8 +220,8 @@ function captureSuccess(mediaFiles) {
 	for (i = 0, len = mediaFiles.length; i < len; i += 1) {
 		var mediaFile = mediaFiles[i];
 		//qbApp.capture.mediaFile = mediaFile;
-		alert(mediaFile.fullPath);
-		qbApp.capture.type == 'answer' ? 	uploadFile(mediaFiles[i]) : askQuestionAftercapture(mediaFiles[i]);
+		//qbApp.capture.type == 'answer' ? 	uploadFile(mediaFiles[i]) : askQuestionAftercapture(mediaFiles[i]);
+		uploadFile(mediaFiles[i]);
 	}
 }
 
@@ -293,7 +286,6 @@ function uploadFile(mediaFile) {
 			Connection: "close"
 		};
 
-	alert(mediaFile.fullPath);
 	//Additional data for send
 	options.params = qbApp.capture;
 	ft.upload(path, qbApp.capture.url, uploadSuccess, uploadFail, options);
