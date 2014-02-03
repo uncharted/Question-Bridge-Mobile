@@ -159,6 +159,7 @@ function askQuestionAftercapture(mediaFiles){
 			qbApp.returnPageId = '#page-home';
 			qbApp.capture.questionData = formData;
 
+			alert(mediaFiles.fullPath);
 			uploadFile(mediaFiles);
 		}
 	});
@@ -226,6 +227,7 @@ function captureSuccess(mediaFiles) {
 	for (i = 0, len = mediaFiles.length; i < len; i += 1) {
 		var mediaFile = mediaFiles[i];
 		//qbApp.capture.mediaFile = mediaFile;
+		alert(mediaFile.fullPath);
 		qbApp.capture.type == 'answer' ? 	uploadFile(mediaFiles[i]) : askQuestionAftercapture(mediaFiles[i]);
 	}
 }
@@ -291,6 +293,7 @@ function uploadFile(mediaFile) {
 			Connection: "close"
 		};
 
+	alert(mediaFile.fullPath);
 	//Additional data for send
 	options.params = qbApp.capture;
 	ft.upload(path, qbApp.capture.url, uploadSuccess, uploadFail, options);
