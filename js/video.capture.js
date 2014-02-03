@@ -116,11 +116,11 @@ function initAsqQuestion(){
 			qbApp.returnPageId = '#page-home';
 			qbApp.capture.questionData = formData;
 
+			$askQuestionStep2.find('input.record-question').css('visibility', 'visible');
 			$.mobile.changePage( "#page-ask-question-step-2", {transition: "slidefade"});
 		}
 	});
 
-	$askQuestionStep2.find('input.record-question').css('visibility', 'visible');
 	$askQuestionStep2.find("form.new-question-form-2").on('submit', function(event) {
 		event.preventDefault();
 	}).validate({
