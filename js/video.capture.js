@@ -64,7 +64,7 @@ function showDeviceRotateMessage(){
 function autoCaptureOnCorrectRotate(){
 	clearInterval(checkDeviceRotateInterval);
 	checkDeviceRotateInterval = null;
-	alert(qbApp.captureType);
+
 	if(qbApp.captureType == 'question') {
 		submitHandlerCaptureVideo();
 	}
@@ -72,7 +72,7 @@ function autoCaptureOnCorrectRotate(){
 		prosessAnswerCaptureVideo();
 	}
 	if(qbApp.captureType == 'picture') {
-		submitHandlerCapturePicture();
+		qbApp.behaviors.submitHandlerCapturePicture();
 	}
 }
 
@@ -215,7 +215,7 @@ function checkAuthentication(){
 }
 
 function captureSuccess(mediaFiles) {
-	qbApp.showLoading($('body > div.ui-loader'), 'html');
+	qbApp.showLoading($('body > div.ui-loader'), 'html', true);
 	var i, len;
 	for (i = 0, len = mediaFiles.length; i < len; i += 1) {
 		var mediaFile = mediaFiles[i];

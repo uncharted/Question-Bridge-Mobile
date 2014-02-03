@@ -1539,7 +1539,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 
 									//First time form submit - we need to take user photo
 									qbApp.captureType = 'picture';
-									submitHandlerCapturePicture();
+									qbApp.behaviors.submitHandlerCapturePicture();
 								}
 								else{
 									//We already have user image ID, so we can submit complete form data
@@ -1640,7 +1640,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 									showDeviceRotateMessage();
 								}
 								else {
-									submitHandlerCapturePicture();
+									qbApp.behaviors.submitHandlerCapturePicture();
 								}
 							},
 							function() {
@@ -1649,7 +1649,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 						);
 					}
 					else{
-						submitHandlerCapturePicture();
+						qbApp.behaviors.submitHandlerCapturePicture();
 					}
 				});
 			break;
@@ -1716,7 +1716,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		}
 	}
 
-	function submitHandlerCapturePicture() {
+	qbApp.behaviors.submitHandlerCapturePicture = function() {
 		qbApp.showLoading($('body > div.ui-loader'), 'html');
 			navigator.camera.getPicture(uploadPhoto, getPictureFail, { quality: 50,
 				destinationType: navigator.camera.DestinationType.FILE_URI,
