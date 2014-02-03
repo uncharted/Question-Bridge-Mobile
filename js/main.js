@@ -1396,7 +1396,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 									if(response.status == 'success'){
 										$form.get(0).reset();
 										alert("Account information was send to your e-mail. Please check it.");
-										$.mobile.changePage( "#page-sing-in", {transition: "slide"});
+										$.mobile.changePage( "#page-sing-in", {transition: "slidefade"});
 									}
 							});
 					}
@@ -1463,10 +1463,10 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		var activePageId   = $.mobile.activePage.attr( "id" );
 		var $returnBtn = $('#'+activePageId).find('a[data-rel="back"]');
 		if(qbApp.pageComeFrom){
-			$.mobile.changePage( qbApp.pageComeFrom, {transition: "slide"});
+			$.mobile.changePage( qbApp.pageComeFrom, {transition: "slidefade"});
 		}
 		else{
-			$returnBtn.length ? $returnBtn.trigger('click') : $.mobile.changePage( "#page-home", {transition: "slide"});
+			$returnBtn.length ? $returnBtn.trigger('click') : $.mobile.changePage( "#page-home", {transition: "slidefade"});
 		}
 	}
 
@@ -1494,7 +1494,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				initQuestionsList('#page-home', {order:'latest'}, 'replace');
 				$('#page-home #main-menu' ).panel("close");
 			} else {
-				$.mobile.changePage( "#page-home", {transition: "slide"});
+				$.mobile.changePage( "#page-home", {transition: "slidefade"});
 			}
 		});
 	}

@@ -30,7 +30,8 @@ function showDeviceRotateMessage(){
 		checkDeviceRotateInterval = setInterval(function() {
 			var activePageId = $.mobile.activePage.attr( "id" );
 
-			if(activePageId != 'page-question' && activePageId != 'page-ask-question-step-1' && activePageId != 'registration-step-3') {
+			if(activePageId != 'page-question' && activePageId != 'page-ask-question-step-2' && activePageId != 'registration-step-3') {
+				alert('checkDeviceRotateInterval');
 				clearInterval(checkDeviceRotateInterval);
 				checkDeviceRotateInterval = null;
 			}
@@ -62,6 +63,7 @@ function showDeviceRotateMessage(){
 }
 
 function autoCaptureOnCorrectRotate(){
+	alert('autoCaptureOnCorrectRotate')
 	clearInterval(checkDeviceRotateInterval);
 	checkDeviceRotateInterval = null;
 
@@ -114,7 +116,7 @@ function initAsqQuestion(){
 			qbApp.returnPageId = '#page-home';
 			qbApp.capture.questionData = formData;
 
-			$.mobile.changePage( "#page-ask-question-step-2", {transition: "slide"});
+			$.mobile.changePage( "#page-ask-question-step-2", {transition: "slidefade"});
 		}
 	});
 
@@ -206,7 +208,7 @@ function checkAuthentication(){
 			$('#'+activePageId).find('div#ipad-login').popup('open');
 		}
 		else{
-			$.mobile.changePage( "#page-sing-in", {transition: "slide"});
+			$.mobile.changePage( "#page-sing-in", {transition: "slidefade"});
 		}
 	}
 	else{
@@ -222,6 +224,9 @@ function captureSuccess(mediaFiles) {
 		//qbApp.capture.mediaFile = mediaFile;
 		//qbApp.capture.type == 'answer' ? 	uploadFile(mediaFiles[i]) : askQuestionAftercapture(mediaFiles[i]);
 		uploadFile(mediaFiles[i]);
+		if(qbApp.capture.type == 'question') {
+			$('#page-ask-question-step-2').find('input.record-question').css('visibility', 'hidden');
+		}
 	}
 }
 
@@ -251,7 +256,7 @@ function captureVideo(type) {
   	);
 	}
 	else{
-		$.mobile.changePage('#take-me-back', {transition: "slide"});
+		$.mobile.changePage('#take-me-back', {transition: "slidefade"});
 	}
 
 }
@@ -260,7 +265,7 @@ function uploadFile(mediaFile) {
 
 	var uploadSuccess = function(result){
 		qbApp.hideLoading($('body > .ui-loader'));
-		$.mobile.changePage('#take-me-back', {transition: "slide"});
+		$.mobile.changePage('#take-me-back', {transition: "slidefade"});
 	};
 
 	var uploadFail = function(error){
