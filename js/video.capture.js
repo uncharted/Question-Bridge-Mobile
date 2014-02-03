@@ -31,7 +31,6 @@ function showDeviceRotateMessage(){
 			var activePageId = $.mobile.activePage.attr( "id" );
 
 			if(activePageId != 'page-question' && activePageId != 'page-ask-question-step-2' && activePageId != 'registration-step-3') {
-				alert('checkDeviceRotateInterval');
 				clearInterval(checkDeviceRotateInterval);
 				checkDeviceRotateInterval = null;
 			}
@@ -63,10 +62,9 @@ function showDeviceRotateMessage(){
 }
 
 function autoCaptureOnCorrectRotate(){
-	alert('autoCaptureOnCorrectRotate')
 	clearInterval(checkDeviceRotateInterval);
 	checkDeviceRotateInterval = null;
-
+	alert(qbApp.captureType);
 	if(qbApp.captureType == 'question') {
 		submitHandlerCaptureVideo();
 	}

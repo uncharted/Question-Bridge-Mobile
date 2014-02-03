@@ -1614,6 +1614,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 						});
 			break;
 			case 'registration-step-3':
+				qbApp.captureType = 'picture';
 				$('#make-portrait').on('click', function(event) {
 					event.preventDefault();
 
@@ -1630,7 +1631,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 							$.mobile.changePage( $form.data('next'), {transition: "slidefade"});
 						}
 					});
-					qbApp.captureType = 'picture';
+
 					if(/iPhone/i.test(navigator.userAgent)){
 						navigator.accelerometer.getCurrentAcceleration(
 							function(acceleration) {
