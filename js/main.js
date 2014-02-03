@@ -1717,7 +1717,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	}
 
 	qbApp.behaviors.submitHandlerCapturePicture = function() {
-		qbApp.showLoading($('body > div.ui-loader'), 'html');
+		qbApp.showLoading($('body > div.ui-loader'), 'html', true);
 			navigator.camera.getPicture(uploadPhoto, getPictureFail, { quality: 50,
 				destinationType: navigator.camera.DestinationType.FILE_URI,
 				correctOrientation: true
@@ -1743,6 +1743,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 
 		options.params = qbApp.capture;
 
+		$('#make-portrait').hide();
 		var ft = new FileTransfer();
 		ft.upload(imageURI, encodeURI(qbApp.settings.restUrl + 'user/pre-pregistration?&user-photo='+imageURI), uploadPhotoSuccessCallback, uploadPhotoFailCallback, options);
 	}
@@ -1762,7 +1763,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			$inputProfileFid = $('input#user-profile-photo-id');
 			$profileAvatar = $('img#smallImage');
 
-			$('a#make-portrait').hide();
 			$('#registration-step-3 input.registr-btn').show();
 		}
 
@@ -1786,6 +1786,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	}
 	//Failure callback
 	function uploadPhotoFailCallback(error) {
+		$('#make-portrait').show();
 		alert("There was an error uploading image");
 	}
 })(jQuery);

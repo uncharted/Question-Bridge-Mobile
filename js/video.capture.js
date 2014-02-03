@@ -97,8 +97,10 @@ function submitHandlerCaptureVideo() {
 }
 
 function initAsqQuestion(){
+	var $askQuestionStep1 = $('#page-ask-question-step-1'),
+			$askQuestionStep2 = $('#page-ask-question-step-2');
 
-	$('#page-ask-question-step-1').find("form.new-question-form-1").on('submit', function(event) {
+	$askQuestionStep1.find("form.new-question-form-1").on('submit', function(event) {
 		event.preventDefault();
 	}).validate({
 		errorPlacement: function(){
@@ -118,7 +120,8 @@ function initAsqQuestion(){
 		}
 	});
 
-	$('#page-ask-question-step-2').find("form.new-question-form-2").on('submit', function(event) {
+	$askQuestionStep2.find('input.record-question').css('visibility', 'visible');
+	$askQuestionStep2.find("form.new-question-form-2").on('submit', function(event) {
 		event.preventDefault();
 	}).validate({
 		errorPlacement: function(){
@@ -126,7 +129,7 @@ function initAsqQuestion(){
 		},
 		submitHandler: function(form) {
 			//Reset #page-ask-question-step-1 form
-			var $input = $('#page-ask-question-step-1').find("form.new-question-form-1 input:text, form.new-question-form-1 textarea");
+			var $input = $askQuestionStep1.find("form.new-question-form-1 input:text, form.new-question-form-1 textarea");
 			$.each($input, function(index, field) {
 				 $(field).val('');
 			});
