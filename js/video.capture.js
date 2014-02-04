@@ -161,13 +161,12 @@ function askQuestionAftercapture(mediaFiles){
 			$questionSubmitBtn.css( 'visibility' , 'hidden' );
 			var $form = $(form),
 					formData = $form.serialize(),
-					requestUrl = qbApp.settings.serverUrl + 'qb/rest/video/question?' + formData;
+					requestUrl = qbApp.settings.serverUrl + 'qb/rest/video/question?' + formData + '&uid=' + qbApp.cookie.user.uid;
 
-			alert(requestUrl);
 			$.getJSON(requestUrl, function(response) {
-				alert(response)
-				if(response.success == true) {
-					alert('success');
+				if(response.success === true) {
+					qbApp.hideLoading($('body > .ui-loader'));
+					$.mobile.changePage('#take-me-back', {transition: "slide"});
 				}
 			});
 		}
