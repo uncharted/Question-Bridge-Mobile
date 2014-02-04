@@ -1121,7 +1121,7 @@ background-size: 22px; */
  	padding: 10px 0 10px 10px;
  	margin-bottom: 5px;
 }
-.page-ask-question form .new-question-form-2 {
+.page-ask-question form.new-question-form-2 {
 	margin-top: -12px;
 }
 .page-ask-question .content .description{
