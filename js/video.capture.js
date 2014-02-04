@@ -159,11 +159,15 @@ function askQuestionAftercapture(mediaFiles){
 		submitHandler: function(form) {
 			qbApp.showLoading($('body > div.ui-loader'), 'html', true);
 			$questionSubmitBtn.css( 'visibility' , 'hidden' );
-			var $form = $(form);
-			var formData = $form.serialize();
-			qbApp.capture.url  = qbApp.settings.serverUrl + 'qb/rest/video/question?' + formData;
+			var $form = $(form),
+					formData = $form.serialize(),
+					requestUrl = qbApp.settings.serverUrl + 'qb/rest/video/question?' + formData;
 
-			/*qbApp.capture.questionData = formData;*/
+			$.getJSON(requestUrl, function(response) {
+				if(response.success == true) {
+					alert('success');
+				}
+			});
 		}
 	});
 }
@@ -266,14 +270,20 @@ function captureVideo(type) {
 
 }
 
-function uploadFile(mediaFile) {
+function uploadFile( mediaFile ) {
 
-	var uploadSuccess = function(result){
-		qbApp.hideLoading($('body > .ui-loader'));
-		$.mobile.changePage('#take-me-back', {transition: "slide"});
+	var uploadSuccess = function( result ){
 		if( qbApp.captureType  == 'question' ) {
-			alert(result.responseCode);
-			alert(result.response);
+			var $questionCreatePage = $( '#' + $.mobile.activePage.attr( "id" ) ),
+					fid = result.response.fid;
+
+			$questionCreatePage.find( 'input.uploaded-video-id' ).arrt( 'value', fid );
+			$questionCreatePage.find( 'div.progress-loader' ).hide();
+			alert(fid);
+		}
+		else {
+			qbApp.hideLoading($('body > .ui-loader'));
+			$.mobile.changePage('#take-me-back', {transition: "slide"});
 		}
 	};
 
