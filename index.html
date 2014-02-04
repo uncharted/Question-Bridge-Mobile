@@ -326,7 +326,7 @@
 		</div>
 	</div>
 
-	<div class="page page-ask-question" data-role="page" id="page-ask-question-step-2" data-add-back-btn="true">
+	<div class="page page-ask-question" data-role="page" id="page-ask-question-step-1" data-add-back-btn="true">
 		<div class="header" data-role="header" data-position="fixed" data-tap-toggle="false">
 			<h1 class="logo">Question Bridge</h1>
 			<a href="#main-menu" class="main-menu ui-btn-right">Menu</a>
@@ -334,20 +334,17 @@
 
 		<div data-role="content" class="content">
 			<div class="content-primary">
-				<form class="new-question-form-2" data-next="#page-ask-question-step-2">
+				<form class="new-question-form-1" data-next="#page-ask-question-step-2">
 					<div class="description">
 						Start a conversation by asking a new question to the Black male community. Questions are limited to 90 seconds and you will be asked to summarize the question in 140 characters or less after recording.
 					</div>
-					<div class="black-identify">
-						<label data-role="none"><input data-role="none" type="checkbox" class="checkbox" name="black-identify">Yes, I identify as a black male.</label>
-					</div>
-					<input data-role="none" class="record-question" type="submit" value="RECORD" />
+					<input data-role="none" class="record-question" type="submit" value="RECORD &gt;" />
 				</form>
 			</div>
 		</div>
 	</div>
 
-	<div class="page page-ask-question" data-role="page" id="page-ask-question-step-1">
+	<div class="page page-ask-question" data-role="page" id="page-ask-question-step-2">
 		<div class="header" data-role="header" data-position="fixed" data-tap-toggle="false">
 			<h1 class="logo">Question Bridge</h1>
 			<a href="#main-menu" class="main-menu ui-btn-right" data-icon="bars">Menu</a>
@@ -355,7 +352,7 @@
 
 		<div data-role="content" class="content">
 			<div class="content-primary">
-				<form class="new-question-form-1">
+				<form class="new-question-form-2">
 					<div class="question-summarize-col">
 						<h2>Summarize your question.</h2>
 						<div class="help-text">120 character limit.</div>
@@ -371,7 +368,11 @@
 							<input type="text" name="tag4" placeholder="4">
 							<input type="text" name="tag5" placeholder="5">
 						</fieldset>
-						<input data-role="none" class="registr-btn form-submit" type="submit" value="next &gt;" />
+						<input class="uploaded-video-id" type="hidden" name="fid" value="0">
+						<div class="video-upload">
+							<div class="progress-loader"></div>
+							<input data-role="none" class="registr-btn form-submit" type="submit" value="submit" />
+						</div>
 					</div>
 				</form>
 			</div>

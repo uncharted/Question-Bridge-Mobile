@@ -7,9 +7,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.buttonMarkup.hoverDelay = 25;
 
 
-	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
+	qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	qbApp.settings.serverUrl = 'http://107.21.242.74/';
+	//qbApp.settings.serverUrl = 'http://107.21.242.74/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
@@ -1396,7 +1396,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 									if(response.status == 'success'){
 										$form.get(0).reset();
 										alert("Account information was send to your e-mail. Please check it.");
-										$.mobile.changePage( "#page-sing-in", {transition: "slidefade"});
+										$.mobile.changePage( "#page-sing-in", {transition: "slide"});
 									}
 							});
 					}
@@ -1463,10 +1463,10 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		var activePageId   = $.mobile.activePage.attr( "id" );
 		var $returnBtn = $('#'+activePageId).find('a[data-rel="back"]');
 		if(qbApp.pageComeFrom){
-			$.mobile.changePage( qbApp.pageComeFrom, {transition: "slidefade"});
+			$.mobile.changePage( qbApp.pageComeFrom, {transition: "slide"});
 		}
 		else{
-			$returnBtn.length ? $returnBtn.trigger('click') : $.mobile.changePage( "#page-home", {transition: "slidefade"});
+			$returnBtn.length ? $returnBtn.trigger('click') : $.mobile.changePage( "#page-home", {transition: "slide"});
 		}
 	}
 
@@ -1494,7 +1494,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				initQuestionsList('#page-home', {order:'latest'}, 'replace');
 				$('#page-home #main-menu' ).panel("close");
 			} else {
-				$.mobile.changePage( "#page-home", {transition: "slidefade"});
+				$.mobile.changePage( "#page-home", {transition: "slide"});
 			}
 		});
 	}
@@ -1539,7 +1539,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 
 									//First time form submit - we need to take user photo
 									qbApp.captureType = 'picture';
-									qbApp.behaviors.submitHandlerCapturePicture();
+									submitHandlerCapturePicture();
 								}
 								else{
 									//We already have user image ID, so we can submit complete form data
@@ -1614,7 +1614,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 						});
 			break;
 			case 'registration-step-3':
-				qbApp.captureType = 'picture';
 				$('#make-portrait').on('click', function(event) {
 					event.preventDefault();
 
@@ -1631,7 +1630,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 							$.mobile.changePage( $form.data('next'), {transition: "slidefade"});
 						}
 					});
-
+					qbApp.captureType = 'picture';
 					if(/iPhone/i.test(navigator.userAgent)){
 						navigator.accelerometer.getCurrentAcceleration(
 							function(acceleration) {
@@ -1640,7 +1639,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 									showDeviceRotateMessage();
 								}
 								else {
-									qbApp.behaviors.submitHandlerCapturePicture();
+									submitHandlerCapturePicture();
 								}
 							},
 							function() {
@@ -1649,7 +1648,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 						);
 					}
 					else{
-						qbApp.behaviors.submitHandlerCapturePicture();
+						submitHandlerCapturePicture();
 					}
 				});
 			break;
@@ -1716,8 +1715,8 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		}
 	}
 
-	qbApp.behaviors.submitHandlerCapturePicture = function() {
-		qbApp.showLoading($('body > div.ui-loader'), 'html', true);
+	function submitHandlerCapturePicture() {
+		qbApp.showLoading($('body > div.ui-loader'), 'html');
 			navigator.camera.getPicture(uploadPhoto, getPictureFail, { quality: 50,
 				destinationType: navigator.camera.DestinationType.FILE_URI,
 				correctOrientation: true
@@ -1743,7 +1742,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 
 		options.params = qbApp.capture;
 
-		$('#make-portrait').hide();
 		var ft = new FileTransfer();
 		ft.upload(imageURI, encodeURI(qbApp.settings.restUrl + 'user/pre-pregistration?&user-photo='+imageURI), uploadPhotoSuccessCallback, uploadPhotoFailCallback, options);
 	}
@@ -1763,6 +1761,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			$inputProfileFid = $('input#user-profile-photo-id');
 			$profileAvatar = $('img#smallImage');
 
+			$('a#make-portrait').hide();
 			$('#registration-step-3 input.registr-btn').show();
 		}
 
@@ -1786,7 +1785,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	}
 	//Failure callback
 	function uploadPhotoFailCallback(error) {
-		$('#make-portrait').show();
 		alert("There was an error uploading image");
 	}
 })(jQuery);

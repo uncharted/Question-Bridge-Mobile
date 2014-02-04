@@ -1107,8 +1107,8 @@ background-size: 22px; */
 }
 
  #ipad-login .content form input:not(.sing-in),
- .page-ask-question form.new-question-form-1 input:not(.registr-btn),
- .page-ask-question form.new-question-form-1 textarea,
+ .page-ask-question form.new-question-form-2 input:not(.registr-btn),
+ .page-ask-question form.new-question-form-2 textarea,
  #ipad-page-forgot-password input[type="text"]{
  	font: 18px/20px 'Gotham Light';
 	color:#666666;
@@ -1131,6 +1131,39 @@ background-size: 22px; */
     resize: none;
     height: 60px !important;
     padding: 5px !important;
+}
+.page-ask-question .video-upload {
+	width: 100%;
+	max-width: 300px;
+	height: 40px;
+	float: left;
+}
+.page-ask-question .video-upload .progress-loader {
+	background: url('../images/progress-bar-infinite-bg.png');
+  background-repeat: repeat-x;
+  width: 100%;
+  height: 100%;
+  background-position: 0 0;
+  animation: progressbar 200s infinite;
+  -webkit-animation: progressbar 200s infinite; /* Safari and Chrome */
+  position: inherit;
+  border-radius: 2px;
+}
+
+@keyframes progressbar
+{
+from {background-position: 0 0;}
+to {background-position: 9999px 0;}
+}
+
+@-webkit-keyframes progressbar /* Safari and Chrome */
+{
+from {background-position: 0 0;}
+to {background-position: 9999px 0;}
+}
+
+.page-ask-question .video-upload input.form-submit {
+	margin: 0 auto;
 }
 .page fieldset > div,
 .page fieldset > div > div.ui-input-text {

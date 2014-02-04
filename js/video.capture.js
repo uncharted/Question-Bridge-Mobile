@@ -30,7 +30,7 @@ function showDeviceRotateMessage(){
 		checkDeviceRotateInterval = setInterval(function() {
 			var activePageId = $.mobile.activePage.attr( "id" );
 
-			if(activePageId != 'page-question' && activePageId != 'page-ask-question-step-2' && activePageId != 'registration-step-3') {
+			if(activePageId != 'page-question' && activePageId != 'page-ask-question-step-1' && activePageId != 'registration-step-3') {
 				clearInterval(checkDeviceRotateInterval);
 				checkDeviceRotateInterval = null;
 			}
@@ -72,7 +72,7 @@ function autoCaptureOnCorrectRotate(){
 		prosessAnswerCaptureVideo();
 	}
 	if(qbApp.captureType == 'picture') {
-		qbApp.behaviors.submitHandlerCapturePicture();
+		submitHandlerCapturePicture();
 	}
 }
 
@@ -91,37 +91,8 @@ function videoRecordReturnBack(){
 	});
 }
 
-function submitHandlerCaptureVideo() {
-	qbApp.captureType = null;
-	captureVideo('question');
-}
-
 function initAsqQuestion(){
-	var $askQuestionStep1 = $('#page-ask-question-step-1'),
-			$askQuestionStep2 = $('#page-ask-question-step-2');
-
-	$askQuestionStep1.find("form.new-question-form-1").on('submit', function(event) {
-		event.preventDefault();
-	}).validate({
-		errorPlacement: function(){
-			return false;  // suppresses error message text
-		},
-		submitHandler: function(form) {
-			qbApp.showLoading($('body > div.ui-loader'), 'html', true);
-			//$questionSubmitBtn.css( 'visibility' , 'hidden' );
-			var $form = $(form);
-			var formData = $form.serialize();
-			qbApp.capture.url = qbApp.settings.serverUrl + 'qb/rest/video/question?' + formData;
-			qbApp.capture.uid = qbApp.cookie.user.uid;
-			qbApp.returnPageId = '#page-home';
-			qbApp.capture.questionData = formData;
-
-			$askQuestionStep2.find('input.record-question').css('visibility', 'visible');
-			$.mobile.changePage( "#page-ask-question-step-2", {transition: "slidefade"});
-		}
-	});
-
-	$askQuestionStep2.find("form.new-question-form-2").on('submit', function(event) {
+	$('#page-ask-question-step-1').find("form.new-question-form-1").on('submit', function(event) {
 		event.preventDefault();
 	}).validate({
 		errorPlacement: function(){
@@ -129,7 +100,7 @@ function initAsqQuestion(){
 		},
 		submitHandler: function(form) {
 			//Reset #page-ask-question-step-1 form
-			var $input = $askQuestionStep1.find("form.new-question-form-1 input:text, form.new-question-form-1 textarea");
+			var $input = $('#page-ask-question-step-2').find("form.new-question-form-2 input:text, form.new-question-form-2 textarea");
 			$.each($input, function(index, field) {
 				 $(field).val('');
 			});
@@ -157,6 +128,42 @@ function initAsqQuestion(){
 				submitHandlerCaptureVideo();
 			}
 			return false;
+		}
+	});
+}
+
+function submitHandlerCaptureVideo() {
+	/*qbApp.captureType = null;*/
+	captureVideo('question');
+}
+
+function askQuestionAftercapture(mediaFiles){
+	$.mobile.changePage('#page-ask-question-step-2', {transition: "slide"/*, reloadPage: true*/});
+	var $questionSubmitPage = $( '#page-ask-question-step-2' ),
+			$questionSubmitBtn = $questionSubmitPage.find( 'form input[type="submit"]' );
+
+	$questionSubmitBtn.css( 'visibility' , 'visible' );
+
+	qbApp.capture.url  = qbApp.settings.serverUrl + 'qb/rest/video/video-upload';
+	qbApp.capture.uid  = qbApp.cookie.user.uid;
+	qbApp.returnPageId = '#page-home';
+	qbApp.captureType  = 'question';
+	uploadFile(mediaFiles);
+
+	$('#page-ask-question-step-2').find("form.new-question-form-2").on('submit', function(event) {
+		event.preventDefault();
+	}).validate({
+		errorPlacement: function(){
+			return false;  // suppresses error message text
+		},
+		submitHandler: function(form) {
+			qbApp.showLoading($('body > div.ui-loader'), 'html', true);
+			$questionSubmitBtn.css( 'visibility' , 'hidden' );
+			var $form = $(form);
+			var formData = $form.serialize();
+			qbApp.capture.url  = qbApp.settings.serverUrl + 'qb/rest/video/question?' + formData;
+
+			/*qbApp.capture.questionData = formData;*/
 		}
 	});
 }
@@ -209,7 +216,7 @@ function checkAuthentication(){
 			$('#'+activePageId).find('div#ipad-login').popup('open');
 		}
 		else{
-			$.mobile.changePage( "#page-sing-in", {transition: "slidefade"});
+			$.mobile.changePage( "#page-sing-in", {transition: "slide"});
 		}
 	}
 	else{
@@ -218,16 +225,13 @@ function checkAuthentication(){
 }
 
 function captureSuccess(mediaFiles) {
-	qbApp.showLoading($('body > div.ui-loader'), 'html', true);
+	qbApp.showLoading($('body > div.ui-loader'), 'html');
 	var i, len;
 	for (i = 0, len = mediaFiles.length; i < len; i += 1) {
 		var mediaFile = mediaFiles[i];
 		//qbApp.capture.mediaFile = mediaFile;
-		//qbApp.capture.type == 'answer' ? 	uploadFile(mediaFiles[i]) : askQuestionAftercapture(mediaFiles[i]);
-		uploadFile(mediaFiles[i]);
-		if(qbApp.capture.type == 'question') {
-			$('#page-ask-question-step-2').find('input.record-question').css('visibility', 'hidden');
-		}
+		alert(mediaFile.fullPath);
+		qbApp.capture.type == 'answer' ? 	uploadFile(mediaFiles[i]) : askQuestionAftercapture(mediaFiles[i]);
 	}
 }
 
@@ -257,7 +261,7 @@ function captureVideo(type) {
   	);
 	}
 	else{
-		$.mobile.changePage('#take-me-back', {transition: "slidefade"});
+		$.mobile.changePage('#take-me-back', {transition: "slide"});
 	}
 
 }
@@ -266,7 +270,11 @@ function uploadFile(mediaFile) {
 
 	var uploadSuccess = function(result){
 		qbApp.hideLoading($('body > .ui-loader'));
-		$.mobile.changePage('#take-me-back', {transition: "slidefade"});
+		$.mobile.changePage('#take-me-back', {transition: "slide"});
+		if( qbApp.captureType  == 'question' ) {
+			alert(result.responseCode);
+			alert(result.response);
+		}
 	};
 
 	var uploadFail = function(error){
@@ -283,6 +291,21 @@ function uploadFile(mediaFile) {
 	var ft = new FileTransfer(),
 		path = mediaFile.fullPath,
 		name = mediaFile.name;
+
+		if( qbApp.captureType  == 'question' ) {
+			var $progressBar = $('#page-ask-question-step-2').find('div.progress-loader'),
+					perc;
+
+			ft.onprogress = function(progressEvent) {
+				if (progressEvent.lengthComputable) {
+					perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
+					$progressBar.css('width', perc);
+				} else {
+					alert('done');
+					$progressBar.hide();
+				}
+			};
+		}
 
 	var options = new FileUploadOptions();
 		options.chunkedMode = false;
