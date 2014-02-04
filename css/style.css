@@ -1137,6 +1137,8 @@ background-size: 22px; */
 	max-width: 300px;
 	height: 40px;
 	float: left;
+	overflow: hidden;
+	border-radius: 2px;
 }
 .page-ask-question .video-upload .progress-loader {
 	background: url('../images/progress-bar-infinite-bg.png');

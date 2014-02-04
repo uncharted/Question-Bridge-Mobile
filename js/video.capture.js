@@ -273,11 +273,12 @@ function uploadFile( mediaFile ) {
 
 	var uploadSuccess = function( result ){
 		if( qbApp.captureType  == 'question' ) {
-			alert(result.response.fid);
 			var activePageId = $.mobile.activePage.attr( "id" );
-			var $questionCreatePage = $( '#' + activePageId ),
-					fid = result.response.fid;
+					$questionCreatePage = $( '#' + activePageId ),
+					response = jQuery.parseJSON(result.response),
+					fid = response.fid;
 
+			alert(response);
 			$questionCreatePage.find( 'input.uploaded-video-id' ).attr( 'value', fid );
 			$questionCreatePage.find( 'div.progress-loader' ).hide();
 			alert(fid);
