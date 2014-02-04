@@ -234,7 +234,6 @@ function captureSuccess(mediaFiles) {
 	for (i = 0, len = mediaFiles.length; i < len; i += 1) {
 		var mediaFile = mediaFiles[i];
 		//qbApp.capture.mediaFile = mediaFile;
-		alert(mediaFile.fullPath);
 		qbApp.capture.type == 'answer' ? 	uploadFile(mediaFiles[i]) : askQuestionAftercapture(mediaFiles[i]);
 	}
 }
@@ -274,7 +273,9 @@ function uploadFile( mediaFile ) {
 
 	var uploadSuccess = function( result ){
 		if( qbApp.captureType  == 'question' ) {
-			var $questionCreatePage = $( '#' + $.mobile.activePage.attr( "id" ) ),
+			alert(result.response.fid);
+			var activePageId = $.mobile.activePage.attr( "id" );
+			var $questionCreatePage = $( '#' + activePageId ),
 					fid = result.response.fid;
 
 			$questionCreatePage.find( 'input.uploaded-video-id' ).arrt( 'value', fid );
@@ -309,7 +310,7 @@ function uploadFile( mediaFile ) {
 			ft.onprogress = function(progressEvent) {
 				if (progressEvent.lengthComputable) {
 					perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
-					$progressBar.css('width', perc);
+					$progressBar.css('width', perc*3);
 				} else {
 					alert('done');
 					$progressBar.hide();
