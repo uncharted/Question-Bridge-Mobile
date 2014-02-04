@@ -163,7 +163,9 @@ function askQuestionAftercapture(mediaFiles){
 					formData = $form.serialize(),
 					requestUrl = qbApp.settings.serverUrl + 'qb/rest/video/question?' + formData;
 
+			alert(requestUrl);
 			$.getJSON(requestUrl, function(response) {
+				alert(response)
 				if(response.success == true) {
 					alert('success');
 				}
@@ -278,10 +280,8 @@ function uploadFile( mediaFile ) {
 					response = jQuery.parseJSON(result.response),
 					fid = response.fid;
 
-			alert(response);
 			$questionCreatePage.find( 'input.uploaded-video-id' ).attr( 'value', fid );
 			$questionCreatePage.find( 'div.progress-loader' ).hide();
-			alert(fid);
 		}
 		else {
 			qbApp.hideLoading($('body > .ui-loader'));
@@ -311,7 +311,7 @@ function uploadFile( mediaFile ) {
 			ft.onprogress = function(progressEvent) {
 				if (progressEvent.lengthComputable) {
 					perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
-					$progressBar.css('width', perc*3);
+					$progressBar.css('width', perc*2.5);
 				} else {
 					alert('done');
 					$progressBar.hide();
