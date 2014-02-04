@@ -278,7 +278,7 @@ function uploadFile( mediaFile ) {
 			var $questionCreatePage = $( '#' + activePageId ),
 					fid = result.response.fid;
 
-			$questionCreatePage.find( 'input.uploaded-video-id' ).arrt( 'value', fid );
+			$questionCreatePage.find( 'input.uploaded-video-id' ).attr( 'value', fid );
 			$questionCreatePage.find( 'div.progress-loader' ).hide();
 			alert(fid);
 		}
