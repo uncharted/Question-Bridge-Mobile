@@ -72,7 +72,7 @@ function autoCaptureOnCorrectRotate(){
 		prosessAnswerCaptureVideo();
 	}
 	if(qbApp.captureType == 'picture') {
-		submitHandlerCapturePicture();
+		qbApp.behaviors.submitHandlerCapturePicture();
 	}
 }
 
@@ -138,11 +138,13 @@ function submitHandlerCaptureVideo() {
 }
 
 function askQuestionAftercapture(mediaFiles){
-	$.mobile.changePage('#page-ask-question-step-2', {transition: "slide"/*, reloadPage: true*/});
 	var $questionSubmitPage = $( '#page-ask-question-step-2' ),
 			$questionSubmitBtn = $questionSubmitPage.find( 'form input[type="submit"]' );
 
+	$questionSubmitPage.find( 'div.progress-loader' ).show();
 	$questionSubmitBtn.css( 'visibility' , 'visible' );
+
+	$.mobile.changePage('#page-ask-question-step-2', {transition: "slide"/*, reloadPage: true*/});
 
 	qbApp.capture.url  = qbApp.settings.serverUrl + 'qb/rest/video/video-upload';
 	qbApp.capture.uid  = qbApp.cookie.user.uid;
