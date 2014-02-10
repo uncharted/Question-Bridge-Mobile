@@ -248,7 +248,10 @@ function captureError(error) {
 
 function captureVideo(type) {
 	qbApp.capture.type = type;
-	var duration = (type =='question') ? 30 : 90;
+	var duration = (type =='question') ? 30 : 90,
+			windowWidth = $( window ).width(),
+			portraitOverlay = ( windowWidth > 768 ) ? 'overlay-iPad-landscape-v2.png' : 'overlay-iPhone-portrait.png',
+			landscapeOverlay = ( windowWidth > 768 ) ? 'overlay-iPad-landscape-v2.png' : 'overlay-iPhone-landscape.png';
 
 	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 		/*navigator.device.capture.captureVideo(captureSuccess, captureError, {limit: 1, duration: 90});*/
@@ -261,8 +264,8 @@ function captureVideo(type) {
         highquality: true, // set to true to override the default low quality setting
         frontcamera: true, // set to true to override the default backfacing camera setting
         // you'll want to sniff the useragent/device and pass the best overlay based on that.. assuming iphone here
-        portraitOverlay: 'www/images/cameraoverlays/overlay-iPhone-portrait.png', // put the png in your www folder
-        landscapeOverlay: 'www/images/cameraoverlays/overlay-iPhone-landscape.png' // not passing an overlay means no image is shown for the landscape orientation
+        portraitOverlay: 'www/images/cameraoverlays/' + portraitOverlay, // put the png in your www folder
+        landscapeOverlay: 'www/images/cameraoverlays/' + landscapeOverlay // not passing an overlay means no image is shown for the landscape orientation
       }
   	);
 	}

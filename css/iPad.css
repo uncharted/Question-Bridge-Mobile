@@ -403,6 +403,11 @@
 	.page-tutorial .content h2 {
 		font: 18px/20px 'Gotham Book';
 	}
+	ul.questions > li.question h2:before {
+		width: 28px;
+		height: 34px;
+		top: -40px;
+	}
 }
 
 														/*----------------PORTRAITE----------*/

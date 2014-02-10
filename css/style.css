@@ -235,6 +235,17 @@ div.question h2 {
 	text-overflow: none;
 	white-space: normal;
 	text-transform: uppercase;
+	overflow: visible;
+}
+ul.questions > li.question h2:before {
+	content: '';
+	position: absolute;
+	width: 14px;
+	height: 17px;
+	background: url('../images/btn-homepage-play.png') no-repeat;
+	background-size: cover;
+	top: -22px;
+	left: 0;
 }
 ul.questions > li.question .submitted,
 div.question .submitted {
