@@ -134,6 +134,8 @@ function initAsqQuestion(){
 
 function submitHandlerCaptureVideo() {
 	/*qbApp.captureType = null;*/
+	var activePageId = $.mobile.activePage.attr( "id" );
+	$( '#' + activePageId ).find( '.content' ).css('visibility', 'hidden');
 	captureVideo('question');
 }
 
@@ -242,8 +244,8 @@ function captureSuccess(mediaFiles) {
 }
 
 function captureError(error) {
-	var activePageId = $.mobile.activePage.attr( "id" );
-	$('#'+activePageId).find('div.content-primary').css('visibility', 'visible');
+		var activePageId = $.mobile.activePage.attr( "id" );
+	$( '#' + activePageId ).find( '.content, .content-primary' ).css('visibility', 'visible');
 }
 
 function captureVideo(type) {

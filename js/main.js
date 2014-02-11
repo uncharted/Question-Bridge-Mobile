@@ -52,7 +52,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		initLogoNavigate();
 		initOrientationChange();
 		initLogOut();
-		//FB.init({ appId: "315999478539121", nativeInterface: CDV.FB, useCachedDialogs: false });
+		FB.init({ appId: "315999478539121", nativeInterface: CDV.FB, useCachedDialogs: false });
 	}
 
 	function initDevice() {
@@ -73,9 +73,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		});
 		//First time app run. Slide on tutotial page
 		var applaunchCount = window.localStorage.getItem('launchCount');
-		alert(applaunchCount);
 		if(applaunchCount === null){
-				alert(1)
 				window.localStorage.setItem('launchCount', true);
 				setTimeout(function() {
 					$.mobile.changePage('#page-tutorial-1', {transition: "fade"});

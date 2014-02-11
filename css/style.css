@@ -52,6 +52,9 @@ div.content-primary li.answer {
 	padding: 0;
 	/* overflow: hidden; */
 }
+.page-question .ui-content{
+	overflow-y: visible;
+}
 .ui-loading .ui-loader {
 	background: #000;
 	opacity: 0.5;
