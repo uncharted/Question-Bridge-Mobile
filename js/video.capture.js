@@ -297,7 +297,10 @@ function uploadFile( mediaFile ) {
 			$questionCreatePage.find( 'div.progress-loader' ).hide();
 		}
 		else {
-			$( '#take-me-back' ).find( '.answer-uploading' ).fadeOut().siblings( '.after-upload' ).fadeIn();
+			var $takeMeBackPage = $( '#take-me-back' );
+			$takeMeBackPage.find( '.answer-uploading' ).fadeOut(function(){
+				$takeMeBackPage.siblings( '.after-upload' ).fadeIn();
+			});
 		}
 	};
 
@@ -327,7 +330,7 @@ function uploadFile( mediaFile ) {
 		ft.onprogress = function(progressEvent) {
 			if (progressEvent.lengthComputable) {
 				perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
-				$progressBar.css('width', perc*2.5);
+				$progressBar.css('width', perc*2.6);
 			} else {
 				alert('done');
 				$progressBar.hide();
