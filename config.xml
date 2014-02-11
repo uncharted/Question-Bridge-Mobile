@@ -3,7 +3,7 @@
 		xmlns:gap = "http://phonegap.com/ns/1.0"
 		id        = "com.questionbridge.app"
 		versionCode=""
-		version   = "1.0.0">
+		version   = "1.0.1">
 
 		<name>Question Bridge</name>
 		<description>Question Bridge mobile application</description>

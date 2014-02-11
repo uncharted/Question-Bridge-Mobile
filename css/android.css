@@ -48,3 +48,7 @@
   margin: 3px 0 2px 3% !important;
   text-indent: 7px !important;
 }
+
+.android .ui-input-search input::-webkit-input-placeholder {
+
+}

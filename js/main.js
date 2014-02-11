@@ -7,9 +7,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.buttonMarkup.hoverDelay = 25;
 
 
-	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
+	qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	qbApp.settings.serverUrl = 'http://107.21.242.74/';
+	//qbApp.settings.serverUrl = 'http://107.21.242.74/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
@@ -72,14 +72,14 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			if(!$this.val().length)	$this.removeClass('filled');
 		});
 		//First time app run. Slide on tutotial page
-/*		var applaunchCount = window.localStorage.getItem('launchCount');
+		var applaunchCount = window.localStorage.getItem('launchCount');
 		if(applaunchCount !== true){
 				window.localStorage.setItem('launchCount', true);
 				setTimeout(function() {
 					$.mobile.changePage('#page-tutorial-1', {transition: "fade"});
 		    }, 600);
 				initTutorialPage();
-		}*/
+		}
 		initTutorialPage();
 		setTimeout(function() {
 			navigator.splashscreen.hide();
@@ -349,10 +349,13 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 	//copy main menu to all div[data-role="page"]
 	function copyMainMenu() {
+		//alert(1)
+		if( $( window ).width() < 768 )	$('#page-home #main-menu div[data-role="popup"]').remove();
+
 		var $pages = $('div[data-role="page"]');
 		$pages.each(function(index,item){
 			var $page = $(item);
-			if($page.has('#main-menu').length === 0) {
+			if($page.find('#main-menu').length === 0) {
 				var $mainMenuPanel = $('#page-home #main-menu').clone();
 				$page.append($mainMenuPanel);
 			}
@@ -1581,6 +1584,10 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				});
 				$label_date_of_birth.on('click', function() {
 					$date_of_birth.trigger('focus');
+				});
+
+				$form.find( 'input' ).on( 'focus focusout', function() {
+					$( this ).removeClass( 'error' );
 				});
 
 				$form.submit(function(event) {
