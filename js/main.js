@@ -74,7 +74,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		//First time app run. Slide on tutotial page
 		var applaunchCount = window.localStorage.getItem('launchCount');
 		alert(applaunchCount);
-		if(applaunchCount !== true){
+		if(applaunchCount != true){
 				alert(1)
 				window.localStorage.setItem('launchCount', true);
 				setTimeout(function() {

@@ -683,7 +683,6 @@ input.form-submit{
 	left: 50%;
 	background: url('../images/btn-social-facebook.png') no-repeat;
 	background-size: cover;
-	display: none;
 }
 .page-sing-in .or{
 	color:#444444;
