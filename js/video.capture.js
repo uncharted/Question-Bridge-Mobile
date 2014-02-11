@@ -299,7 +299,7 @@ function uploadFile( mediaFile ) {
 		else {
 			var $takeMeBackPage = $( '#take-me-back' );
 			$takeMeBackPage.find( '.answer-uploading' ).fadeOut(function(){
-				$takeMeBackPage.siblings( '.after-upload' ).fadeIn();
+				$takeMeBackPage.find( '.after-upload' ).fadeIn();
 			});
 		}
 	};
