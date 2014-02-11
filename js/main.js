@@ -1286,10 +1286,8 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			qbApp.showLoading($('body > div.ui-loader'), 'html');
 			FB.init({ appId: "1397201370521243", nativeInterface: CDV.FB, useCachedDialogs: false });
 			FB.getLoginStatus(function(response){
-				alert('getLoginStatus')
 				FB.login(
 					function(response) {
-						alert('login')
 						FB.api('/me', function(response) {
 							var me = {};
 							me.name       = response.name;
