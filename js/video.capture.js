@@ -250,8 +250,8 @@ function captureVideo(type) {
 	qbApp.capture.type = type;
 	var duration = (type =='question') ? 30 : 90,
 			windowWidth = $( window ).width(),
-			portraitOverlay = ( windowWidth > 768 ) ? 'overlay-iPad-landscape-v2.png' : 'overlay-iPhone-portrait.png',
-			landscapeOverlay = ( windowWidth > 768 ) ? 'overlay-iPad-landscape-v2.png' : 'overlay-iPhone-landscape.png';
+			portraitOverlay = ( windowWidth > 768 ) ? 'overlay-iPad-portrait.png' : 'overlay-iPhone-portrait.png',
+			landscapeOverlay = ( windowWidth > 768 ) ? 'overlay-iPad-landscape.png' : 'overlay-iPhone-landscape.png';
 
 	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 		/*navigator.device.capture.captureVideo(captureSuccess, captureError, {limit: 1, duration: 90});*/

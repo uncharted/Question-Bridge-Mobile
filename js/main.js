@@ -7,9 +7,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.buttonMarkup.hoverDelay = 25;
 
 
-	qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
+	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	//qbApp.settings.serverUrl = 'http://107.21.242.74/';
+	qbApp.settings.serverUrl = 'http://107.21.242.74/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
@@ -72,15 +72,16 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			if(!$this.val().length)	$this.removeClass('filled');
 		});
 		//First time app run. Slide on tutotial page
-		var applaunchCount = window.localStorage.getItem('launchCount');
-		if(applaunchCount !== true){
-				window.localStorage.setItem('launchCount', true);
+		var firstTimeRun = $.cookie( 'firstTimeRun' );
+		alert(firstTimeRun)
+		if(firstTimeRun !== true){
+				$.cookie( 'firstTimeRun', true );
+				alert(1);
 				setTimeout(function() {
 					$.mobile.changePage('#page-tutorial-1', {transition: "fade"});
 		    }, 600);
 				initTutorialPage();
 		}
-		initTutorialPage();
 		setTimeout(function() {
 			navigator.splashscreen.hide();
     }, 2000);
@@ -386,11 +387,11 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			}
 		});
 
-		$('a.main-menu').on('click tap', function(event) {
+		/*$('a.main-menu').on('click tap', function(event) {
 			event.preventDefault();
 			var activePageId = $.mobile.activePage.attr( "id" );
 			$('#'+activePageId).find('#main-menu').panel( "open" );
-		});
+		});*/
 
 		$mainMenu.find('a.uncharted-digital-link').click(function() {
 			event.preventDefault();
