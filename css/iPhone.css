@@ -186,8 +186,8 @@ div.content-primary div.question ul.navigation:after{
 		color:#e0a125;
 	}
 .black-identify .checkbox{
-		width: 18px !important;
-		height: 18px !important;
+		width: 20px !important;
+		height: 20px !important;
 		padding: 0;
 		margin:0;
 		vertical-align: bottom;
@@ -217,8 +217,8 @@ div.content-primary div.question ul.navigation:after{
 		top: 0;
 		left: 0;
 		background:url(../images/ico-checkbox.png) no-repeat 0 0;
-	  width:18px;
-	  height:18px;
+	  width:20px;
+	  height:20px;
 	  display:block;
 	}
 	.black-identify label input:checked:before {

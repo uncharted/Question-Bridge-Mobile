@@ -1148,7 +1148,8 @@ background-size: 22px; */
     height: 60px !important;
     padding: 5px !important;
 }
-.page-ask-question .video-upload {
+.page-ask-question .video-upload,
+.take-me-back .answer-uploading .video-upload {
 	width: 100%;
 	max-width: 300px;
 	height: 40px;
@@ -1156,7 +1157,8 @@ background-size: 22px; */
 	overflow: hidden;
 	border-radius: 2px;
 }
-.page-ask-question .video-upload .progress-loader {
+.page-ask-question .video-upload .progress-loader,
+.take-me-back .answer-uploading .video-upload .progress-loader {
 	background: url('../images/progress-bar-infinite-bg.png');
   background-repeat: repeat-x;
   width: 100%;
@@ -1378,4 +1380,15 @@ body.not-black-male div.page-question .video-respond {
 .ui-footer {
 	background: none;
 	border:none;
+}
+
+.take-me-back .answer-uploading {
+	width: 300px;
+	margin: 30px auto 0;
+	display: none;
+}
+.take-me-back .answer-uploading h2{
+	font: 16px/30px 'Gotham Book', Arial, sans-serif;
+	color: #ffffff;
+	text-align: center;
 }

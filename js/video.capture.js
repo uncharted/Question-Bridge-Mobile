@@ -213,7 +213,9 @@ function prosessAnswerCaptureVideo() {
 	qbApp.capture.url = qbApp.settings.serverUrl + 'qb/rest/video/answer';
 	qbApp.returnPageId = '#'+activePageId;
 	qbApp.captureType = null;
-	$('#'+activePageId).find('div.content-primary').css('visibility', 'hidden');
+	$.mobile.changePage('#take-me-back', {transition: "fade"});
+	$( '#take-me-back' ).find( '.answer-uploading' ).show().siblings( '.after-upload' ).hide();
+	//$('#'+activePageId).find('div.content-primary').css('visibility', 'hidden');
 	captureVideo('answer');
 }
 
@@ -234,12 +236,17 @@ function checkAuthentication(){
 }
 
 function captureSuccess(mediaFiles) {
-	qbApp.showLoading($('body > div.ui-loader'), 'html');
 	var i, len;
 	for (i = 0, len = mediaFiles.length; i < len; i += 1) {
 		var mediaFile = mediaFiles[i];
 		//qbApp.capture.mediaFile = mediaFile;
-		qbApp.capture.type == 'answer' ? 	uploadFile(mediaFiles[i]) : askQuestionAftercapture(mediaFiles[i]);
+		if( qbApp.capture.type == 'answer' ) {
+			uploadFile(mediaFiles[i])
+		}
+		else {
+			qbApp.showLoading($('body > div.ui-loader'), 'html');
+			askQuestionAftercapture(mediaFiles[i]);
+		}
 	}
 }
 
@@ -290,8 +297,7 @@ function uploadFile( mediaFile ) {
 			$questionCreatePage.find( 'div.progress-loader' ).hide();
 		}
 		else {
-			qbApp.hideLoading($('body > .ui-loader'));
-			$.mobile.changePage('#take-me-back', {transition: "slide"});
+			$( '#take-me-back' ).find( '.answer-uploading' ).fadeOut().siblings( '.after-upload' ).fadeIn();
 		}
 	};
 
@@ -311,19 +317,22 @@ function uploadFile( mediaFile ) {
 		name = mediaFile.name;
 
 		if( qbApp.captureType  == 'question' ) {
-			var $progressBar = $('#page-ask-question-step-2').find('div.progress-loader'),
-					perc;
-
-			ft.onprogress = function(progressEvent) {
-				if (progressEvent.lengthComputable) {
-					perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
-					$progressBar.css('width', perc*2.5);
-				} else {
-					alert('done');
-					$progressBar.hide();
-				}
-			};
+			var $progressBar = $('#page-ask-question-step-2').find('div.progress-loader');
 		}
+		else {
+			var $progressBar = $('#take-me-back').find('div.progress-loader');
+		}
+
+		var perc;
+		ft.onprogress = function(progressEvent) {
+			if (progressEvent.lengthComputable) {
+				perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
+				$progressBar.css('width', perc*2.5);
+			} else {
+				alert('done');
+				$progressBar.hide();
+			}
+		};
 
 	var options = new FileUploadOptions();
 		options.chunkedMode = false;
