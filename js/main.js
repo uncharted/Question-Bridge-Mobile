@@ -7,9 +7,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.buttonMarkup.hoverDelay = 25;
 
 
-	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
+	qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	qbApp.settings.serverUrl = 'http://107.21.242.74/';
+	//qbApp.settings.serverUrl = 'http://107.21.242.74/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
@@ -46,7 +46,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		initDevice();
 		copyMainMenu();
 		$.mobile.initializePage();
-		initGeolocation();
+		setTimeout( function() { initGeolocation();}, 2200);
 		initCheckAuth();
 		initMainMenu();
 		initLogoNavigate();
@@ -72,11 +72,11 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			if(!$this.val().length)	$this.removeClass('filled');
 		});
 		//First time app run. Slide on tutotial page
-		var firstTimeRun = $.cookie( 'firstTimeRun' );
-		alert(firstTimeRun)
-		if(firstTimeRun !== true){
-				$.cookie( 'firstTimeRun', true );
-				alert(1);
+		var applaunchCount = window.localStorage.getItem('launchCount');
+		alert(applaunchCount);
+		if(applaunchCount !== true){
+				alert(1)
+				window.localStorage.setItem('launchCount', true);
 				setTimeout(function() {
 					$.mobile.changePage('#page-tutorial-1', {transition: "fade"});
 		    }, 600);
@@ -1314,6 +1314,14 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					},
 					{ scope: "email" }
 				);
+			});
+		});
+
+		//Reset all registration form
+		$( evt.target ).find( 'a.phone-registration' ).on( 'click', function() {
+			$.each( $( '.page-registration form' ), function(index, val) {
+				 $( this ).get(0).reset()
+				 					.find( '.error' ).removeClass( 'error' );
 			});
 		});
 	});
