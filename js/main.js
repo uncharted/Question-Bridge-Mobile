@@ -52,7 +52,17 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		initLogoNavigate();
 		initOrientationChange();
 		initLogOut();
+		initAndroidHardcode();
 		FB.init({ appId: "315999478539121", nativeInterface: CDV.FB, useCachedDialogs: false });
+	}
+
+	/**
+	 * [initAndroidHardcode quick fix for vedroid]
+	 */
+	function initAndroidHardcode() {
+		if( navigator.userAgent.match( /Android/i ) ) {
+			$( 'div[data-role="footer"]' ).removeAttr( 'data-position' );
+		}
 	}
 
 	function initDevice() {

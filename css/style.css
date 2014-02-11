@@ -1341,6 +1341,9 @@ body.not-black-male div.page-question .video-respond {
 	max-width: 400px;
 	margin: 5% auto 0;
 }
+.landscape .page-tutorial .content {
+	max-width: 35%;
+}
 .page-tutorial .content img {
 	display: block;
 	width: 92%;
