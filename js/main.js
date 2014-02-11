@@ -7,9 +7,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.buttonMarkup.hoverDelay = 25;
 
 
-	qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
+	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	//qbApp.settings.serverUrl = 'http://107.21.242.74/';
+	qbApp.settings.serverUrl = 'http://107.21.242.74/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
@@ -74,7 +74,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		//First time app run. Slide on tutotial page
 		var applaunchCount = window.localStorage.getItem('launchCount');
 		alert(applaunchCount);
-		if(applaunchCount != true){
+		if(applaunchCount === null){
 				alert(1)
 				window.localStorage.setItem('launchCount', true);
 				setTimeout(function() {
@@ -1288,8 +1288,10 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			qbApp.showLoading($('body > div.ui-loader'), 'html');
 			FB.init({ appId: "1397201370521243", nativeInterface: CDV.FB, useCachedDialogs: false });
 			FB.getLoginStatus(function(response){
+				alert('getLoginStatus')
 				FB.login(
 					function(response) {
+						alert('login')
 						FB.api('/me', function(response) {
 							var me = {};
 							me.name       = response.name;
