@@ -1328,8 +1328,15 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		//Reset all registration form
 		$( evt.target ).find( 'a.phone-registration' ).on( 'click', function() {
 			$.each( $( '.page-registration form' ), function(index, val) {
-				 $( this ).get(0).reset()
-				 					.find( '.error' ).removeClass( 'error' );
+				var $form = $( val );
+					$form.get(0).reset();
+					$form.find( '.error' ).removeClass( 'error' );
+
+					if( $form.attr( 'id' ) == 'register-3' ) {
+						$form.find( '#make-portrait' ).show();
+						$form.find( 'input.registr-btn' ).hide();
+						$form.prev().hide().find( 'img' ).attr( 'src', '#' );
+					}
 			});
 		});
 	});
@@ -1613,24 +1620,31 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			if( $emptyInputs.length ) { //Focus on empty row
 				$emptyInputs.eq(0).trigger( 'focus' );
 			}
-			else { //Need to add new fieldset
-				fieldsetWidth = $fieldsetWrapper.width();
-				if( fieldsetStartWidth == undefined ) fieldsetStartWidth = fieldsetWidth;
-				//Append new fieldset
-				var $newFieldset = $emptyFieldset.clone();
-				$.each( $newFieldset.find( 'input' ).not( '.add-more' ), function( index, input ) {
-					inputNameIndexStart++;
-					$( input ).attr( 'name', inputNamePrefix + '-' + inputNameIndexStart );
-				});
-				$fieldsetWrapper.append( $newFieldset );
-				$newFieldset.find( 'input' ).first().trigger( 'focus' );
-				$fieldsetWrapper.find( 'fieldset' ).css({ 'float' : 'left', 'width' : fieldsetStartWidth });
-				fieldsetLength = $fieldsetWrapper.find( 'fieldset' ).length;
-				$fieldsetWrapper.width( fieldsetWidth + fieldsetStartWidth );
+			else {
+				if( $activeFieldset.next().length ) { //User return back and we already have appended fieldset
+					$activeFieldset.animate({ 'opacity' : 0 }, 1000).removeClass( 'active' )
+													.next().delay( 600 ).animate({ 'marginLeft' : fieldsetStartWidth * -1 }, 1000, function() {
+														$( this ).find( 'input' ).first().trigger( 'focus' );
+													}).addClass( 'active' );
+				}
+				else { //Need to add new fieldset
+					fieldsetWidth = $fieldsetWrapper.width();
+					if( fieldsetStartWidth == undefined ) fieldsetStartWidth = fieldsetWidth;
+					//Append new fieldset
+					var $newFieldset = $emptyFieldset.clone();
+					$.each( $newFieldset.find( 'input' ).not( '.add-more' ), function( index, input ) {
+						inputNameIndexStart++;
+						$( input ).attr( 'name', inputNamePrefix + '-' + inputNameIndexStart ).removeAttr('required');
+					});
+					$fieldsetWrapper.append( $newFieldset );
+					$newFieldset.find( 'input' ).first().trigger( 'focus' );
+					$fieldsetWrapper.find( 'fieldset' ).css({ 'float' : 'left', 'width' : fieldsetStartWidth });
+					fieldsetLength = $fieldsetWrapper.find( 'fieldset' ).length;
+					$fieldsetWrapper.width( fieldsetWidth + fieldsetStartWidth );
 
-				//Animation
-				$fieldsetWrapper.find( '.active' ).animate({ 'opacity' : 0 }, 1000).removeClass( 'active' )
-												.next().delay( 600 ).animate({ 'marginLeft' : fieldsetStartWidth * -1 }, 1000).addClass( 'active' );
+					$fieldsetWrapper.find( '.active' ).animate({ 'opacity' : 0 }, 1000).removeClass( 'active' )
+													.next().delay( 600 ).animate({ 'marginLeft' : fieldsetStartWidth * -1 }, 1000).addClass( 'active' );
+				}
 			}
 		})
 		.on( 'touchstart', function(e) {
@@ -1640,11 +1654,11 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			touchEndX = e.originalEvent.changedTouches[0].clientX;
 			var swipe = touchStartX - touchEndX;
 			if( Math.abs( swipe ) > 50 && animate === false ) {
-				animate = true;
 				var $activeFieldset = $fieldsetWrapper.find( '.active' );
 				if ( swipe < 0 ) { //Show previous fieldset
 					var $previosFieldset = $activeFieldset.prev();
 					if( $previosFieldset.length ) {
+						animate = true;
 						$activeFieldset.animate({ 'marginLeft' : 0 }, 1000).removeClass( 'active' );
 						$previosFieldset.delay( 600 ).animate({ 'opacity' : 1 }, 1000, function() { animate = false; }).addClass( 'active' );
 					}
@@ -1652,6 +1666,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				else { //Show next fieldset
 					var $nextFieldset = $activeFieldset.next();
 					if( $nextFieldset.length ) {
+						animate = true;
 						$activeFieldset.animate({ 'opacity' : 0 }, 1000).removeClass( 'active' );
 						$nextFieldset.delay( 600 ).animate({ 'marginLeft' : fieldsetStartWidth * -1 }, 1000, function() { animate = false; }).addClass( 'active' );
 					}
