@@ -7,9 +7,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.buttonMarkup.hoverDelay = 25;
 
 
-	qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
+	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	//qbApp.settings.serverUrl = 'http://107.21.242.74/';
+	qbApp.settings.serverUrl = 'http://107.21.242.74/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
@@ -1333,6 +1333,10 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					$form.get(0).reset();
 					$form.find( '.error' ).removeClass( 'error' );
 
+					if( $form.attr( 'id' ) == 'register-2') {
+						$form.find( '.fieldset-wrapper fieldset:not(:first)' ).remove();
+						$form.find( '.fieldset-wrapper fieldset' ).removeAttr( 'style' );
+					}
 					if( $form.attr( 'id' ) == 'register-3' ) {
 						$form.find( '#make-portrait' ).show();
 						$form.find( 'input.registr-btn' ).hide();
@@ -1360,6 +1364,9 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				case 'ipad-login':
 					var activePageId = $.mobile.activePage.attr( "id" );
 					initAuthentification(activePageId);
+					setTimeout(function() {
+						$response.find( 'input[name="login"]' ).trigger( 'focus' );
+					}, 1000);
 					$response.find('a.facebook').on('click', function(){
 						qbApp.showLoading($('body > div.ui-loader'), 'html');
 						FB.login(
@@ -1614,6 +1621,23 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				animate = false;
 
 		$firstFieldset.addClass( 'active' );
+
+		//Back button return previous fieldset if user add more
+		var $backBtn = $( '#registration-step-2' ).find( '.header a[data-rel="back"]');
+		$backBtn.on( 'touchstart', function(event) {
+			event.preventDefault();
+			var $activeFieldset = $fieldsetWrapper.find( '.active' );
+			var $previosFieldset = $activeFieldset.prev();
+			if( $previosFieldset.length ) {
+				animate = true;
+				$activeFieldset.animate({ 'marginLeft' : 0 }, 1000).removeClass( 'active' );
+				$previosFieldset.delay( 600 ).animate({ 'opacity' : 1 }, 1000, function() { animate = false; }).addClass( 'active' );
+			}
+			else {
+				$backBtn.attr( 'data-rel', 'back' );
+			}
+		});
+
 		$fieldsetWrapper.on( 'focus', 'input.add-more', function(){
 			var $activeFieldset = $( this ).closest( 'fieldset' ),
 					$emptyInputs = $activeFieldset.find( 'input:text' ).filter(function() { //Looking for empty rows
@@ -1629,6 +1653,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 													.next().delay( 600 ).animate({ 'marginLeft' : fieldsetStartWidth * -1 }, 1000, function() {
 														$( this ).find( 'input' ).first().trigger( 'focus' );
 													}).addClass( 'active' );
+					$backBtn.attr( 'data-rel', 'back-block' );
 				}
 				else { //Need to add new fieldset
 					fieldsetWidth = $fieldsetWrapper.width();
@@ -1647,6 +1672,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 
 					$fieldsetWrapper.find( '.active' ).animate({ 'opacity' : 0 }, 1000).removeClass( 'active' )
 													.next().delay( 600 ).animate({ 'marginLeft' : fieldsetStartWidth * -1 }, 1000).addClass( 'active' );
+					$backBtn.attr( 'data-rel', 'back-block' );
 				}
 			}
 		})
@@ -1665,6 +1691,9 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 						$activeFieldset.animate({ 'marginLeft' : 0 }, 1000).removeClass( 'active' );
 						$previosFieldset.delay( 600 ).animate({ 'opacity' : 1 }, 1000, function() { animate = false; }).addClass( 'active' );
 					}
+					else {
+						$backBtn.attr( 'data-rel', 'back' );
+					}
 				}
 				else { //Show next fieldset
 					var $nextFieldset = $activeFieldset.next();
@@ -1675,7 +1704,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					}
 				}
 			}
-		})
+		});
 	}
 
 	function initPhoneRegistrationForm(activePageId) {

@@ -289,7 +289,8 @@ div.content-primary div.question ul.navigation:after{
 		}
 	}
 
-	.header a[data-rel="back"]{
+	.header a[data-rel="back"],
+	.header a[data-rel="back-block"]{
 		/*background: url('../images/bg-arrow.png') no-repeat;
 		background-size: 16px 22px;*/
 		width: 47px;
@@ -300,6 +301,13 @@ div.content-primary div.question ul.navigation:after{
 		background: url('../images/icon-arrow.png') no-repeat;
 		background-size: 22px 22px;
 		background-position: 5px 6px;
+	}
+	.header a[data-rel="back-block"]{
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	-ms-box-shadow: none;
+	-o-box-shadow: none;
+	box-shadow:none;
 	}
 	@media (-webkit-min-device-pixel-ratio: 2) {
 		.header a[data-rel="back"]{
@@ -642,6 +650,21 @@ div.content-primary div.question ul.navigation:after{
 
 	    margin: 25px 0 10px 0px;
 	    padding: 0;
+	}
+															/*----------------page-tutorial----------*/
+
+	.page-tutorial .content img {
+		display: block;
+		width: 92%;
+		margin: 46px auto 43px;
+	}
+	.page-tutorial .content {
+		margin: 5% auto 30px;
+	}
+	#page-tutorial-3 .content {
+		width: 97%;
+		margin-top: 112px;
+		margin-bottom: 95px;
 	}
 
 															/*----------------ORIENTATION CHANGE MESSAGE----------*/

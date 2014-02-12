@@ -161,7 +161,6 @@ function askQuestionAftercapture(mediaFiles){
 			return false;  // suppresses error message text
 		},
 		submitHandler: function(form) {
-			alert(qbApp.formSubmitAccess);
 			if( qbApp.formSubmitAccess === true ) {
 				qbApp.showLoading($('body > div.ui-loader'), 'html', true);
 				$questionSubmitBtn.css( 'visibility' , 'hidden' );

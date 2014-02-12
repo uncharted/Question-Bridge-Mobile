@@ -451,7 +451,8 @@ ul.search-results > li.question .submitted {
 	}
 }
 
-.header a[data-rel="back"]{
+.header a[data-rel="back"],
+.header a[data-rel="back-block"] {
 	/*background: url('../images/ipad/ipad-btn-arrow.png') no-repeat;
 	background-size: 10.5px 19px;*/
 	background: url('../images/icon-arrow.png') no-repeat;
@@ -1350,6 +1351,11 @@ body.not-black-male div.page-question .video-respond {
 	display: block;
 	width: 92%;
 	margin: 0 auto 10%;
+	box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 1);
+}
+.page-tutorial {
+	background: url('../images/bg-page-tutorial.png') no-repeat;
+	background-size: 100% 100%;
 }
 .page-tutorial .content h2 {
 	color: white;

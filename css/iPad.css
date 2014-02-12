@@ -411,6 +411,19 @@
 	.page-ask-question form.new-question-form-2 {
 		margin: 0 !important;
 	}
+	.page-ask-question form.new-question-form-2 input:not(.registr-btn) {
+		width: 286px;
+	}
+	#ipad-login .content form input:not(.sing-in) {
+		width: 290px;
+	}
+	#page-tutorial-3 .content {
+		max-width: 556px;
+		margin-bottom: 196px;
+	}
+	#page-tutorial-3 .content img {
+		margin: 90px auto 110px;
+	}
 }
 
 														/*----------------PORTRAITE----------*/
