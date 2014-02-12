@@ -36,6 +36,7 @@
 	    float: left;
 	    text-align: center;
 	    width: 100%;
+	    display: none;
 }
 	#ipad-login form{
 	    float: left;
@@ -417,13 +418,13 @@
 	#ipad-login .content form input:not(.sing-in) {
 		width: 290px;
 	}
-	#page-tutorial-3 .content {
-		max-width: 556px;
-		margin-bottom: 196px;
-	}
-	#page-tutorial-3 .content img {
-		margin: 90px auto 110px;
-	}
+/* 	#page-tutorial-3 .content {
+	max-width: 556px;
+	margin-bottom: 196px;
+}
+#page-tutorial-3 .content img {
+	margin: 90px auto 110px;
+} */
 }
 
 														/*----------------PORTRAITE----------*/

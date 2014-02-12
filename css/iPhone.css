@@ -653,19 +653,19 @@ div.content-primary div.question ul.navigation:after{
 	}
 															/*----------------page-tutorial----------*/
 
-	.page-tutorial .content img {
-		display: block;
-		width: 92%;
-		margin: 46px auto 43px;
-	}
-	.page-tutorial .content {
-		margin: 5% auto 30px;
-	}
-	#page-tutorial-3 .content {
-		width: 97%;
-		margin-top: 112px;
-		margin-bottom: 95px;
-	}
+/* 	.page-tutorial .content img {
+	display: block;
+	width: 92%;
+	margin: 10px auto 20px;
+}
+.page-tutorial .content {
+	margin: 5% auto 0;
+}
+#page-tutorial-3 .content {
+	width: 97%;
+	margin-top: 112px;
+	margin-bottom: 65px;
+} */
 
 															/*----------------ORIENTATION CHANGE MESSAGE----------*/
 	#orientation-elements{

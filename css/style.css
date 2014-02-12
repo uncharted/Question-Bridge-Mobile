@@ -646,6 +646,7 @@ input.form-submit{
     margin: 0 auto;
     width: 600px;
     height: 70px;
+    display: none;
 }
 .page-sing-in form{
     width: 600px;
@@ -1339,19 +1340,31 @@ body.not-black-male div.page-question .video-respond {
 .page-tutorial .ui-panel-content-wrap {
 	box-shadow: none;
 }
-.page-tutorial .content {
+.page-tutorial img {
+	display: block;
+	height: 100%;
+	max-height: 100%;
+	margin: 0 auto;
+}
+/* .page-tutorial .content {
 	width: 68%;
-	max-width: 400px;
+max-width: 400px;
 	margin: 5% auto 0;
 }
-.landscape .page-tutorial .content {
-	max-width: 35%;
+#page-tutorial-3 .content {
+	width: 97%;
 }
+#page-tutorial-3 .content img {
+	margin: 46px auto 46px;
+} */
+/* .landscape .page-tutorial .content {
+	max-width: 35%;
+} */
 .page-tutorial .content img {
 	display: block;
 	width: 92%;
 	margin: 0 auto 10%;
-	box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 1);
+	box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 1);
 }
 .page-tutorial {
 	background: url('../images/bg-page-tutorial.png') no-repeat;

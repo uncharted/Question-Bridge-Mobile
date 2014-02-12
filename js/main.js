@@ -83,14 +83,15 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			if(!$this.val().length)	$this.removeClass('filled');
 		});
 		//First time app run. Slide on tutotial page
-		var applaunchCount = window.localStorage.getItem('launchCount');
+/*		var applaunchCount = window.localStorage.getItem('launchCount');
 		if(applaunchCount === null){
 				window.localStorage.setItem('launchCount', true);
 				setTimeout(function() {
 					$.mobile.changePage('#page-tutorial-1', {transition: "fade"});
 		    }, 600);
-				initTutorialPage();
+
 		}
+		initTutorialPage();*/
 		setTimeout(function() {
 			navigator.splashscreen.hide();
     }, 2000);
@@ -129,21 +130,33 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			});*/
 		$('div.page-tutorial').on({
 		    swipeleft: function(event){
-		        var activePageId = $.mobile.activePage.attr( "id" ),
-						$nextPageLink = $('#' + activePageId).find('ul.tutorial-slide li.active a').parent().next().find('a');
+		    	var activePageId = $.mobile.activePage.attr( "id" ),
+					$img = $( '#' + activePageId ).find( 'img' ),
+					forwardPage = $img.data( 'slide-forward' );
+					if( forwardPage != undefined ) {
+						$.mobile.changePage( forwardPage, {transition: "slidefade"});
+					}
+
+/*						$nextPageLink = $('#' + activePageId).find('ul.tutorial-slide li.active a').parent().next().find('a');
 				if($nextPageLink.length) {
 					$nextPageLink.trigger('click');
 				}
 				else {
 					$.mobile.changePage('#page-home', {transition: "slidefade"});
 					$('body').off('swipeleft swiperight');
-				}
+				}*/
 		        event.stopImmediatePropagation();
 		    },
 		    swiperight: function(event){
-		        var activePageId = $.mobile.activePage.attr( "id" ),
+		    	var activePageId = $.mobile.activePage.attr( "id" ),
+					$img = $( '#' + activePageId ).find( 'img' ),
+					backPage = $img.data( 'slide-back' );
+					if( backPage != undefined ) {
+						$.mobile.changePage( backPage, {transition: "slidefade"});
+					}
+/*		        var activePageId = $.mobile.activePage.attr( "id" ),
 						$prevPageLink = $('#' + activePageId).find('ul.tutorial-slide li.active a').parent().prev().find('a');
-				if($prevPageLink.length) $prevPageLink.trigger('click');
+				if($prevPageLink.length) $prevPageLink.trigger('click');*/
 		        event.stopImmediatePropagation();
 		    }
 		});
