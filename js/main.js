@@ -7,9 +7,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.buttonMarkup.hoverDelay = 25;
 
 
-	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
+	qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	qbApp.settings.serverUrl = 'http://107.21.242.74/';
+	//qbApp.settings.serverUrl = 'http://107.21.242.74/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
@@ -1600,7 +1600,8 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				inputNamePrefix = $fieldsetWrapper.data( 'input-name' ),
 				inputNameIndexStart = $firstFieldset.find( 'input' ).not( '.add-more' ).length,
 				fieldsetStartWidth,	fieldsetWidth, fieldsetLength,
-				touchStartX, touchEndX;
+				touchStartX, touchEndX,
+				animate = false;
 
 		$firstFieldset.addClass( 'active' );
 		$fieldsetWrapper.on( 'focus', 'input.add-more', function(){
@@ -1622,6 +1623,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					$( input ).attr( 'name', inputNamePrefix + '-' + inputNameIndexStart );
 				});
 				$fieldsetWrapper.append( $newFieldset );
+				$newFieldset.find( 'input' ).first().trigger( 'focus' );
 				$fieldsetWrapper.find( 'fieldset' ).css({ 'float' : 'left', 'width' : fieldsetStartWidth });
 				fieldsetLength = $fieldsetWrapper.find( 'fieldset' ).length;
 				$fieldsetWrapper.width( fieldsetWidth + fieldsetStartWidth );
@@ -1632,25 +1634,26 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			}
 		})
 		.on( 'touchstart', function(e) {
-			touchStartX = e.originalEvent.clientX;
+			touchStartX = e.originalEvent.touches[0].clientX;
 		})
 		.on( 'touchend', function(e) {
-			touchEndX = e.originalEvent.clientX;
+			touchEndX = e.originalEvent.changedTouches[0].clientX;
 			var swipe = touchStartX - touchEndX;
-			if( Math.abs( swipe ) > 50 ) {
+			if( Math.abs( swipe ) > 50 && animate === false ) {
+				animate = true;
 				var $activeFieldset = $fieldsetWrapper.find( '.active' );
 				if ( swipe < 0 ) { //Show previous fieldset
 					var $previosFieldset = $activeFieldset.prev();
 					if( $previosFieldset.length ) {
 						$activeFieldset.animate({ 'marginLeft' : 0 }, 1000).removeClass( 'active' );
-						$previosFieldset.delay( 600 ).animate({ 'opacity' : 1 }, 1000).addClass( 'active' );
+						$previosFieldset.delay( 600 ).animate({ 'opacity' : 1 }, 1000, function() { animate = false; }).addClass( 'active' );
 					}
 				}
 				else { //Show next fieldset
 					var $nextFieldset = $activeFieldset.next();
 					if( $nextFieldset.length ) {
 						$activeFieldset.animate({ 'opacity' : 0 }, 1000).removeClass( 'active' );
-						$nextFieldset.delay( 600 ).animate({ 'marginLeft' : fieldsetStartWidth * -1 }, 1000).addClass( 'active' );
+						$nextFieldset.delay( 600 ).animate({ 'marginLeft' : fieldsetStartWidth * -1 }, 1000, function() { animate = false; }).addClass( 'active' );
 					}
 				}
 			}
@@ -1705,10 +1708,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 								);
 							}
 						});
-			break;
-			case 'registration-step-2':
-				var $registrationFormFieldset = $( '#registration-step-2' ).find( '.fieldset-wrapper' );
-				infinitiInputFieldset($registrationFormFieldset);
 			break;
 			case 'registration-step-3':
 				$('#make-portrait').on('click', function(event) {
@@ -1795,8 +1794,13 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			break;
 
 			default:
-				var $conteiner = $('#'+activePageId);
-				var $form = $conteiner.find('form.registration-form');
+				var $conteiner = $('#'+activePageId),
+						$form = $conteiner.find('form.registration-form');
+
+				if( activePageId == 'registration-step-2' ) {
+					var $registrationFormFieldset = $( '#registration-step-2' ).find( '.fieldset-wrapper' );
+					infinitiInputFieldset($registrationFormFieldset);
+				}
 
 				$form.submit(function(event) {
 						event.preventDefault();
