@@ -1587,6 +1587,75 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				}
 			});
 	}
+	/*
+	 * Create infinity fieldset append.
+	 * If user focus on input with placeholder "+" we check, if there is some empty field. If we have -
+	 * we focus on it, to show user that he still has place where to wright.
+	 * If not - we append new clone of original fieldset, and change input name on "fieldset-wrapper" data-input-name + index
+	 */
+	function infinitiInputFieldset($fieldsetWrapper) {
+		var $firstFieldset = $fieldsetWrapper.find( 'fieldset' ).eq( 0 ),
+				$emptyFieldset = $firstFieldset.clone(),
+				$form = $fieldsetWrapper.closest( 'form' ).css( 'overflow', 'hidden' ),
+				inputNamePrefix = $fieldsetWrapper.data( 'input-name' ),
+				inputNameIndexStart = $firstFieldset.find( 'input' ).not( '.add-more' ).length,
+				fieldsetStartWidth,	fieldsetWidth, fieldsetLength,
+				touchStartX, touchEndX;
+
+		$firstFieldset.addClass( 'active' );
+		$fieldsetWrapper.on( 'focus', 'input.add-more', function(){
+			var $activeFieldset = $( this ).closest( 'fieldset' ),
+					$emptyInputs = $activeFieldset.find( 'input:text' ).filter(function() { //Looking for empty rows
+						var $input = $( this );
+						if( $input.val() == '' && !$input.hasClass( 'add-more' )) return $input;
+					});
+			if( $emptyInputs.length ) { //Focus on empty row
+				$emptyInputs.eq(0).trigger( 'focus' );
+			}
+			else { //Need to add new fieldset
+				fieldsetWidth = $fieldsetWrapper.width();
+				if( fieldsetStartWidth == undefined ) fieldsetStartWidth = fieldsetWidth;
+				//Append new fieldset
+				var $newFieldset = $emptyFieldset.clone();
+				$.each( $newFieldset.find( 'input' ).not( '.add-more' ), function( index, input ) {
+					inputNameIndexStart++;
+					$( input ).attr( 'name', inputNamePrefix + '-' + inputNameIndexStart );
+				});
+				$fieldsetWrapper.append( $newFieldset );
+				$fieldsetWrapper.find( 'fieldset' ).css({ 'float' : 'left', 'width' : fieldsetStartWidth });
+				fieldsetLength = $fieldsetWrapper.find( 'fieldset' ).length;
+				$fieldsetWrapper.width( fieldsetWidth + fieldsetStartWidth );
+
+				//Animation
+				$fieldsetWrapper.find( '.active' ).animate({ 'opacity' : 0 }, 1000).removeClass( 'active' )
+												.next().delay( 600 ).animate({ 'marginLeft' : fieldsetStartWidth * -1 }, 1000).addClass( 'active' );
+			}
+		})
+		.on( 'touchstart', function(e) {
+			touchStartX = e.originalEvent.clientX;
+		})
+		.on( 'touchend', function(e) {
+			touchEndX = e.originalEvent.clientX;
+			var swipe = touchStartX - touchEndX;
+			if( Math.abs( swipe ) > 50 ) {
+				var $activeFieldset = $fieldsetWrapper.find( '.active' );
+				if ( swipe < 0 ) { //Show previous fieldset
+					var $previosFieldset = $activeFieldset.prev();
+					if( $previosFieldset.length ) {
+						$activeFieldset.animate({ 'marginLeft' : 0 }, 1000).removeClass( 'active' );
+						$previosFieldset.delay( 600 ).animate({ 'opacity' : 1 }, 1000).addClass( 'active' );
+					}
+				}
+				else { //Show next fieldset
+					var $nextFieldset = $activeFieldset.next();
+					if( $nextFieldset.length ) {
+						$activeFieldset.animate({ 'opacity' : 0 }, 1000).removeClass( 'active' );
+						$nextFieldset.delay( 600 ).animate({ 'marginLeft' : fieldsetStartWidth * -1 }, 1000).addClass( 'active' );
+					}
+				}
+			}
+		})
+	}
 
 	function initPhoneRegistrationForm(activePageId) {
 		switch (activePageId){
@@ -1636,6 +1705,10 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 								);
 							}
 						});
+			break;
+			case 'registration-step-2':
+				var $registrationFormFieldset = $( '#registration-step-2' ).find( '.fieldset-wrapper' );
+				infinitiInputFieldset($registrationFormFieldset);
 			break;
 			case 'registration-step-3':
 				$('#make-portrait').on('click', function(event) {

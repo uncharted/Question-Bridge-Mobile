@@ -530,14 +530,16 @@
 				</h2>
 				<div class="examples">Examples: father, student, loyal, black-belt, etc.</div>
 			<form id="register-2" class="registration-form" data-next="#registration-step-3">
-				<fieldset>
-					<input  type="text" name="identity_tag_1" class="registration" placeholder="1" required>
-					<input  type="text" name="identity_tag_2" class="registration" placeholder="2">
-					<input  type="text" name="identity_tag_3" class="registration" placeholder="3">
-					<input  type="text" name="identity_tag_4" class="registration" placeholder="4">
-					<input  type="text" name="identity_tag_5" class="registration" placeholder="5">
-					<input  type="text" name="identity_tag_6" class="registration" placeholder="6">
-				</fieldset>
+				<div class="fieldset-wrapper" data-input-name="identity-tag">
+					<fieldset>
+						<input  type="text" name="identity-tag-1" class="registration" placeholder="1" required>
+						<input  type="text" name="identity-tag-2" class="registration" placeholder="2">
+						<input  type="text" name="identity-tag-3" class="registration" placeholder="3">
+						<input  type="text" name="identity-tag-4" class="registration" placeholder="4">
+						<input  type="text" name="identity-tag-5" class="registration" placeholder="5">
+						<input  type="text" class="add-more" placeholder="+">
+					</fieldset>
+				</div>
 				<input data-role="none" class="registr-btn" type="submit" value="NEXT &gt;" />
 			</form>
 			<div class="footer" data-role="footer" data-position="fixed">
