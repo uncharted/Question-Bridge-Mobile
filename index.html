@@ -157,15 +157,18 @@
 								<h2>
 									Who are you? What words authentically define you? Use single words or hyphenate.
 									<p>Examples: father, student, loyal, black-belt, etc.</p>
+									<p>You can swipe additional rows.</p>
 								</h2>
-								<fieldset>
-									<input type="text" name="identity_tag_1" class="registration" placeholder="1" required>
-									<input type="text" name="identity_tag_2" class="registration" placeholder="2">
-									<input type="text" name="identity_tag_3" class="registration" placeholder="3">
-									<input type="text" name="identity_tag_4" class="registration" placeholder="4">
-									<input type="text" name="identity_tag_5" class="registration" placeholder="5">
-									<input type="text" name="identity_tag_6" class="registration" placeholder="6">
-								</fieldset>
+								<div class="fieldset-wrapper" data-input-name="identity-tag">
+									<fieldset>
+										<input  type="text" name="identity-tag-1" class="registration" placeholder="1" required>
+										<input  type="text" name="identity-tag-2" class="registration" placeholder="2">
+										<input  type="text" name="identity-tag-3" class="registration" placeholder="3">
+										<input  type="text" name="identity-tag-4" class="registration" placeholder="4">
+										<input  type="text" name="identity-tag-5" class="registration" placeholder="5">
+										<input  type="text" class="add-more" placeholder="+" readonly="readonly">
+									</fieldset>
+								</div>
 								<input id="ipad-user-profile-photo-id" type="hidden" name='profile_fid' value='0'>
 								<input data-role="none" class="make-portrait" type="submit" value="Make a self portrait &gt;" />
 								<p>By completing the sign up process, you consent to the
@@ -529,6 +532,7 @@
 					Who are you? What words authentically define you? Use single words or hyphenate.
 				</h2>
 				<div class="examples">Examples: father, student, loyal, black-belt, etc.</div>
+				<div class="examples">You can swipe additional rows.</div>
 			<form id="register-2" class="registration-form" data-next="#registration-step-3">
 				<div class="fieldset-wrapper" data-input-name="identity-tag">
 					<fieldset>

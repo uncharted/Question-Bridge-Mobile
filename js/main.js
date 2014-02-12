@@ -28,6 +28,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	qbApp.captureType = null;
 	qbApp.requestingPage = null;
 	qbApp.formReset = false;
+	qbApp.formSubmitAccess = false;
 	qbApp.captureCounter = 0;
 	qbApp.wideWidthHeight = ($(window).width()/16)*9;
 
@@ -82,14 +83,14 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			if(!$this.val().length)	$this.removeClass('filled');
 		});
 		//First time app run. Slide on tutotial page
-		var applaunchCount = window.localStorage.getItem('launchCount');
+		/*var applaunchCount = window.localStorage.getItem('launchCount');
 		if(applaunchCount === null){
 				window.localStorage.setItem('launchCount', true);
 				setTimeout(function() {
 					$.mobile.changePage('#page-tutorial-1', {transition: "fade"});
 		    }, 600);
 				initTutorialPage();
-		}
+		}*/
 		setTimeout(function() {
 			navigator.splashscreen.hide();
     }, 2000);
@@ -1293,7 +1294,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 
 		$(evt.target).find('a.facebook').on('click', function(event){
 			event.preventDefault();
-			qbApp.showLoading($('body > div.ui-loader'), 'html');
+			qbApp.showLoading($('body > div.ui-loader'), 'html', true);
 			FB.init({ appId: "1397201370521243", nativeInterface: CDV.FB, useCachedDialogs: false });
 			FB.getLoginStatus(function(response){
 				FB.login(
@@ -1534,6 +1535,8 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			$date_of_birth.on('focus', function() {
 				$label_date_of_birth.hide();
 			});
+			var $registrationFormFieldset = $response.find( '.fieldset-wrapper' );
+					infinitiInputFieldset($registrationFormFieldset);
 
 			$response.find('#ipadForm').submit(function(event) {
 				event.preventDefault();

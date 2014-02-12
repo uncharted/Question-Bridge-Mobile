@@ -178,6 +178,7 @@
 	}
 	#ipad-registration .right-block .block-wrapper{
 	    margin: 45px 45px 0 15px;
+	    overflow: hidden;
 
 	}
 	#ipad-registration .left-block .block-wrapper{
@@ -406,6 +407,9 @@
 		width: 28px;
 		height: 34px;
 		top: -40px;
+	}
+	.page-ask-question form.new-question-form-2 {
+		margin: 0 !important;
 	}
 }
 
