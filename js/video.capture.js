@@ -83,7 +83,7 @@ function videoRecordReturnBack(){
 		event.preventDefault();
 		if(qbApp.returnPageId.length){
 			$(qbApp.returnPageId).find('div.content-primary').css('visibility', 'visible');
-			$.mobile.changePage(qbApp.returnPageId, {transition: "slidefade"});
+			$.mobile.changePage(qbApp.returnPageId, {transition: "slidefade", changeHash: false});
 		}
 		else {
 			$.mobile.changePage('#page-home', {transition: "slidefade"});
@@ -135,7 +135,7 @@ function initAsqQuestion(){
 
 function submitHandlerCaptureVideo() {
 	/*qbApp.captureType = null;*/
-	$( '#page-ask-question-step-1' ).find( '.content' ).css('visibility', 'hidden');
+	//$( '#page-ask-question-step-1' ).find( '.content' ).css('visibility', 'hidden');
 	captureVideo('question');
 }
 
@@ -255,7 +255,6 @@ function captureSuccess(mediaFiles) {
 }
 
 function captureError(error) {
-	alert(1)
 		var activePageId = $.mobile.activePage.attr( "id" );
 	$( '#' + activePageId ).find( '.content, .content-primary' ).css('visibility', 'visible');
 }
