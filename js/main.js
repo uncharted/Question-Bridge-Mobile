@@ -138,7 +138,6 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 					}
 					else {
 						$.mobile.changePage( '#page-home', {transition: "slide", reloadPage : true});
-						setTimeout(function() { $.mobile.initializePage(); }, 1000);
 					}
 
 /*						$nextPageLink = $('#' + activePageId).find('ul.tutorial-slide li.active a').parent().next().find('a');
@@ -1961,6 +1960,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					imageWrapperHeight = $profileAvatar.parent().height(),
 					topOffset = (imageHeight - imageWrapperHeight)/2;
 
+			$( '#registration-step-3' ).addClass( 'avatar-loaded' );
 			$profileAvatar.parent().show().css('visibility', 'visible');
 
 			if(topOffset > 0){

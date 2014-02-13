@@ -49,8 +49,17 @@
   text-indent: 7px !important;
 }
 #registration-step-0 form {
-  margin-bottom: 50px;
+  margin-bottom: 66px;
 }
 #registration-step-1 form {
   margin-bottom: 30px;
+}
+.black-identify label input:before {
+  height: 18px !important;
+}
+#registration-step-3 form {
+  margin-bottom: 280px;
+}
+#registration-step-3.avatar-loaded form {
+  margin-bottom: 0px !important;
 }

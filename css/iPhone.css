@@ -220,6 +220,7 @@ div.content-primary div.question ul.navigation:after{
 	  width:20px;
 	  height:20px;
 	  display:block;
+	  overflow: hidden;
 	}
 	.black-identify label input:checked:before {
 		background-position: 0 -18px;
