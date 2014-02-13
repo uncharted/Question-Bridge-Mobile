@@ -1,6 +1,6 @@
 $(document).on('pageinit', '#page-ask-question-step-1', function(evt, ui) {
 	initAsqQuestion();
-	//$( '#page-ask-question-step-1' ).find( '.content' ).css( 'visibility', 'visible' );
+	$( '#page-ask-question-step-1' ).find( '.content' ).css( 'visibility', 'visible' );
 });
 
 $(document).on('pageinit', '#take-me-back', function(evt, ui) {
@@ -147,7 +147,6 @@ function askQuestionAftercapture(mediaFiles){
 	$questionSubmitBtn.css( 'visibility' , 'visible' );
 
 	$.mobile.changePage('#page-ask-question-step-2', {transition: "slide"/*, reloadPage: true*/});
-	$( '#page-ask-question-step-1' ).find( '.content' ).css( 'visibility', 'visible' );
 
 	qbApp.capture.url  = qbApp.settings.serverUrl + 'qb/rest/video/video-upload';
 	qbApp.capture.uid  = qbApp.cookie.user.uid;
