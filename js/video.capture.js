@@ -1,6 +1,5 @@
 $(document).on('pageinit', '#page-ask-question-step-1', function(evt, ui) {
 	initAsqQuestion();
-	$( '#page-ask-question-step-1' ).find( '.content' ).css( 'visibility', 'visible' );
 });
 
 $(document).on('pageinit', '#take-me-back', function(evt, ui) {
@@ -93,7 +92,8 @@ function videoRecordReturnBack(){
 }
 
 function initAsqQuestion(){
-	$('#page-ask-question-step-1').find("form.new-question-form-1").on('submit', function(event) {
+	$( '#page-ask-question-step-1' ).find( '.content' ).css( 'visibility', 'visible' );
+	$( '#page-ask-question-step-1' ).find( "form.new-question-form-1" ).on('submit', function(event) {
 		event.preventDefault();
 	}).validate({
 		errorPlacement: function(){

@@ -83,15 +83,15 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			if(!$this.val().length)	$this.removeClass('filled');
 		});
 		//First time app run. Slide on tutotial page
-		var applaunchCount = window.localStorage.getItem('launchCount');
+/*		var applaunchCount = window.localStorage.getItem('launchCount');
 		if(applaunchCount === null){
 				window.localStorage.setItem('launchCount', true);
 				setTimeout(function() {
 					$.mobile.changePage('#page-tutorial-1', {transition: "fade"});
 		    }, 600);
 				initTutorialPage();
-		}
-		//initTutorialPage();
+		}*/
+		initTutorialPage();
 		setTimeout(function() {
 			navigator.splashscreen.hide();
     }, 2000);
@@ -137,8 +137,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 						$.mobile.changePage( forwardPage, {transition: "slide"});
 					}
 					else {
-						$( '#page-home' ).find( '.search-container' ).hide();
-						$.mobile.changePage( '#page-home', {transition: "slide"});
+						$.mobile.changePage( '#page-home', {transition: "fade"});
 					}
 
 /*						$nextPageLink = $('#' + activePageId).find('ul.tutorial-slide li.active a').parent().next().find('a');
@@ -1302,6 +1301,7 @@ $(document).on("pagebeforechange", function(e, data) {
 
 $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		var prevPageID = data.prevPage.attr('id');
+		$( '#page-sing-in' ).find( 'form' ).get( 0 ).reset();
 		if($(data.prevPage).hasClass("page-registration")){
 			qbApp.pageComeFrom = '#page-home';
 		}
@@ -1422,6 +1422,11 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					restorePassword($form);
 					break;
 			}
+		},
+		popupbeforeposition: function( event, ui ) {
+			var $form = $( event.target ).find( 'form' );
+			$form.get( 0 ).reset();
+			$form .find( '.error' ).removeClass( 'error' );
 		}
 	});
 
