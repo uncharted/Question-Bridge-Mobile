@@ -92,7 +92,8 @@ function videoRecordReturnBack(){
 }
 
 function initAsqQuestion(){
-	$( '#page-ask-question-step-1' ).find( "form.new-question-form-1" ).on('submit', function(event) {
+	$( '#page-ask-question-step-1' ).find( '.content' ).css('visibility', 'visible').show();
+	$( '#page-ask-question-step-1' ).find("form.new-question-form-1").on('submit', function(event) {
 		event.preventDefault();
 	}).validate({
 		errorPlacement: function(){
@@ -134,9 +135,8 @@ function initAsqQuestion(){
 
 function submitHandlerCaptureVideo() {
 	/*qbApp.captureType = null;*/
-	//$( '#page-ask-question-step-1' ).find( '.content' ).css('visibility', 'hidden');
+	$( '#page-ask-question-step-1' ).find( '.content' ).css('visibility', 'hidden');
 	captureVideo('question');
-	$.mobile.changePage('#page-ask-question-step-2', {transition: "slide"/*, reloadPage: true*/});
 }
 
 function askQuestionAftercapture(mediaFiles){
@@ -146,7 +146,7 @@ function askQuestionAftercapture(mediaFiles){
 	$questionSubmitPage.find( 'div.progress-loader' ).show();
 	$questionSubmitBtn.css( 'visibility' , 'visible' );
 
-	//$.mobile.changePage('#page-ask-question-step-2', {transition: "slide"/*, reloadPage: true*/});
+	$.mobile.changePage('#page-ask-question-step-2', {transition: "slide"/*, reloadPage: true*/});
 
 	qbApp.capture.url  = qbApp.settings.serverUrl + 'qb/rest/video/video-upload';
 	qbApp.capture.uid  = qbApp.cookie.user.uid;
@@ -248,19 +248,16 @@ function captureSuccess(mediaFiles) {
 			uploadFile(mediaFiles[i])
 		}
 		else {
-			//qbApp.showLoading($('body > div.ui-loader'), 'html');
+			qbApp.showLoading($('body > div.ui-loader'), 'html');
 			askQuestionAftercapture(mediaFiles[i]);
 		}
 	}
 }
 
 function captureError(error) {
+	alert(1)
 		var activePageId = $.mobile.activePage.attr( "id" );
 	$( '#' + activePageId ).find( '.content, .content-primary' ).css('visibility', 'visible');
-	alert(qbApp.capture.type)
-	if( qbApp.capture.type == 'question' ) {
-		$.mobile.changePage('#page-ask-question-step-1', {transition: "slide"/*, reloadPage: true*/});
-	}
 }
 
 function captureVideo(type) {
