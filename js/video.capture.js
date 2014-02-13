@@ -1,6 +1,6 @@
 $(document).on('pageinit', '#page-ask-question-step-1', function(evt, ui) {
 	initAsqQuestion();
-	$( '#page-ask-question-step-1' ).find( '.content' ).css( 'visibility', 'visible' );
+	//$( '#page-ask-question-step-1' ).find( '.content' ).css( 'visibility', 'visible' );
 });
 
 $(document).on('pageinit', '#take-me-back', function(evt, ui) {
@@ -135,8 +135,8 @@ function initAsqQuestion(){
 
 function submitHandlerCaptureVideo() {
 	/*qbApp.captureType = null;*/
-	var activePageId = $.mobile.activePage.attr( "id" );
-	$( '#' + activePageId ).find( '.content' ).css('visibility', 'hidden');
+	/*var activePageId = $.mobile.activePage.attr( "id" );
+	$( '#' + activePageId ).find( '.content' ).css('visibility', 'hidden');*/
 	captureVideo('question');
 }
 
@@ -228,7 +228,8 @@ function checkAuthentication(){
 	if(qbApp.cookie == undefined){
 		event.preventDefault();
 		if($(window).width() >= 768){
-			$('#'+activePageId).find('div#ipad-login').popup('open');
+			$( '#' + activePageId ).find( '#main-menu' ).find( '.ipad-sing-in a' ).trigger( 'click' );
+			//$('#'+activePageId).find('div#ipad-login').popup('open');
 		}
 		else{
 			$.mobile.changePage( "#page-sing-in", {transition: "slide"});
