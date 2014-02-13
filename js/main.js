@@ -86,10 +86,13 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		var applaunchCount = window.localStorage.getItem('launchCount');
 		if(applaunchCount === null){
 				window.localStorage.setItem('launchCount', true);
-				setTimeout(function() {
+/*				setTimeout(function() {
 					$.mobile.changePage('#page-tutorial-1', {transition: "fade"});
-		    }, 600);
+		    }, 600);*/
 				initTutorialPage();
+		}
+		else {
+			$( 'body' ).children( '.page-tutorial' ).remove();
 		}
 		//initTutorialPage();
 		setTimeout(function() {
@@ -137,7 +140,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 						$.mobile.changePage( forwardPage, {transition: "slide"});
 					}
 					else {
-						$.mobile.changePage( '#page-home', {transition: "slide", reloadPage : true});
+						$.mobile.changePage( '#page-home', {transition: "slide"});
 					}
 
 /*						$nextPageLink = $('#' + activePageId).find('ul.tutorial-slide li.active a').parent().next().find('a');
@@ -523,7 +526,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	});
 
 	/*Hide search box on homepage hide*/
-	$(document).on("pagehide", '#page-home', function( event, ui ) {
+	$(document).on("pagehide pageshow", '#page-home', function( event, ui ) {
 		$('#page-home').find('div.search-container').hide();
 	});
 
