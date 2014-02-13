@@ -1,5 +1,6 @@
 $(document).on('pageinit', '#page-ask-question-step-1', function(evt, ui) {
 	initAsqQuestion();
+	$( evt.target ).find( '.content' ).css( 'visibility', 'visible' );
 });
 
 $(document).on('pageinit', '#take-me-back', function(evt, ui) {

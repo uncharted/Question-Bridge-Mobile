@@ -1377,7 +1377,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	});
 
 	/*Listeners for popup events*/
-	$(document).bind({
+	/*$(document).bind({
 		popupafteropen: function(event, ui) {
 			var $response = $(event.target);
 			switch ($response.attr('id')){
@@ -1425,7 +1425,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					break;
 			}
 		}
-	});
+	});*/
 
 	function restorePassword($form){
 		var authentificationLoading = false;
