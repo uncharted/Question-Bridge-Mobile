@@ -248,7 +248,7 @@ function captureSuccess(mediaFiles) {
 			uploadFile(mediaFiles[i])
 		}
 		else {
-			qbApp.showLoading($('body > div.ui-loader'), 'html');
+			//qbApp.showLoading($('body > div.ui-loader'), 'html');
 			askQuestionAftercapture(mediaFiles[i]);
 		}
 	}
@@ -257,6 +257,7 @@ function captureSuccess(mediaFiles) {
 function captureError(error) {
 		var activePageId = $.mobile.activePage.attr( "id" );
 	$( '#' + activePageId ).find( '.content, .content-primary' ).css('visibility', 'visible');
+	alert(qbApp.capture.type)
 	if( qbApp.capture.type == 'question' ) {
 		$.mobile.changePage('#page-ask-question-step-1', {transition: "slide"/*, reloadPage: true*/});
 	}
