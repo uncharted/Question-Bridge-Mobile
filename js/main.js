@@ -91,7 +91,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		    }, 600);
 				initTutorialPage();
 		}
-		initTutorialPage();
+		//initTutorialPage();
 		setTimeout(function() {
 			navigator.splashscreen.hide();
     }, 2000);
