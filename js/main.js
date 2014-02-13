@@ -87,7 +87,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		if(applaunchCount === null){
 				window.localStorage.setItem('launchCount', true);
 				setTimeout(function() {
-					$.mobile.changePage('#page-tutorial-1', { transition: "slide", reloadPage : true });
+					$.mobile.changePage('#page-tutorial-1', {transition: "fade"});
 		    }, 600);
 				initTutorialPage();
 		}
@@ -137,7 +137,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 						$.mobile.changePage( forwardPage, {transition: "slide"});
 					}
 					else {
-						$.mobile.changePage( '#page-home', {transition: "fade"});
+						$.mobile.changePage( '#page-home', {transition: "fade", reloadPage:true});
 					}
 
 /*						$nextPageLink = $('#' + activePageId).find('ul.tutorial-slide li.active a').parent().next().find('a');
