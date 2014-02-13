@@ -7,9 +7,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.buttonMarkup.hoverDelay = 25;
 
 
-	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
+	qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	qbApp.settings.serverUrl = 'http://107.21.242.74/';
+	//qbApp.settings.serverUrl = 'http://107.21.242.74/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
@@ -90,8 +90,8 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 					$.mobile.changePage('#page-tutorial-1', {transition: "fade"});
 		    }, 600);
 
-		}
-		initTutorialPage();*/
+		}*/
+		initTutorialPage();
 		setTimeout(function() {
 			navigator.splashscreen.hide();
     }, 2000);
@@ -134,7 +134,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 					$img = $( '#' + activePageId ).find( 'img' ),
 					forwardPage = $img.data( 'slide-forward' );
 					if( forwardPage != undefined ) {
-						$.mobile.changePage( forwardPage, {transition: "slidefade"});
+						$.mobile.changePage( forwardPage, {transition: "slide"});
 					}
 
 /*						$nextPageLink = $('#' + activePageId).find('ul.tutorial-slide li.active a').parent().next().find('a');
@@ -152,7 +152,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 					$img = $( '#' + activePageId ).find( 'img' ),
 					backPage = $img.data( 'slide-back' );
 					if( backPage != undefined ) {
-						$.mobile.changePage( backPage, {transition: "slidefade"});
+						$.mobile.changePage( backPage, {transition: "slide", reverse: true});
 					}
 /*		        var activePageId = $.mobile.activePage.attr( "id" ),
 						$prevPageLink = $('#' + activePageId).find('ul.tutorial-slide li.active a').parent().prev().find('a');
@@ -160,6 +160,10 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		        event.stopImmediatePropagation();
 		    }
 		});
+		$( window ).on( 'orientationchange', function() {
+			var activePageId = $.mobile.activePage.attr( "id" );
+			$( '#' + activePageId ).css( 'maxHeight', $( window ).height() );
+		})
 	}
 
 
