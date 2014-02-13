@@ -40,15 +40,17 @@
   text-indent: 0 !important;
   text-indent: 0 !important;
   padding: 0 !important;
-  height: 35px !important;
-  min-height: 35px !important;
+  height: 30px !important;
+  min-height: 30px !important;
   border-bottom-right-radius: 4px !important;
 }
 .android .page-sing-in input.filled{
   margin: 3px 0 2px 3% !important;
   text-indent: 7px !important;
 }
-
-.android .ui-input-search input::-webkit-input-placeholder {
-
+#registration-step-0 form {
+  margin-bottom: 50px;
+}
+#registration-step-1 form {
+  margin-bottom: 30px;
 }

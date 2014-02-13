@@ -138,7 +138,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 					}
 					else {
 						$.mobile.changePage( '#page-home', {transition: "slide", reloadPage : true});
-						$.mobile.initializePage();
+						setTimeout(function() { $.mobile.initializePage(); }, 1000);
 					}
 
 /*						$nextPageLink = $('#' + activePageId).find('ul.tutorial-slide li.active a').parent().next().find('a');
@@ -1700,13 +1700,17 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 											.removeAttr('required');
 					});
 					$fieldsetWrapper.append( $newFieldset );
-					$newFieldset.find( 'input' ).first().trigger( 'focus' );
+					//$newFieldset.find( 'input' ).first().trigger( 'focus' );
 					$fieldsetWrapper.find( 'fieldset' ).css({ 'float' : 'left', 'width' : fieldsetStartWidth });
 					fieldsetLength = $fieldsetWrapper.find( 'fieldset' ).length;
 					$fieldsetWrapper.width( fieldsetWidth + fieldsetStartWidth );
 
-					$fieldsetWrapper.find( '.active' ).animate({ 'opacity' : 0 }, 1000).removeClass( 'active' )
-													.next().delay( 600 ).animate({ 'marginLeft' : fieldsetStartWidth * -1 }, 1000).addClass( 'active' );
+					$fieldsetWrapper.find( '.active' )
+														.stop( true, true ).animate({ 'opacity' : 0 }, 900).removeClass( 'active' )
+													.next()
+														.delay( 600 ).stop( true, true ).animate({ 'marginLeft' : fieldsetStartWidth * -1 }, 900, function() {
+															$( this ).find( 'input' ).first().trigger( 'focus' );
+														}).addClass( 'active' );
 					$backBtn.attr( 'data-rel', 'back-block' );
 				}
 			}
