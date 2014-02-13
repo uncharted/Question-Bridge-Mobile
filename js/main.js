@@ -83,15 +83,15 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			if(!$this.val().length)	$this.removeClass('filled');
 		});
 		//First time app run. Slide on tutotial page
-/*		var applaunchCount = window.localStorage.getItem('launchCount');
+		var applaunchCount = window.localStorage.getItem('launchCount');
 		if(applaunchCount === null){
 				window.localStorage.setItem('launchCount', true);
 				setTimeout(function() {
 					$.mobile.changePage('#page-tutorial-1', {transition: "fade"});
 		    }, 600);
 				initTutorialPage();
-		}*/
-		initTutorialPage();
+		}
+		//initTutorialPage();
 		setTimeout(function() {
 			navigator.splashscreen.hide();
     }, 2000);
@@ -1424,9 +1424,15 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			}
 		},
 		popupbeforeposition: function( event, ui ) {
-			var $form = $( event.target ).find( 'form' );
-			$form.get( 0 ).reset();
-			$form .find( '.error' ).removeClass( 'error' );
+			var $response = $(event.target);
+			switch ($response.attr('id')){
+				case 'ipad-login':
+					var $form = $response.find( 'form' );
+					$form.get( 0 ).reset();
+					$form .find( '.error' ).removeClass( 'error' );
+				break;
+			}
+
 		}
 	});
 
