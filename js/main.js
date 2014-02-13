@@ -7,9 +7,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.buttonMarkup.hoverDelay = 25;
 
 
-	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
+	qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	qbApp.settings.serverUrl = 'http://107.21.242.74/';
+	//qbApp.settings.serverUrl = 'http://107.21.242.74/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
@@ -137,7 +137,8 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 						$.mobile.changePage( forwardPage, {transition: "slide"});
 					}
 					else {
-						$.mobile.changePage( '#page-home', {transition: "slide", pageReload : true});
+						$.mobile.changePage( '#page-home', {transition: "slide", reloadPage : true});
+						$.mobile.initializePage();
 					}
 
 /*						$nextPageLink = $('#' + activePageId).find('ul.tutorial-slide li.active a').parent().next().find('a');
@@ -1694,7 +1695,9 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					var $newFieldset = $emptyFieldset.clone();
 					$.each( $newFieldset.find( 'input' ).not( '.add-more' ), function( index, input ) {
 						inputNameIndexStart++;
-						$( input ).attr( 'name', inputNamePrefix + '-' + inputNameIndexStart ).removeAttr('required');
+						$( input ).attr( 'name', inputNamePrefix + '-' + inputNameIndexStart )
+											.attr( 'placeholder', inputNameIndexStart )
+											.removeAttr('required');
 					});
 					$fieldsetWrapper.append( $newFieldset );
 					$newFieldset.find( 'input' ).first().trigger( 'focus' );
