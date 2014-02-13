@@ -83,15 +83,15 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			if(!$this.val().length)	$this.removeClass('filled');
 		});
 		//First time app run. Slide on tutotial page
-/*		var applaunchCount = window.localStorage.getItem('launchCount');
+		var applaunchCount = window.localStorage.getItem('launchCount');
 		if(applaunchCount === null){
 				window.localStorage.setItem('launchCount', true);
 				setTimeout(function() {
 					$.mobile.changePage('#page-tutorial-1', {transition: "fade"});
 		    }, 600);
 				initTutorialPage();
-		}*/
-
+		}
+		//initTutorialPage();
 		setTimeout(function() {
 			navigator.splashscreen.hide();
     }, 2000);

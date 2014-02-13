@@ -1,6 +1,6 @@
 $(document).on('pageinit', '#page-ask-question-step-1', function(evt, ui) {
 	initAsqQuestion();
-	$( evt.target ).find( '.content' ).css( 'visibility', 'visible' );
+	$( '#page-ask-question-step-1' ).find( '.content' ).css( 'visibility', 'visible' );
 });
 
 $(document).on('pageinit', '#take-me-back', function(evt, ui) {
@@ -229,7 +229,6 @@ function checkAuthentication(){
 		event.preventDefault();
 		if($(window).width() >= 768){
 			$('#'+activePageId).find('div#ipad-login').popup('open');
-			$( '#ipad-login' ).find( 'input[name="login"]' ).trigger( 'focus' );
 		}
 		else{
 			$.mobile.changePage( "#page-sing-in", {transition: "slide"});
