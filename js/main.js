@@ -136,6 +136,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 					if( forwardPage != undefined ) {
 						$.mobile.changePage( forwardPage, {transition: "slide"});
 					}
+					else {
+						$.mobile.changePage( '#page-home', {transition: "slide"});
+					}
 
 /*						$nextPageLink = $('#' + activePageId).find('ul.tutorial-slide li.active a').parent().next().find('a');
 				if($nextPageLink.length) {
