@@ -87,11 +87,11 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		if(applaunchCount === null){
 				window.localStorage.setItem('launchCount', true);
 				setTimeout(function() {
-					$.mobile.changePage('#page-tutorial-1', {transition: "fade"});
+					$.mobile.changePage('#page-tutorial-1', { transition: "slide", reloadPage : true });
 		    }, 600);
 				initTutorialPage();
 		}
-		//initTutorialPage();
+		initTutorialPage();
 		setTimeout(function() {
 			navigator.splashscreen.hide();
     }, 2000);
@@ -1386,7 +1386,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					var activePageId = $.mobile.activePage.attr( "id" );
 					initAuthentification(activePageId);
 					$response.find('a.facebook').on('click', function(){
-						qbApp.showLoading($('body > div.ui-loader'), 'html');
+						qbApp.showLoading($('body > div.ui-loader'), 'html', true);
 						FB.login(
 							function(response) {
 								FB.api('/me', function(response) {
@@ -1407,14 +1407,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					});
 					break;
 				case 'ipad-registration':
-					if(qbApp.formReset === true) {
-						var $ipadForm  = $response.find('form#ipadForm');
-						$ipadForm.find('div.ipad-profile-image-wrapper').hide();
-						$ipadForm.find('div.left-block, div.right-block').show();
-						$ipadForm.get(0).reset();
-						$ipadForm.find('#ipad-user-profile-photo-id').val(0);
-						qbApp.formReset = false;
-					}
+
 					initIPadRegistrationForm($response);
 					break;
 				case 'ipad-page-forgot-password':
@@ -1430,6 +1423,16 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					var $form = $response.find( 'form' );
 					$form.get( 0 ).reset();
 					$form .find( '.error' ).removeClass( 'error' );
+				break;
+				case 'ipad-registration':
+					if(qbApp.formReset === true) {
+						var $ipadForm  = $response.find('form#ipadForm');
+						$ipadForm.find('div.ipad-profile-image-wrapper').hide();
+						$ipadForm.find('div.left-block, div.right-block').show();
+						$ipadForm.get(0).reset();
+						$ipadForm.find('#ipad-user-profile-photo-id').val(0);
+						qbApp.formReset = false;
+					}
 				break;
 			}
 
