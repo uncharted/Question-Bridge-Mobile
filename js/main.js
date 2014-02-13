@@ -1377,16 +1377,13 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	});
 
 	/*Listeners for popup events*/
-	/*$(document).bind({
+	$(document).bind({
 		popupafteropen: function(event, ui) {
 			var $response = $(event.target);
 			switch ($response.attr('id')){
 				case 'ipad-login':
 					var activePageId = $.mobile.activePage.attr( "id" );
 					initAuthentification(activePageId);
-					setTimeout(function() {
-						$response.find( 'input[name="login"]' ).trigger( 'focus' );
-					}, 1000);
 					$response.find('a.facebook').on('click', function(){
 						qbApp.showLoading($('body > div.ui-loader'), 'html');
 						FB.login(
@@ -1425,7 +1422,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					break;
 			}
 		}
-	});*/
+	});
 
 	function restorePassword($form){
 		var authentificationLoading = false;
