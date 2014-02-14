@@ -651,18 +651,25 @@ div.content-primary div.question ul.navigation:after{
 	    margin: 25px 0 10px 0px;
 	    padding: 0;
 	}
-	#registration-step-0 .content .footer {
-		margin-top: 40px;
+	.page-registration .ui-panel-content-wrap {
+		position: relative;
 	}
-	#registration-step-1 .content {
-		padding-bottom: 40px;
+	.page-registration .footer {
+		position: absolute;
+		bottom: 0;
 	}
-	 #registration-step-3 form {
-	  margin-bottom: 240px;
-	}
-	#registration-step-3.avatar-loaded form {
-	  margin-bottom: 0px !important;
-	}
+/* 	#registration-step-0 .content .footer {
+	margin-top: 60px;
+}
+#registration-step-1 .content {
+	padding-bottom: 40px;
+}
+ #registration-step-3 form {
+  margin-bottom: 260px;
+}
+#registration-step-3.avatar-loaded form {
+  margin-bottom: 0px !important;
+	} */
 															/*----------------page-tutorial----------*/
 
 /* 	.page-tutorial .content img {
