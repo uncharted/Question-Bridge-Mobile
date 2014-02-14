@@ -1911,6 +1911,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			event.preventDefault();
 
 			qbApp.showLoading($('body > div.ui-loader'), 'html', true);
+			$( "#create-avatar-popup" ).popup( "close" )
 			var options = {
 				quality: 50,
 				targetWidth: 300,
@@ -1970,12 +1971,12 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			$profileAvatar = $requestingPage.find('img#ipad-smallImage');
 		}
 		else {
-			var $phoneRegisterPage = $( '#registration-step-3' );
-			$inputProfileFid = $phoneRegisterPage.find( 'a.make-portrait' );
-			$profileAvatar = $phoneRegisterPage.find( '#smallImage' );
+			var $registrationPage = $( '#registration-step-3' );
+			$inputProfileFid = $( '#user-profile-photo-id' );
+			$profileAvatar = $( '#smallImage' );
 
-			$('a#make-portrait').hide();
-			$('#registration-step-3 input.registr-btn').show();
+			$registrationPage.find( 'a.make-portrait' ).hide();
+			$registrationPage.find( 'input.registr-btn' ).show();
 		}
 
 		$inputProfileFid.attr('value', response.profile_fid);

@@ -652,6 +652,9 @@ div.content-primary div.question ul.navigation:after{
 	    margin: 25px 0 10px 0px;
 	    padding: 0;
 	}
+	#registration-step-2 .content .footer {
+		bottom: -20px;
+	}
 															/*----------------page-tutorial----------*/
 
 /* 	.page-tutorial .content img {
