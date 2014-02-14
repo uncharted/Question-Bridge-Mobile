@@ -1909,6 +1909,8 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		});
 		$popup.find( 'a.librarie' ).on( 'click', function( event ) {
 			event.preventDefault();
+
+			qbApp.showLoading($('body > div.ui-loader'), 'html', true);
 			var options = {
 				quality: 50,
 				targetWidth: 300,
@@ -1920,13 +1922,13 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
 			};
 			navigator.camera.getPicture( uploadPhoto, function(err) {
-				_messagePopup(JSON.stringify(err), false);
+				qbApp.hideLoading($('body > .ui-loader'));
 			}, options);
 		});
 	}
 
 	qbApp.behaviors.submitHandlerCapturePicture = function() {
-		qbApp.showLoading($('body > div.ui-loader'), 'html');
+		qbApp.showLoading($('body > div.ui-loader'), 'html', true);
 			navigator.camera.getPicture(uploadPhoto, getPictureFail, { quality: 50,
 				destinationType: navigator.camera.DestinationType.FILE_URI,
 				correctOrientation: true
@@ -1968,8 +1970,9 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			$profileAvatar = $requestingPage.find('img#ipad-smallImage');
 		}
 		else {
-			$inputProfileFid = $('input#user-profile-photo-id');
-			$profileAvatar = $('img#smallImage');
+			var $phoneRegisterPage = $( '#registration-step-3' );
+			$inputProfileFid = $phoneRegisterPage.find( 'a.make-portrait' );
+			$profileAvatar = $phoneRegisterPage.find( '#smallImage' );
 
 			$('a#make-portrait').hide();
 			$('#registration-step-3 input.registr-btn').show();
