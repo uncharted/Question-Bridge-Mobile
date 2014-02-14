@@ -1157,6 +1157,17 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			var keywords = $(this).val();
 			updateSearchResults(keywords);
 		});
+		if(navigator.userAgent.match(/Android/i)){
+			$( '#edit-search-results' )
+				.attr( 'placeholder', '').val( 'Search' ).addClass( 'android-placeholder' )
+				.on( 'focus', function() {
+					$( this ).val( '' ).removeClass( 'android-placeholder' );
+				})
+				.on( 'focusout', function() {
+					var $input = $( this );
+					if( $input.val() == '' ) $input.val( 'Search' ).addClass( 'android-placeholder' );
+				});
+		}
 	}
 
 	function updateSearchResults(keywords) {
@@ -1879,6 +1890,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 							showDeviceRotateMessage();
 						}
 						else {
+							$( "#create-avatar-popup" ).popup( "close" )
 							qbApp.behaviors.submitHandlerCapturePicture();
 						}
 					},
@@ -1888,6 +1900,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				);
 			}
 			else{
+				$( "#create-avatar-popup" ).popup( "close" )
 				qbApp.behaviors.submitHandlerCapturePicture();
 			}
 		});
@@ -1913,18 +1926,19 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	}
 
 	qbApp.behaviors.captureProfilePhotoIpad = function( $form ) {
-		$menu = $( '#ipad-create-avatar-popup' );
+		var $menu = $( '#ipad-create-avatar-popup' ),
+				$requestingPage = $('#ipad-registration');
 		$menu.find( 'a.photo' ).on( 'click', function( event ) {
 			event.preventDefault();
-			var userImageID = $form.find('input#ipad-user-profile-photo-id').attr('value');
+			var userImageID = $form.find('input#ipad-user-profile-photo-id').attr('value')
 			if(userImageID == 0) {
-				var $requestingPage = $('#ipad-registration');
 
 				$requestingPage.find('div.left-block, div.right-block').hide();
 				$requestingPage.find('div.ipad-profile-image-wrapper').show();
 
 				//First time form submit - we need to take user photo
 				qbApp.captureType = 'picture';
+				alert(1)
 				qbApp.behaviors.submitHandlerCapturePicture();
 			}
 			else{
@@ -1962,9 +1976,14 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				destinationType: navigator.camera.DestinationType.FILE_URI,
 				sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
 			};
+			qbApp.captureType = 'picture';
 			navigator.camera.getPicture( uploadPhoto, function(err) {
 				qbApp.hideLoading($('body > .ui-loader'));
+				$requestingPage.find('div.left-block, div.right-block').show();
+				$requestingPage.find('div.ipad-profile-image-wrapper').hide();
 			}, options);
+			$requestingPage.find('div.left-block, div.right-block').hide();
+			$requestingPage.find('div.ipad-profile-image-wrapper').show();
 		});
 
 	}
