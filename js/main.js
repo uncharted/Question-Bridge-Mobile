@@ -53,17 +53,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		initLogoNavigate();
 		initOrientationChange();
 		initLogOut();
-		initAndroidHardcode();
 		FB.init({ appId: "315999478539121", nativeInterface: CDV.FB, useCachedDialogs: false });
-	}
-
-	/**
-	 * [initAndroidHardcode quick fix for vedroid]
-	 */
-	function initAndroidHardcode() {
-		if( navigator.userAgent.match( /Android/i ) ) {
-			$( 'div[data-role="footer"]' ).removeAttr( 'data-position' );
-		}
 	}
 
 	function initDevice() {
@@ -1457,6 +1447,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 						$ipadForm.get(0).reset();
 						$ipadForm.find('#ipad-user-profile-photo-id').val(0);
 						qbApp.formReset = false;
+						$( '#ipad-create-avatar-popup' ).hide();
 					}
 				break;
 			}

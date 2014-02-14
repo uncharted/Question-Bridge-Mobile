@@ -651,8 +651,17 @@ div.content-primary div.question ul.navigation:after{
 	    margin: 25px 0 10px 0px;
 	    padding: 0;
 	}
-	#registration-step-2 .content .footer {
-		bottom: -20px;
+	#registration-step-0 .content .footer {
+		margin-top: 40px;
+	}
+	#registration-step-1 .content {
+		padding-bottom: 40px;
+	}
+	 #registration-step-3 form {
+	  margin-bottom: 240px;
+	}
+	#registration-step-3.avatar-loaded form {
+	  margin-bottom: 0px !important;
 	}
 															/*----------------page-tutorial----------*/
 
