@@ -93,7 +93,6 @@
 	#ipad-login .forgot{
 		font: 12px/18px 'Gotham Light';
 		color: #e0a125;
-		display: none;
 		text-decoration: none;
 		margin: 5px 0 10px 0;
 		float: left;
@@ -333,21 +332,26 @@
 
     display: none;
 }
-	.ipad-profile-image{
-    width: 400px;
-    margin: 0 auto 0;
-    overflow: hidden;
-    height: 400px;
-    visibility: hidden;
-	}
-	.ipad-profile-image img{
-    display: block;
-    width: 100%;
-	}
-	.ipad-profile-image-wrapper input.registration-finish{
-		margin: 20px 0 0 50px !important;
+.ipad-profile-image{
+  width: 400px;
+  margin: 0 auto 0;
+  overflow: hidden;
+  height: 400px;
+  visibility: hidden;
+}
+.ipad-profile-image img{
+  display: block;
+  width: 100%;
+}
+.ipad-profile-image-wrapper input.registration-finish{
+	margin: 20px 0 0 50px !important;
 
-		width: 300px !important;
+	width: 300px !important;
+}
+#ipad-create-avatar-popup {
+	position: absolute;
+	margin: -45px 0 0 50px;
+	display: none;
 }
 															/*----------------RESTORE PASSWORD----------*/
 	#ipad-page-forgot-password-popup input[type="submit"]{

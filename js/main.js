@@ -663,6 +663,18 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 						var pixelsFromWindowTop = 0 + $(window).scrollTop();
 						if(pixelsFromWindowTop == 0) {
 							$page.find('div.search-container').show();
+							//Fix placeholder for android
+							if(navigator.userAgent.match(/Android/i)){
+								$( '#edit-search-home' )
+									.attr( 'placeholder', '').val( 'Search' ).addClass( 'android-placeholder' )
+									.on( 'focus', function() {
+										$( this ).val( '' ).removeClass( 'android-placeholder' );
+									})
+									.on( 'focusout', function() {
+										var $input = $( this );
+										if( $input.val() == '' ) $input.val( 'Search' ).addClass( 'android-placeholder' );
+									});
+							}
 							if(infiniteScrolLoading == false ) {
 								//get new questions
 								var latestNid = $(pageId).find('ul.questions > li:first').data('nid');
@@ -1362,7 +1374,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 						$form.find( '.fieldset-wrapper fieldset' ).removeAttr( 'style' );
 					}
 					if( $form.attr( 'id' ) == 'register-3' ) {
-						$form.find( '#make-portrait' ).show();
+						$form.find( 'a.make-portrait' ).show();
 						$form.find( 'input.registr-btn' ).hide();
 						$form.prev().hide().find( 'img' ).attr( 'src', '#' );
 					}
@@ -1601,38 +1613,10 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 							}
 							//Send data to create new user
 							else{
-								var userImageID = $form.find('input#ipad-user-profile-photo-id').attr('value');
-
-								if(userImageID == 0) {
-									var $requestingPage = $('#ipad-registration');
-
-									$requestingPage.find('div.left-block, div.right-block').hide();
-									$requestingPage.find('div.ipad-profile-image-wrapper').show();
-
-									//First time form submit - we need to take user photo
-									qbApp.captureType = 'picture';
-									qbApp.behaviors.submitHandlerCapturePicture();
-								}
-								else{
-									//We already have user image ID, so we can submit complete form data
-									$.getJSON(qbApp.settings.restUrl + "user/register?jsoncallback=?&"+formData,
-										function(response){
-											$form.get(0).reset();
-											qbApp.hideLoading($('body > .ui-loader'));
-											if(response.sessid !== undefined){
-												$('body').addClass('logged-in');
-												$.cookie('drupal_sess', response, { expires: 7 });
-												qbApp.formReset = true;
-												$('#ipad-registration').popup( "close" );
-												//$.mobile.changePage( "#page-home", {transition: "slide"});
-												qbApp.cookie = response;
-											}
-											else{
-												//Registration fail
-											}
-										}
-									)
-								}
+								qbApp.hideLoading($('body > .ui-loader'));
+								var $captureMenu = $( '#ipad-create-avatar-popup' );
+								$captureMenu.fadeIn();
+								qbApp.behaviors.captureProfilePhotoIpad( $form );
 							}
 						}
 					)
@@ -1812,7 +1796,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					}
 				});
 
-				qbApp.behaviors.captureProfilePhoto( $conteiner.find( '#create-avatar-popup-popup' ) );
+				qbApp.behaviors.captureProfilePhotoPhone( $conteiner.find( '#create-avatar-popup-popup' ) );
 
 			break;
 			/*Finish registration. Collect data from all step registration form*/
@@ -1829,7 +1813,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 							return false;  // suppresses error message text
 						},
 						submitHandler: function(form) {
-							qbApp.showLoading($('body > div.ui-loader'), 'html');
+							qbApp.showLoading($('body > div.ui-loader'), 'html', true);
 							var formDataUrl = '';
 							$.each($('.page-registration'), function(index, page) {
 								$form = $(page).find('form.registration-form');
@@ -1883,7 +1867,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		}
 	}
 
-	qbApp.behaviors.captureProfilePhoto = function($popup) {
+	qbApp.behaviors.captureProfilePhotoPhone = function($popup) {
 		$popup.find( 'a.photo' ).on( 'click', function( event ) {
 			event.preventDefault();
 			qbApp.captureType = 'picture';
@@ -1926,6 +1910,63 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				qbApp.hideLoading($('body > .ui-loader'));
 			}, options);
 		});
+	}
+
+	qbApp.behaviors.captureProfilePhotoIpad = function( $form ) {
+		$menu = $( '#ipad-create-avatar-popup' );
+		$menu.find( 'a.photo' ).on( 'click', function( event ) {
+			event.preventDefault();
+			var userImageID = $form.find('input#ipad-user-profile-photo-id').attr('value');
+			if(userImageID == 0) {
+				var $requestingPage = $('#ipad-registration');
+
+				$requestingPage.find('div.left-block, div.right-block').hide();
+				$requestingPage.find('div.ipad-profile-image-wrapper').show();
+
+				//First time form submit - we need to take user photo
+				qbApp.captureType = 'picture';
+				qbApp.behaviors.submitHandlerCapturePicture();
+			}
+			else{
+				//We already have user image ID, so we can submit complete form data
+				$.getJSON(qbApp.settings.restUrl + "user/register?jsoncallback=?&"+formData,
+					function(response){
+						$form.get(0).reset();
+						qbApp.hideLoading($('body > .ui-loader'));
+						if(response.sessid !== undefined){
+							$('body').addClass('logged-in');
+							$.cookie('drupal_sess', response, { expires: 7 });
+							qbApp.formReset = true;
+							$('#ipad-registration').popup( "close" );
+							//$.mobile.changePage( "#page-home", {transition: "slide"});
+							qbApp.cookie = response;
+						}
+						else{
+							//Registration fail
+						}
+					}
+				)
+			}
+		});
+		$menu.find( 'a.librarie' ).on( 'click', function( event ) {
+			event.preventDefault();
+			qbApp.showLoading($('body > div.ui-loader'), 'html', true);
+			$( "#ipad-create-avatar-popup" ).hide();
+			var options = {
+				quality: 50,
+				targetWidth: 300,
+				targetHeight: 300,
+				allowEdit: true,
+				saveToPhotoAlbum: false,
+				limit: 1,
+				destinationType: navigator.camera.DestinationType.FILE_URI,
+				sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+			};
+			navigator.camera.getPicture( uploadPhoto, function(err) {
+				qbApp.hideLoading($('body > .ui-loader'));
+			}, options);
+		});
+
 	}
 
 	qbApp.behaviors.submitHandlerCapturePicture = function() {

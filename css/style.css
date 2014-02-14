@@ -1136,6 +1136,9 @@ background-size: 22px; */
  	padding: 10px 0 10px 10px;
  	margin-bottom: 5px;
 }
+.page-ask-question form.new-question-form-2 input:not(.registr-btn) {
+	width: 270px;
+}
 .page-ask-question form.new-question-form-2 {
 	margin-top: -12px;
 }
