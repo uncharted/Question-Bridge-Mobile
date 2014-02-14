@@ -1433,7 +1433,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					});
 					break;
 				case 'ipad-registration':
-
 					initIPadRegistrationForm($response);
 					break;
 				case 'ipad-page-forgot-password':
@@ -1602,7 +1601,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			});
 			var $registrationFormFieldset = $response.find( '.fieldset-wrapper' );
 					infinitiInputFieldset($registrationFormFieldset);
-
 			$response.find('#ipadForm').submit(function(event) {
 				event.preventDefault();
 			}).validate({
@@ -1610,27 +1608,52 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					return false;  // suppresses error message text
 				},
 				submitHandler: function(form) {
-					$.mobile.silentScroll(1);
+					//$.mobile.silentScroll(1);
+					$form = $( form );
 					qbApp.showLoading($('body > div.ui-loader'), 'html');
-					var $form = $(form),
-							formData = $form.serialize();
-					$.getJSON(qbApp.settings.restUrl + "user/pre-pregistration?jsoncallback=?&"+formData,
-						function(response){
-							if(response.error === true){
+					var userImageID = $form.find('input#ipad-user-profile-photo-id').attr('value');
+					alert(userImageID)
+					if( userImageID != 0 ) {
+						//Submit registration form
+						$.getJSON(qbApp.settings.restUrl + "user/register?jsoncallback=?&"+formData,
+							function(response){
+								$form.get(0).reset();
 								qbApp.hideLoading($('body > .ui-loader'));
-								$.each(response, function(index, row) {
-									$form.find('input[name="'+index+'"]').val('').attr('placeholder', row).addClass('error');
-								});
+								if(response.sessid !== undefined){
+									$('body').addClass('logged-in');
+									$.cookie('drupal_sess', response, { expires: 7 });
+									qbApp.formReset = true;
+									$('#ipad-registration').popup( "close" );
+									//$.mobile.changePage( "#page-home", {transition: "slide"});
+									qbApp.cookie = response;
+								}
+								else{
+									//Registration fail
+								}
 							}
-							//Send data to create new user
-							else{
-								qbApp.hideLoading($('body > .ui-loader'));
-								var $captureMenu = $( '#ipad-create-avatar-popup' );
-								$captureMenu.fadeIn();
-								qbApp.behaviors.captureProfilePhotoIpad( $form );
+						)
+					}
+					else {
+						var $form = $(form),
+						formData = $form.serialize();
+						$.getJSON(qbApp.settings.restUrl + "user/pre-pregistration?jsoncallback=?&"+formData,
+							function(response){
+								if(response.error === true){
+									qbApp.hideLoading($('body > .ui-loader'));
+									$.each(response, function(index, row) {
+										$form.find('input[name="'+index+'"]').val('').attr('placeholder', row).addClass('error');
+									});
+								}
+								//Send data to create new user
+								else{
+									qbApp.hideLoading($('body > .ui-loader'));
+									var $captureMenu = $( '#ipad-create-avatar-popup' );
+									$captureMenu.fadeIn();
+									qbApp.behaviors.captureProfilePhotoIpad( $form );
+								}
 							}
-						}
-					)
+						)
+					}
 				}
 			});
 	}
@@ -1930,37 +1953,8 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				$requestingPage = $('#ipad-registration');
 		$menu.find( 'a.photo' ).on( 'click', function( event ) {
 			event.preventDefault();
-			var userImageID = $form.find('input#ipad-user-profile-photo-id').attr('value')
-			if(userImageID == 0) {
-
-				$requestingPage.find('div.left-block, div.right-block').hide();
-				$requestingPage.find('div.ipad-profile-image-wrapper').show();
-
-				//First time form submit - we need to take user photo
-				qbApp.captureType = 'picture';
-				alert(1)
-				qbApp.behaviors.submitHandlerCapturePicture();
-			}
-			else{
-				//We already have user image ID, so we can submit complete form data
-				$.getJSON(qbApp.settings.restUrl + "user/register?jsoncallback=?&"+formData,
-					function(response){
-						$form.get(0).reset();
-						qbApp.hideLoading($('body > .ui-loader'));
-						if(response.sessid !== undefined){
-							$('body').addClass('logged-in');
-							$.cookie('drupal_sess', response, { expires: 7 });
-							qbApp.formReset = true;
-							$('#ipad-registration').popup( "close" );
-							//$.mobile.changePage( "#page-home", {transition: "slide"});
-							qbApp.cookie = response;
-						}
-						else{
-							//Registration fail
-						}
-					}
-				)
-			}
+			qbApp.captureType = 'picture';
+			qbApp.behaviors.submitHandlerCapturePicture();
 		});
 		$menu.find( 'a.librarie' ).on( 'click', function( event ) {
 			event.preventDefault();
@@ -1979,13 +1973,8 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			qbApp.captureType = 'picture';
 			navigator.camera.getPicture( uploadPhoto, function(err) {
 				qbApp.hideLoading($('body > .ui-loader'));
-				$requestingPage.find('div.left-block, div.right-block').show();
-				$requestingPage.find('div.ipad-profile-image-wrapper').hide();
 			}, options);
-			$requestingPage.find('div.left-block, div.right-block').hide();
-			$requestingPage.find('div.ipad-profile-image-wrapper').show();
 		});
-
 	}
 
 	qbApp.behaviors.submitHandlerCapturePicture = function() {
@@ -2025,10 +2014,11 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				$inputProfileFid;
 
 		if(qbApp.requestingPage == 'ipad-registration') {
-
 			var $requestingPage = $('#' + qbApp.requestingPage);
 			$inputProfileFid = $requestingPage.find('input#ipad-user-profile-photo-id');
 			$profileAvatar = $requestingPage.find('img#ipad-smallImage');
+			$requestingPage.find('div.left-block, div.right-block').hide();
+			$requestingPage.find('div.ipad-profile-image-wrapper').show();
 		}
 		else {
 			var $registrationPage = $( '#registration-step-3' );
