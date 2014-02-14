@@ -1609,12 +1609,12 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				},
 				submitHandler: function(form) {
 					//$.mobile.silentScroll(1);
-					$form = $( form );
-					qbApp.showLoading($('body > div.ui-loader'), 'html');
+					var $form = $( form );
+					qbApp.showLoading($('body > div.ui-loader'), 'html', true);
 					var userImageID = $form.find('input#ipad-user-profile-photo-id').attr('value');
-					alert(userImageID)
 					if( userImageID != 0 ) {
 						//Submit registration form
+						var formData = $form.serialize();
 						$.getJSON(qbApp.settings.restUrl + "user/register?jsoncallback=?&"+formData,
 							function(response){
 								$form.get(0).reset();
@@ -1634,8 +1634,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 						)
 					}
 					else {
-						var $form = $(form),
-						formData = $form.serialize();
+						var formData = $form.serialize();
 						$.getJSON(qbApp.settings.restUrl + "user/pre-pregistration?jsoncallback=?&"+formData,
 							function(response){
 								if(response.error === true){
