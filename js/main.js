@@ -7,9 +7,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.buttonMarkup.hoverDelay = 25;
 
 
-	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
+	qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	qbApp.settings.serverUrl = 'http://107.21.242.74/';
+	//qbApp.settings.serverUrl = 'http://107.21.242.74/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
@@ -1466,7 +1466,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 									if(response.status == 'success'){
 										$form.get(0).reset();
 										alert("Account information was send to your e-mail. Please check it.");
-										$.mobile.changePage( "#page-sing-in", {transition: "slide"});
+										$.mobile.changePage( "#page-sing-in", {transition: "slide", changeHash: false});
 									}
 							});
 					}
@@ -1536,7 +1536,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			$.mobile.changePage( qbApp.pageComeFrom, {transition: "slide"});
 		}
 		else{
-			$returnBtn.length ? $returnBtn.trigger('click') : $.mobile.changePage( "#page-home", {transition: "slide"});
+			$returnBtn.length ? $returnBtn.trigger('click') : $.mobile.changePage( "#page-home", {transition: "slide", changeHash: false});
 		}
 	}
 
@@ -1798,43 +1798,22 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 						});
 			break;
 			case 'registration-step-3':
-				$('#make-portrait').on('click', function(event) {
+				var $conteiner = $('#'+activePageId);
+				var $form = $conteiner.find('form.registration-form');
+
+				$form.submit(function(event) {
 					event.preventDefault();
-
-					var $conteiner = $('#'+activePageId);
-					var $form = $conteiner.find('form.registration-form');
-
-					$form.submit(function(event) {
-						event.preventDefault();
-					}).validate({
-						errorPlacement: function(){
-							return false;  // suppresses error message text
-						},
-						submitHandler: function(form) {
-							$.mobile.changePage( $form.data('next'), {transition: "slidefade"});
-						}
-					});
-					qbApp.captureType = 'picture';
-					if(/iPhone/i.test(navigator.userAgent)){
-						navigator.accelerometer.getCurrentAcceleration(
-							function(acceleration) {
-								var accelerationX = acceleration.x;
-								if(accelerationX < 8) {
-									showDeviceRotateMessage();
-								}
-								else {
-									qbApp.behaviors.submitHandlerCapturePicture();
-								}
-							},
-							function() {
-								alert('Accelerometer Error! Please reload Application.');
-							}
-						);
-					}
-					else{
-						qbApp.behaviors.submitHandlerCapturePicture();
+				}).validate({
+					errorPlacement: function(){
+						return false;  // suppresses error message text
+					},
+					submitHandler: function(form) {
+						$.mobile.changePage( $form.data('next'), {transition: "slidefade"});
 					}
 				});
+
+				qbApp.behaviors.captureProfilePhoto( $conteiner.find( '#create-avatar-popup-popup' ) );
+
 			break;
 			/*Finish registration. Collect data from all step registration form*/
 			case 'registration-step-4':
@@ -1902,6 +1881,48 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					})
 			break;
 		}
+	}
+
+	qbApp.behaviors.captureProfilePhoto = function($popup) {
+		$popup.find( 'a.photo' ).on( 'click', function( event ) {
+			event.preventDefault();
+			qbApp.captureType = 'picture';
+			if(/iPhone/i.test(navigator.userAgent)){
+				navigator.accelerometer.getCurrentAcceleration(
+					function(acceleration) {
+						var accelerationX = acceleration.x;
+						if(accelerationX < 8) {
+							showDeviceRotateMessage();
+						}
+						else {
+							qbApp.behaviors.submitHandlerCapturePicture();
+						}
+					},
+					function() {
+						alert('Accelerometer Error! Please reload Application.');
+					}
+				);
+			}
+			else{
+				qbApp.behaviors.submitHandlerCapturePicture();
+			}
+		});
+		$popup.find( 'a.librarie' ).on( 'click', function( event ) {
+			event.preventDefault();
+			var options = {
+				quality: 50,
+				targetWidth: 300,
+				targetHeight: 300,
+				allowEdit: true,
+				saveToPhotoAlbum: false,
+				limit: 1,
+				destinationType: navigator.camera.DestinationType.FILE_URI,
+				sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+			};
+			navigator.camera.getPicture( uploadPhoto, function(err) {
+				_messagePopup(JSON.stringify(err), false);
+			}, options);
+		});
 	}
 
 	qbApp.behaviors.submitHandlerCapturePicture = function() {

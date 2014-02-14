@@ -3,7 +3,7 @@
 		xmlns:gap = "http://phonegap.com/ns/1.0"
 		id        = "com.questionbridge.app"
 		versionCode=""
-		version   = "1.0.1">
+		version   = "2.0.0">
 
 		<name>Question Bridge</name>
 		<description>Question Bridge mobile application</description>
@@ -27,6 +27,7 @@
 		<icon src="icons/ios/icon-114.png" gap:platform="ios" width="114" height="114" />
 		<icon src="icons/ios/icon-120.png" gap:platform="ios" width="120" height="120" />
 		<icon src="icons/ios/icon-144.png" gap:platform="ios" width="144" height="144" />
+		<icon src="icons/ios/icon-152.png" gap:platform="ios" width="152" height="152" />
 		<icon src="icons/ios/icon-156.png" gap:platform="ios" width="156" height="156" />
 		<icon src="icons/android/ldpi.png" gap:platform="android" gap:density="ldpi" />
 		<icon src="icons/android/mdpi.png" gap:platform="android" gap:density="mdpi" />
