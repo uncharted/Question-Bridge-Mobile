@@ -19,7 +19,7 @@
 		<preference name="fullscreen" value="false" />
 		<preference name="show-splash-screen-spinner" value="true" />
 		<preference name="ios-statusbarstyle" value="black-translucent" />
-		<!-- <preference name="KeyboardShrinksView" value="true" /> -->
+		<preference name="KeyboardShrinksView" value="true" />
 
 		<icon src="icons/ios/icon-57.png" gap:platform="ios" width="57" height="57" />
 		<icon src="icons/ios/icon-72.png" gap:platform="ios" width="72" height="72" />

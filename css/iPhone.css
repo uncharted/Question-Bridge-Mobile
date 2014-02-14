@@ -658,6 +658,9 @@ div.content-primary div.question ul.navigation:after{
 		position: absolute;
 		bottom: 0;
 	}
+	.page-registration .registration-form {
+		padding-bottom: 40px;
+	}
 /* 	#registration-step-0 .content .footer {
 	margin-top: 60px;
 }
