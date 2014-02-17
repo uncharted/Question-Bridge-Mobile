@@ -854,7 +854,6 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			}
 
 			resizeQuestionAdditionalWrapper();
-			qbApp.hideLoading($(data.page).find('div.content'));
 		});
 
 		$video.kaltura({serviceUrl: qbApp.settings.kaltura.serviceUrl,
@@ -862,6 +861,12 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			thumbWidth: qbApp.settings.kaltura.bigThumbWidth,
 			protocol:'http',
 			preload: 'auto'
+		});
+
+		$video.on( 'canplay', function() { // Prevent run video before Kaltura source load
+			setTimeout(function() {
+				qbApp.hideLoading($(data.page).find('div.content'));
+			}, 500);
 		});
 
 		var $title = $('<h2>'+question.title+'</h2><span class="submitted">&mdash; '+question.first_name+' ' +question.last_name+ '</span>');
