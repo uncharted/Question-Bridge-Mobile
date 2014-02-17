@@ -8,12 +8,14 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 
 	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
-	qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	//qbApp.settings.serverUrl = 'http://107.21.242.74/';
+	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
+	qbApp.settings.serverUrl = 'http://107.21.242.74/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
-	qbApp.settings.kaltura.cdnUrl = 'http://d2dubxfb4mntd4.cloudfront.net';
+	//qbApp.settings.kaltura.cdnUrl = 'http://d2dubxfb4mntd4.cloudfront.net';	//old cloudfront
+	//qbApp.settings.kaltura.cdnUrl = 'http://d397py36atgh0a.cloudfront.net'; //new cloudfront
+	qbApp.settings.kaltura.cdnUrl = 'http://107.22.246.60'; //kaltura server
 	qbApp.settings.kaltura.thumbWidth = 360;
 	qbApp.settings.kaltura.smallThumbWidth = 160;
 	qbApp.settings.kaltura.bigThumbWidth = 1024;
@@ -76,9 +78,6 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		var applaunchCount = window.localStorage.getItem('launchCount');
 		if(applaunchCount === null){
 				window.localStorage.setItem('launchCount', true);
-/*				setTimeout(function() {
-					$.mobile.changePage('#page-tutorial-1', {transition: "fade"});
-		    }, 600);*/
 				initTutorialPage();
 		}
 		else {
