@@ -770,6 +770,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	function buildQuestion(question, data) {
 		var $content = $(data.page).find('div.content-primary');
 		$content.html('');
+		qbApp.showLoading($(data.page).find('div.content'), 'append', true);
 
 		var $div = $('<div class="question" data-url="' + question.url + '" data-nid="' + question.nid + '"></div>');
 
@@ -853,6 +854,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			}
 
 			resizeQuestionAdditionalWrapper();
+			qbApp.hideLoading($(data.page).find('div.content'));
 		});
 
 		$video.kaltura({serviceUrl: qbApp.settings.kaltura.serviceUrl,
@@ -1246,7 +1248,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		if($container.hasClass('ui-loader')) {
 			$.mobile.loading('hide');
 		}
-		$container.children('.qb-loader').remove();
+		$container.children('.qb-loader, .overlay').remove();
 	}
 
 	function parseUrl( url ) {
@@ -1984,6 +1986,10 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 
 			alert('Image capture was canceled.');
 			qbApp.hideLoading($('body > .ui-loader'));
+		}
+		else {
+			qbApp.hideLoading($('body > div.ui-loader'));
+			$( "#create-avatar-popup" ).popup( "close" );
 		}
 	}
 	function uploadPhoto(imageURI){

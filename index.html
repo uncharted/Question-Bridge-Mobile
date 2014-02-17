@@ -31,12 +31,15 @@
 	<script src="facebook-js-sdk.js"></script>
 
 <script type="text/javascript" charset="utf-8">
-	window.onerror = function(msg, url, line) {
-		var idx = url.lastIndexOf("/");
-		if(idx > -1) {url = url.substring(idx+1);}
-		alert("ERROR in " + url + " (line #" + line + "): " + msg);
-		return false; //suppress Error Alert;
-	};
+	//Evalible error alert for local debuging
+/*	if( qbApp.settings.serverUrl.match(/drupal7.dev/).length ) {
+		window.onerror = function(msg, url, line) {
+			var idx = url.lastIndexOf("/");
+			if(idx > -1) {url = url.substring(idx+1);}
+			alert("ERROR in " + url + " (line #" + line + "): " + msg);
+			return false; //suppress Error Alert;
+		};
+	}*/
 </script>
 </head>
 
@@ -237,8 +240,8 @@
 								</div>
 								<div id="ipad-create-avatar-popup">
 									<ul data-role="listview" data-inset="true" data-theme="a">
-										<li><a href="#" class="photo">Make photo</a></li>
-										<li><a href="#" class="librarie">Load from librarie</a></li>
+										<li><a href="#" class="photo">Capture Photo</a></li>
+										<li><a href="#" class="librarie">From Photo Library</a></li>
 									</ul>
 								</div>
 								<input id="ipad-user-profile-photo-id" type="hidden" name='profile_fid' value='0'>
@@ -585,8 +588,8 @@
 					<a href="#create-avatar-popup" data-rel="popup" data-role="none" data-transition="pop" class="make-portrait" >Make portrait</a>
 					<div data-role="popup" class="create-avatar" id="create-avatar-popup" data-theme="c">
 						<ul data-role="listview" data-inset="true" data-theme="a">
-							<li><a href="#" class="photo">Make photo</a></li>
-							<li><a href="#" class="librarie">Load from librarie</a></li>
+							<li><a href="#" class="photo">Capture Photo</a></li>
+							<li><a href="#" class="librarie">From Photo Library</a></li>
 						</ul>
 					</div>
 					<input id="user-profile-photo-id" type="hidden" name='profile_fid' value='0'>
