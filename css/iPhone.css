@@ -327,7 +327,7 @@ div.content-primary div.question ul.navigation:after{
 	}
 	.page-sing-in form{
 		width: 300px;
-		padding: 0 0 30px 0;
+		padding: 0 0 50px 0;
 		margin: 15px auto 0;
 	}
 	.page-sing-in .content form input.login{
@@ -385,9 +385,11 @@ div.content-primary div.question ul.navigation:after{
 }
 	.page-sing-in .create{
 		font-size: 12px;
-		margin: 50px auto 0;
-		width: 280px;
-		height: 18px;
+		margin: 0;
+		padding: 0;
+		position: absolute;
+		bottom: 0;
+		width: 100%;
 		text-align: center;
 	}
 	.page-sing-in input.log-in{

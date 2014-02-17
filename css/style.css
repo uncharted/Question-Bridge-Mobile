@@ -1414,3 +1414,7 @@ max-width: 400px;
 	color: #ffffff;
 	text-align: center;
 }
+.page-sing-in .forgot,
+.page-sing-in .forgot:hover {
+	text-decoration: none;
+}

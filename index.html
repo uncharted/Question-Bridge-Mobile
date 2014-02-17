@@ -29,6 +29,15 @@
 	<script src="cdv-plugin-fb-connect.js"></script>
 	<!-- facebook js sdk -->
 	<script src="facebook-js-sdk.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+	window.onerror = function(msg, url, line) {
+		var idx = url.lastIndexOf("/");
+		if(idx > -1) {url = url.substring(idx+1);}
+		alert("ERROR in " + url + " (line #" + line + "): " + msg);
+		return false; //suppress Error Alert;
+	};
+</script>
 </head>
 
 <body>
@@ -435,7 +444,7 @@
 				</fieldset>
 			</form>
 
-			<div data-role="footer" class="create" data-position="fixed">
+			<div data-role="footer" class="create">
 				<span>Don't have a profile?</span>
 				<a href="#registration-step-0" data-transition="slide" data-role="none" class="phone-registration">
 				 Create one now.
