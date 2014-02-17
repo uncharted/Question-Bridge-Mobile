@@ -770,7 +770,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	function buildQuestion(question, data) {
 		var $content = $(data.page).find('div.content-primary');
 		$content.html('');
-		qbApp.showLoading($(data.page).find('div.content'), 'append', true);
+		//qbApp.showLoading($(data.page).find('div.content'), 'append', true);
 
 		var $div = $('<div class="question" data-url="' + question.url + '" data-nid="' + question.nid + '"></div>');
 
@@ -863,11 +863,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			preload: 'auto'
 		});
 
-		$video.on( 'canplay', function() { // Prevent run video before Kaltura source load
-			setTimeout(function() {
-				qbApp.hideLoading($(data.page).find('div.content'));
-			}, 500);
-		});
+/*		$video.on( 'canplay', function() { // Prevent run video before Kaltura source load
+			qbApp.hideLoading($(data.page).find('div.content'));
+		});*/
 
 		var $title = $('<h2>'+question.title+'</h2><span class="submitted">&mdash; '+question.first_name+' ' +question.last_name+ '</span>');
 		var $respond = $('<a href="#" class="video-respond"><span>Respond</span></a>');
