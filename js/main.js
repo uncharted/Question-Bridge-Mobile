@@ -197,7 +197,6 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 								if(order == 'favourites') {
 									initQuestionsList('#page-home', {order:'favourites'}, 'replace');
 								}
-
 							})
 			}
 		}
@@ -401,6 +400,12 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 					return false;
 				}
 			}*/
+			if ( /favourites/.test(href) ) {
+				var loginCheck = checkAuthentication();
+				if(loginCheck !== true) {
+					event.preventDefault();
+				}
+			}
 			if($listviewContainer.get(0) && data.query.order !== undefined) {
 				$(data.page).find('div.search-container').hide();
 				initQuestionsList(data.page, data.query, 'replace');
@@ -556,10 +561,12 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 					if(order == 'local') {
 						$noResultsStr = $('<p>It looks like no questions have been asked in your area. Are you ready to get the conversation started?</p>');
 						var $respond = $('<a href="#" class="video-respond-repeatable"><span>Ask a Question</span></a>');
-						$respond.on('click', function(event){
-							event.preventDefault();
-							prosessAnswer();
-						});
+						setTimeout(function() {
+							$respond.on('click', function(event){
+								event.preventDefault();
+								$.mobile.changePage( '#page-ask-question-step-1', {transition: "slidefade"});
+							});
+						}, 600);
 						$noResults.append($respond);
 					}
 					$noResults.prepend($noResultsStr);
@@ -1311,7 +1318,7 @@ $(document).on("pagebeforechange", function(e, data) {
 	//Sing in required for following links
 	if(data.toPage.length) {
 		var requestPageUrl = data.toPage;
-		if(/order=favourites|page-ask-question-step-1/i.test(requestPageUrl)) {
+		if(/page-ask-question-step-1/i.test(requestPageUrl)) {
 			var loginCheck = checkAuthentication();
 			if(loginCheck !== true) {
 				e.preventDefault();

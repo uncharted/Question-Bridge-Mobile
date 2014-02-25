@@ -1303,7 +1303,9 @@ span.play-pause {
 	margin-top: -18px;
 	cursor: pointer;
 }
-
+.not-black-male .video-respond-repeatable {
+	display: none;
+}
 .video-respond-repeatable{
 	background: url('../images/btn-respond-repeatable.png');
 	background-size: cover;

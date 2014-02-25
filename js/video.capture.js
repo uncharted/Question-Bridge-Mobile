@@ -231,7 +231,7 @@ function checkAuthentication(){
 			//$('#'+activePageId).find('div#ipad-login').popup('open');
 		}
 		else{
-			$.mobile.changePage( "#page-sing-in", {transition: "slide", changeHash: false});
+			$.mobile.changePage( "#page-sing-in", {transition: "slide", changeHash: false, reverse: true});
 		}
 	}
 	else{
