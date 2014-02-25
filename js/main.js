@@ -600,14 +600,16 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 				$li.append($title);
 
 				//init Question
-				$li.on(qbApp.clickEvent, function(event) {
-					event.preventDefault();
-					var url = $(this).data('url');
-					var data = parseUrl(url);
-					if(data.query.nid && data.page) {
-						initQuestion(question, data);
-					}
-				});
+				setTimeout(function(){
+					$li.on(qbApp.clickEvent, function(event) {
+						event.preventDefault();
+						var url = $(this).data('url');
+						var data = parseUrl(url);
+						if(data.query.nid && data.page) {
+							initQuestion(question, data);
+						}
+					});
+				}, 600);
 
 				if(insertMethod == 'prepend') {
 					$listviewContainer.prepend($li);
