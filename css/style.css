@@ -411,26 +411,13 @@ ul.search-results > li.question .submitted {
 .page-terms-conditions .content-primary {
 	padding: 20px;
 	font: 18px/22px 'Gotham Light',Arial,sans-serif;
-	color: white;
+	color: #FFFFFF;
 	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 .page-terms-conditions h2,
 .page-terms-conditions h3 {
 	text-align: center;
 }
-.page-terms-conditions P { margin-bottom: 0.08in; direction: ltr; color: white !important; line-height: 115%; widows: 2; orphans: 2 }
-.page-terms-conditions P.western { font-family: "Calibri"; font-size: 11pt; so-language: en-US }
-.page-terms-conditions P.cjk { font-family: "Calibri"; font-size: 11pt }
-.page-terms-conditions P.ctl { font-family: "Times New Roman", serif; font-size: 11pt; so-language: ar-SA }
-.page-terms-conditions H2 { margin-top: 0.19in; margin-bottom: 0.19in; direction: ltr; line-height: 100%; widows: 2; orphans: 2; page-break-after: auto }
-.page-terms-conditions H2.western { so-language: en-US }
-.page-terms-conditions H2.cjk { font-family: "Times New Roman", serif }
-.page-terms-conditions H2.ctl { font-family: "Times New Roman", serif; so-language: ar-SA }
-.page-terms-conditions H3 { margin-top: 0.19in; margin-bottom: 0.19in; direction: ltr; line-height: 100%; widows: 2; orphans: 2; page-break-after: auto }
-.page-terms-conditions H3.western { font-size: 13pt; so-language: en-US }
-.page-terms-conditions H3.cjk { font-family: "Times New Roman", serif; font-size: 13pt }
-.page-terms-conditions H3.ctl { font-family: "Times New Roman", serif; font-size: 13pt; so-language: ar-SA }
-.page-terms-conditions A:link { color: #0000ff }
 /*About Page*/
 .page-about .content-primary a,
 .page-about .content-primary a:visited {
