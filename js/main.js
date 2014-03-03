@@ -2008,6 +2008,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 
 		options.params = qbApp.capture;
 		$( '#ipad-create-avatar-popup' ).hide();
+		$( "#create-avatar-popup" ).popup( "close" );
 
 		var ft = new FileTransfer();
 		ft.upload(imageURI, encodeURI(qbApp.settings.restUrl + 'user/pre-pregistration?&user-photo='+imageURI), uploadPhotoSuccessCallback, uploadPhotoFailCallback, options);

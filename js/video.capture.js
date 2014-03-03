@@ -92,7 +92,6 @@ function videoRecordReturnBack(){
 }
 
 function initAsqQuestion(){
-	$( '#page-ask-question-step-1' ).find( '.content' ).css('visibility', 'visible').show();
 	$( '#page-ask-question-step-1' ).find("form.new-question-form-1").on('submit', function(event) {
 		event.preventDefault();
 	}).validate({
@@ -147,6 +146,7 @@ function askQuestionAftercapture(mediaFiles){
 	$questionSubmitBtn.css( 'visibility' , 'visible' );
 
 	$.mobile.changePage('#page-ask-question-step-2', {transition: "fade", changeHash: false});
+	$( '#page-ask-question-step-1' ).find( '.content' ).show();
 
 	qbApp.capture.url  = qbApp.settings.serverUrl + 'qb/rest/video/video-upload';
 	qbApp.capture.uid  = qbApp.cookie.user.uid;
