@@ -146,7 +146,9 @@ function askQuestionAftercapture(mediaFiles){
 	$questionSubmitBtn.css( 'visibility' , 'visible' );
 
 	$.mobile.changePage('#page-ask-question-step-2', {transition: "fade", changeHash: false});
-	$( '#page-ask-question-step-1' ).find( '.content' ).show();
+	setTimeout(function() {
+		$( '#page-ask-question-step-1' ).find( '.content' ).show();
+	}, 1000);
 
 	qbApp.capture.url  = qbApp.settings.serverUrl + 'qb/rest/video/video-upload';
 	qbApp.capture.uid  = qbApp.cookie.user.uid;
