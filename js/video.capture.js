@@ -135,7 +135,7 @@ function initAsqQuestion(){
 
 function submitHandlerCaptureVideo() {
 	/*qbApp.captureType = null;*/
-	//$( '#page-ask-question-step-1' ).find( '.content' ).css('visibility', 'hidden');
+	$( '#page-ask-question-step-1' ).find( '.content' ).fadeOut();
 	captureVideo('question');
 }
 
@@ -146,7 +146,8 @@ function askQuestionAftercapture(mediaFiles){
 	$questionSubmitPage.find( 'div.progress-loader' ).show();
 	$questionSubmitBtn.css( 'visibility' , 'visible' );
 
-	$.mobile.changePage('#page-ask-question-step-2', {transition: "slide", changeHash: false});
+	$.mobile.changePage('#page-ask-question-step-2', {transition: "fade", changeHash: false});
+	$( '#page-ask-question-step-1' ).find( '.content' ).fadeIn();
 
 	qbApp.capture.url  = qbApp.settings.serverUrl + 'qb/rest/video/video-upload';
 	qbApp.capture.uid  = qbApp.cookie.user.uid;
@@ -255,9 +256,10 @@ function captureSuccess(mediaFiles) {
 }
 
 function captureError(error) {
-	alert(1)
-/*	var activePageId = $.mobile.activePage.attr( "id" );
-	$( '#' + activePageId ).find( '.content, .content-primary' ).css('visibility', 'visible');*/
+	var activePageId = $.mobile.activePage.attr( "id" );
+	if ( activePageId == 'page-ask-question-step-1' ) {
+		$( '#page-ask-question-step-1' ).find( '.content' ).fadeIn();
+	}
 }
 
 function captureVideo(type) {

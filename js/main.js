@@ -1973,9 +1973,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
 			};
 			qbApp.captureType = 'picture';
-			navigator.camera.getPicture( uploadPhoto, function(err) {
-				qbApp.hideLoading($('body > .ui-loader'));
-			}, options);
+			navigator.camera.getPicture( uploadPhoto, getPictureFail, options);
 		});
 	}
 
