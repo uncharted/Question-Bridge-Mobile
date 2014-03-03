@@ -255,8 +255,9 @@ function captureSuccess(mediaFiles) {
 }
 
 function captureError(error) {
-		var activePageId = $.mobile.activePage.attr( "id" );
-	$( '#' + activePageId ).find( '.content, .content-primary' ).css('visibility', 'visible');
+	alert(1)
+/*	var activePageId = $.mobile.activePage.attr( "id" );
+	$( '#' + activePageId ).find( '.content, .content-primary' ).css('visibility', 'visible');*/
 }
 
 function captureVideo(type) {

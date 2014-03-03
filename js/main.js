@@ -6,8 +6,8 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.buttonMarkup.hoverDelay = 25;
 
 
-	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
-	qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
+	qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
+	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
 	//qbApp.settings.serverUrl = 'http://107.21.242.74/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
@@ -2009,6 +2009,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		options.mimeType = "image/jpg";
 
 		options.params = qbApp.capture;
+		$( '#ipad-create-avatar-popup' ).hide();
 
 		var ft = new FileTransfer();
 		ft.upload(imageURI, encodeURI(qbApp.settings.restUrl + 'user/pre-pregistration?&user-photo='+imageURI), uploadPhotoSuccessCallback, uploadPhotoFailCallback, options);
