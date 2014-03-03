@@ -7,8 +7,8 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 
 	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
-	qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	//qbApp.settings.serverUrl = 'http://107.21.242.74/';
+	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
+	qbApp.settings.serverUrl = 'http://107.21.242.74/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
