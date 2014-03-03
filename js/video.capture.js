@@ -235,7 +235,8 @@ function checkAuthentication(){
 }
 
 function captureSuccess(mediaFiles) {
-	var i, len;
+	var i, len,
+			activePageId = $.mobile.activePage.attr( "id" );
 	for (i = 0, len = mediaFiles.length; i < len; i += 1) {
 		var mediaFile = mediaFiles[i];
 		//qbApp.capture.mediaFile = mediaFile;
