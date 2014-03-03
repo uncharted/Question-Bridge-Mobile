@@ -213,14 +213,7 @@ function prosessAnswer(){
 
 function prosessAnswerCaptureVideo() {
 	var activePageId = $.mobile.activePage.attr( "id" );
-	qbApp.capture.nid = $('#'+activePageId).find('div.question').data('nid');
-	qbApp.capture.uid = qbApp.cookie.user.uid;
-	qbApp.capture.url = qbApp.settings.serverUrl + 'qb/rest/video/answer';
-	qbApp.returnPageId = '#'+activePageId;
-	qbApp.captureType = null;
-	$.mobile.changePage('#take-me-back', {transition: "fade", changeHash: false});
-	$( '#take-me-back' ).find( '.answer-uploading' ).show().siblings( '.after-upload' ).hide();
-	//$('#'+activePageId).find('div.content-primary').css('visibility', 'hidden');
+	$('#'+activePageId).find( '.content' ).hide();
 	captureVideo('answer');
 }
 
@@ -247,6 +240,13 @@ function captureSuccess(mediaFiles) {
 		var mediaFile = mediaFiles[i];
 		//qbApp.capture.mediaFile = mediaFile;
 		if( qbApp.capture.type == 'answer' ) {
+			qbApp.capture.nid = $('#'+activePageId).find('div.question').data('nid');
+			qbApp.capture.uid = qbApp.cookie.user.uid;
+			qbApp.capture.url = qbApp.settings.serverUrl + 'qb/rest/video/answer';
+			qbApp.returnPageId = '#'+activePageId;
+			qbApp.captureType = null;
+			$.mobile.changePage('#take-me-back', {transition: "fade", changeHash: false});
+			$( '#take-me-back' ).find( '.answer-uploading' ).show().siblings( '.after-upload' ).hide();
 			uploadFile(mediaFiles[i])
 		}
 		else {
@@ -260,6 +260,8 @@ function captureError(error) {
 	var activePageId = $.mobile.activePage.attr( "id" );
 	if ( activePageId == 'page-ask-question-step-1' ) {
 		$( '#page-ask-question-step-1' ).find( '.content' ).fadeIn();
+	} else {
+		$('#'+activePageId).find( '.content' ).fadeIn();
 	}
 }
 
