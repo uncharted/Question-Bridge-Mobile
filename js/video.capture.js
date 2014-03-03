@@ -247,8 +247,11 @@ function captureSuccess(mediaFiles) {
 			qbApp.returnPageId = '#'+activePageId;
 			qbApp.captureType = null;
 			$.mobile.changePage('#take-me-back', {transition: "fade", changeHash: false});
+			setTimeout(function() {
+				$('#'+activePageId).find( '.content' ).show();
+			}, 1000);
 			$( '#take-me-back' ).find( '.answer-uploading' ).show().siblings( '.after-upload' ).hide();
-			uploadFile(mediaFiles[i])
+			uploadFile(mediaFiles[i]);
 		}
 		else {
 			qbApp.showLoading($('body > div.ui-loader'), 'html');
