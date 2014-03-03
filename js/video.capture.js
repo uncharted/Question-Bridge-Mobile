@@ -135,7 +135,7 @@ function initAsqQuestion(){
 
 function submitHandlerCaptureVideo() {
 	/*qbApp.captureType = null;*/
-	$( '#page-ask-question-step-1' ).find( '.content' ).fadeOut();
+	$( '#page-ask-question-step-1' ).find( '.content' ).hide();
 	captureVideo('question');
 }
 
@@ -147,7 +147,6 @@ function askQuestionAftercapture(mediaFiles){
 	$questionSubmitBtn.css( 'visibility' , 'visible' );
 
 	$.mobile.changePage('#page-ask-question-step-2', {transition: "fade", changeHash: false});
-	$( '#page-ask-question-step-1' ).find( '.content' ).fadeIn();
 
 	qbApp.capture.url  = qbApp.settings.serverUrl + 'qb/rest/video/video-upload';
 	qbApp.capture.uid  = qbApp.cookie.user.uid;
