@@ -7,8 +7,8 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 
 	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
-	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	qbApp.settings.serverUrl = 'http://107.21.242.74/';
+	qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
+	//qbApp.settings.serverUrl = 'http://107.21.242.74/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
@@ -418,7 +418,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			$('#'+activePageId).find('#main-menu').panel( "open" );
 		});*/
 
-		$mainMenu.find('a.uncharted-digital-link').click(function() {
+		$mainMenu.find('a.uncharted-digital-link').click(function( event ) {
 			event.preventDefault();
 			var $link = $(this),
 					url = $link.attr('href');
@@ -1322,6 +1322,16 @@ $(document).on("pagebeforechange", function(e, data) {
 			var loginCheck = checkAuthentication();
 			if(loginCheck !== true) {
 				e.preventDefault();
+			}
+		}
+	}
+
+	var $fromPage = data.options.fromPage;
+	if ( $fromPage instanceof jQuery ) {
+		if ( $fromPage.hasClass( 'page-question' ) ) {
+			var $questionVideo = $fromPage.find( '.question video' );
+			if ( $questionVideo.find( 'source' ).length ) {
+				$questionVideo.get( 0 ).pause();
 			}
 		}
 	}

@@ -134,8 +134,8 @@ function initAsqQuestion(){
 
 function submitHandlerCaptureVideo() {
 	/*qbApp.captureType = null;*/
-	$( '#page-ask-question-step-1' ).find( '.content' ).hide();
-	captureVideo('question');
+	$( '#page-ask-question-step-1' ).find( '.content' ).css( 'visibility', 'hidden' );
+	//captureVideo('question');
 }
 
 function askQuestionAftercapture(mediaFiles){
