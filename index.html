@@ -1003,10 +1003,21 @@
 		<div class="header" data-role="header" data-position="fixed" data-tap-toggle="false">
 			<h1 class="logo">Question Bridge</h1>
 			<a href="#main-menu" class="main-menu ui-btn-right" data-icon="bars">Menu</a>
+			<div data-role="popup" id="flagging"  data-dismissible="false" style="max-width:270px;" class="ui-corner-all">
+				<div data-role="content" class="ui-corner-bottom ui-content">
+					<div class="flag flagging-msg">You are about to flag this video as inappropriate <span>Are you sure?</span></div>
+					<div class="unflag flagging-msg">You are about to unflag this video as inappropriate <span>Are you sure?</span></div>
+					<div class="buttons">
+						<a href="#" class="no">No</a>
+						<a href="#" class="yes">Yes</a>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<div data-role="content" class="content">
-			<div class="content-primary"></div>
+			<div class="content-primary">
+			</div>
 		</div>
 	</div>
 
@@ -1114,7 +1125,7 @@
 
 			<div data-role="footer" class="create">
 				<span>Don't have a profile?</span>
-				<a href="#registration-step-0" data-transition="slide" data-role="none" class="phone-registration">
+				<a href="#registration-step-0" data-transition="slidefade" data-role="none" class="phone-registration">
 				 Create one now.
 				</a>
 			</div>

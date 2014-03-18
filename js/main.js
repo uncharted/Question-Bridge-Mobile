@@ -7,8 +7,8 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 
 	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
-	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	qbApp.settings.serverUrl = 'http://107.21.242.74/';
+	qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
+	//qbApp.settings.serverUrl = 'http://107.21.242.74/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
@@ -84,7 +84,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		}
 		//initTutorialPage();
 		setTimeout(function() {
-			navigator.splashscreen.hide();
+			if ( navigator.splashscreen !== undefined ) navigator.splashscreen.hide();
     }, 2000);
 
 		$.ajaxSetup({
@@ -762,9 +762,10 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 				qbApp.showLoading($(data.page).find('div.content-primary > div.question-additional-wrapper'), 'append');
 
-				var uid  = (qbApp.cookie != null) ? qbApp.cookie.user.uid : 0;
+				var uid  = (qbApp.cookie != null) ? qbApp.cookie.user.uid : 0,
+						flagAnonymousSid = window.localStorage.getItem('flagAnonymousSid');
 
-				$.getJSON( qbApp.settings.restUrl + "questions/"+question.nid+"?uid="+uid+"&jsoncallback=?",
+				$.getJSON( qbApp.settings.restUrl + "questions/"+question.nid+"?uid="+uid+"&flagAnonymousSid="+flagAnonymousSid+"&jsoncallback=?",
 					function(response){
 						buildQuestionAdditional(response, data);
 					});
@@ -896,15 +897,25 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 				toggleIsQuestionFavorite(question.nid, 'add');
 			}else{
 				toggleIsQuestionFavorite(question.nid, 'remove');
-				//if(order == favourites )
-				//console.log(order);
 			}
 		});
 
-		var $flag  = $('<li><a href="#" class="nav-flag"><span>Flag</span></a></li>');
-		$flag.on('click', function(event) {
+		var $flag  = $( '<li><a href="#" class="nav-flag"><span>Flag</span></a></li>' );
+		$flag.on( 'click', function( event ) {
 			event.preventDefault();
-			//console.log(qbApp.cookie);
+			var $flag = $( this ).find( 'a.nav-flag' ),
+					flagResult;
+
+			if ( !$flag.hasClass( 'is-flagged' ) ){
+				toggleFlagContent( 'flag', question.nid, 'inappropriate', function( respond ) {
+					if ( respond.success ) $flag.addClass( 'is-flagged' );
+				});
+
+			} else {
+				toggleFlagContent( 'unflag', question.nid, 'inappropriate', function( respond ) {
+					if ( respond.success ) $flag.removeClass( 'is-flagged' );
+				});
+			}
 		});
 
 		var $share = $('<li><a href="#" class="nav-share"><span>Share</span></a></li>');
@@ -940,6 +951,29 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			$questionNavigation.removeClass('video-paying');
 			$playPause.show();
 		});
+	}
+
+	/**
+	 * [toggleFlagContent -> send flag / unflag content request]
+	 * @param  [string] action    ['flag' / 'unflag']
+	 * @param  [int] entry_id     [nid / cid]
+	 * @param  [string] flag_name [flag name ('inappropriate' / 'inappropriate_comment'). Can see in 'flag' table.]
+	 * @return [bool]              [was action success?]
+	 */
+	function toggleFlagContent( action, entry_id, flag_name, callback ) {
+		var uid = ( qbApp.cookie ) ? qbApp.cookie.user.uid : 0,
+				data = 'action=' + action + '&entity-id=' + entry_id + '&uid=' + uid + '&flag-name=' + flag_name;
+
+		$.getJSON( qbApp.settings.restUrl + 'video/actions?jsoncallback=?&' + data,
+							function( response ){ //Object {success: true, anonymous_sid: "21"}
+								if ( response.success === true ) {
+									if ( uid == 0 && response.anonymous_sid !== undefined ) {
+										window.localStorage.setItem('flagAnonymousSid', response.anonymous_sid);
+									}
+								}
+
+								if ( callback ) callback( response );
+							});
 	}
 
 	function initSwipeScroll($conteiner){
@@ -985,16 +1019,16 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 	//Create single node page structure
 	function buildQuestionAdditional(response, data) {
+		var $page = $( data.page ),
+				$content = $page.find('div.content-primary');
 
-		var $content = $(data.page).find('div.content-primary');
-
+		$page.removeClass( 'flagging' );
 		//remove loader
 		qbApp.hideLoading($content.find('div.question-additional-wrapper'));
 
 		var question = response.question;
-		if(question.is_favorite){
-			$content.find('a.nav-favorite').addClass('is-favorite');
-		}
+		if( question.is_favorite )	$content.find( 'a.nav-favorite' ).addClass( 'is-favorite' );
+		if( question.is_flagged )	$content.find( 'a.nav-flag' ).addClass( 'is-flagged' );
 
 		if(response.answers.length > 0 || response.themes.length > 0){
 			var $leftInnerShadow = $('<div class="left-inner-shadow"></div>');
@@ -1007,13 +1041,22 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			if(response.answers.length > 0){
 				var $answersWrapper = $('<div class="answers-wrapper"></div>');
 				var $answersTitle = $('<h3>Answers</h3>');
+
+				var $answersFlagWrapper = $('<div class="flag-answer"></div>');
+				var $flagAnswerOverlay = $( '<div class="flag-answer-overlay"></div>' );
+				var $flagAnswer = $( '<a href="#" class="active">Flag an answer as inappropriate</a>' );
+				$answersFlagWrapper.append( $flagAnswerOverlay, $flagAnswer );
+				$flagAnswer.on( 'click', function() {
+					$page.toggleClass( 'flagging' );
+				});
+
 				var $answersContainer = $('<ul class="answers"></ul>');
 				$.each(response.answers, function( key, answer ){
-					var $answer = $('<li class="answer"></li>'),
+					var $answer = $('<li class="answer" data-cid="' + answer.cid + '"></li>'),
 							thumbnailPath = answer.thumbnail + '/width/'+ qbApp.settings.kaltura.smallThumbWidth,
 							$thumb = $('<img src="'+thumbnailPath+'" alt="'+answer.kaltura_id+'" data-partnerId="'+question.partner_id+'" data-entryId="'+answer.kaltura_id+'">'),
 							$video = $('<video class="kaltura" poster="'+thumbnailPath+'" data-partnerId="'+question.partner_id+'" data-entryId="'+answer.kaltura_id+'"></video>');
-
+					if ( answer.is_flagged ) $answer.addClass( 'is-flagged' );
 					//qbApp.showLoading($answer);
 					$answer.append($video);
 
@@ -1066,11 +1109,21 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 								$video.css('visibility', 'hidden');
 							});
 
-							$answer.on('tap', function(event) {
-								$thumb.hide();
-								$video.css('visibility', 'visible');
-								$video.get(0).play();
-								if($('body').hasClass("android"))	$video.get(0).webkitEnterFullscreen();
+							$answer.on( 'tap', function(event) {
+								if ( $page.hasClass( 'flagging' ) ) {
+									var $flaggingPopup = $( '#flagging' );
+									$flaggingPopup.popup( 'open' );
+									if ( $answer.hasClass( 'is-flagged' ) ) $flaggingPopup.addClass( 'unflagging' );
+									$( this ).siblings( 'li' ).addClass( 'inactive' );
+								}
+								else {
+									$thumb.hide();
+									$video.css('visibility', 'visible');
+									$video.get(0).play();
+									if($('body').hasClass("android"))	$video.get(0).webkitEnterFullscreen();
+								}
+
+								return false;
 							});
 						}
 						else {
@@ -1085,7 +1138,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 					$answer.prepend($thumb);
 					$answersContainer.append($answer);
 				});
-				$answersWrapper.append($answersTitle);
+				$answersWrapper.append($answersTitle, $answersFlagWrapper);
 				$answersWrapper.append($answersContainer);
 				$questionInfoWrapper.append($answersWrapper);
 			}
@@ -1451,6 +1504,43 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					var $form = $response.find('form');
 					restorePassword($form);
 					break;
+				case 'flagging':
+					var activePageId   = $.mobile.activePage.attr( "id" ),
+							$activePage = $( '#' + activePageId ),
+				 			$answers = $activePage.find( '.question-additional-wrapper' ).find( '.answer' );
+
+		 			function _closeDialog() {
+		 				$answers.removeClass( 'inactive' );
+						$activePage.removeClass( 'flagging' );
+						$response.popup( "close" );
+						$response.removeClass( 'unflagging' );
+						$response.find( 'a' ).unbind();
+		 			}
+
+					$response.find( '.no' ).on( 'click', function() {
+						_closeDialog();
+					});
+
+					$response.find( '.yes' ).on( 'click', function() {
+						var $flaggedAnswer = $answers.not( '.inactive' ),
+								flaggedCid = $flaggedAnswer.data( 'cid' );
+
+						if ( flaggedCid ) {
+							if ( $flaggedAnswer.hasClass( 'is-flagged' ) ) {
+								toggleFlagContent( 'unflag', flaggedCid, 'inappropriate_comment', function( respond ) {
+									$flaggedAnswer.removeClass( 'is-flagged' );
+									_closeDialog()
+								});
+							}
+							else {
+								toggleFlagContent( 'flag', flaggedCid, 'inappropriate_comment', function( respond ) {
+									$flaggedAnswer.addClass( 'is-flagged' );
+									_closeDialog()
+								});
+							}
+						}
+					});
+					break;
 			}
 		},
 		popupbeforeposition: function( event, ui ) {
@@ -1568,10 +1658,10 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		var activePageId   = $.mobile.activePage.attr( "id" );
 		var $returnBtn = $('#'+activePageId).find('a[data-rel="back"]');
 		if(qbApp.pageComeFrom){
-			$.mobile.changePage( qbApp.pageComeFrom, {transition: "slide"});
+			$.mobile.changePage( qbApp.pageComeFrom, {transition: "slidefade"});
 		}
 		else{
-			$returnBtn.length ? $returnBtn.trigger('click') : $.mobile.changePage( "#page-home", {transition: "slide", changeHash: false});
+			$returnBtn.length ? $returnBtn.trigger('click') : $.mobile.changePage( "#page-home", {transition: "slidefade", changeHash: false});
 		}
 	}
 
@@ -1583,7 +1673,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			//Send URL to destroy drupal user session
 			var uid = qbApp.cookie.user.uid;
 			$.getJSON(qbApp.settings.restUrl + "user/logout?jsoncallback=?&uid="+qbApp.cookie.user.uid, function(response){
-				console.log(response);
 			});
 
 			//Destroy mobile session

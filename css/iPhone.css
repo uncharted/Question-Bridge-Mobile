@@ -562,9 +562,11 @@ div.content-primary div.question ul.navigation:after{
 	.question-additional-wrapper .answers-wrapper h3,
 	.question-additional-wrapper .themes-wrapper h3{
 		font: 12px/20px 'Gotham Light',Arial,sans-serif;
-		margin: 9.5px 0 5.5px 10px;
+		margin: 9.5px 0 5.5px 0;
 		position: relative;
+		text-indent: 10px;
 	}
+
 	.question-additional-wrapper ul.answers{
 		height: 50px;
 	}
