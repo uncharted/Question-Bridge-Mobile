@@ -668,7 +668,6 @@ input.form-submit{
     margin: 0 auto;
     width: 600px;
     height: 70px;
-    display: none;
 }
 .page-sing-in form{
     width: 600px;
@@ -717,7 +716,6 @@ input.form-submit{
 	margin: 0 auto;
 	height: 43px;
 	margin-top: 34px;
-	display: none;
 }
 .page-sing-in {
 	font-size: 18px;

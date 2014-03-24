@@ -33,6 +33,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	qbApp.captureCounter = 0;
 	qbApp.wideWidthHeight = ($(window).width()/16)*9;
 
+	//qbApp.facebookAppID = '1397201370521243'; //Local
+	qbApp.facebookAppID = '315999478539121'; // dev
+
 	if("deviceready" in window) {
 		document.addEventListener("deviceready", function(){
 			initApp();
@@ -54,7 +57,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		initLogoNavigate();
 		initOrientationChange();
 		initLogOut();
-		FB.init({ appId: "315999478539121", nativeInterface: CDV.FB, useCachedDialogs: false });
+		FB.init({ appId: qbApp.facebookAppID, nativeInterface: CDV.FB, useCachedDialogs: false });
 	}
 
 	function initDevice() {
