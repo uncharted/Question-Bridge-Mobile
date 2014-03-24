@@ -895,7 +895,6 @@ body.logged-in li.log-out{
 }
 .question .qiestion-navigation .nav-share span{
 	background-position: -264px 0px;
-	visibility: hidden;
 }
 .portrait .question .qiestion-navigation a.is-favorite span{
 	background: url('../images/ipad/ipad-question-sprite2-active.png') no-repeat;

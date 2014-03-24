@@ -6,8 +6,8 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.buttonMarkup.hoverDelay = 25;
 
 
-	qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
-	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
+	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
+	qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
 	//qbApp.settings.serverUrl = 'http://107.21.242.74/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
@@ -271,7 +271,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	}
 
 	function socialShare(){
-		/*window.plugins.socialsharing.available(function(isAvailable) {
+		window.plugins.socialsharing.available(function(isAvailable) {
 			if (isAvailable) {
 				var activePageId = $.mobile.activePage.attr( "id" );
 				var $activePage = $('#'+activePageId);
@@ -280,7 +280,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 				var thumbUrl =  $activePage.find('img.thumb').attr('src');
 				window.plugins.socialsharing.share(qbApp.settings.serverUrl+urlAlias, questionTheme, thumbUrl);
 			}
-		})*/
+		})
 	}
 
 	function initOrientationChange(){
@@ -388,12 +388,13 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	//init Main Menu links
 	function initMainMenu() {
 		var $mainMenu = $('#main-menu');
-		$('#main-menu a').on(qbApp.clickEvent, function(event) {
+		$mainMenu.find( 'a' ).on(qbApp.clickEvent, function(event) {
+
 			var activePageId = $.mobile.activePage.attr( "id" );
 			var href = $(this).attr('href');
 			var data = parseUrl(href);
-			if(data.page=='#'+activePageId) {
-				$( '#main-menu' ).panel("close");
+			if( data.page == '#'+activePageId ) {
+				$( '#' + activePageId ).find( '#main-menu' ).panel("close");
 			}
 			//alert(href);
 			var $listviewContainer = $(data.page).find('ul.questions[data-role="listview"]');
