@@ -389,7 +389,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	function initMainMenu() {
 		var $mainMenu = $( '#main-menu' );
 
-		alert($mainMenu.find( 'a' ).length)
+		alert( $mainMenu.length )
 		$mainMenu.find( 'a' ).on( qbApp.clickEvent, function(event) {
 			alert(1);
 			var activePageId = $.mobile.activePage.attr( "id" );
