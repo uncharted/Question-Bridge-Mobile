@@ -387,51 +387,57 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 	//init Main Menu links
 	function initMainMenu() {
-		var $mainMenu = $( '#main-menu' );
+		var $pages = $('div[data-role="page"]');
+		//var $mainMenu = $pages.find('#main-menu');
+		$pages.each(function(index,item){
 
-		alert( $mainMenu.length )
-		$mainMenu.find( 'a' ).on( qbApp.clickEvent, function(event) {
-			alert(1);
-			var activePageId = $.mobile.activePage.attr( "id" );
-			var href = $(this).attr('href');
-			var data = parseUrl(href);
-			if( data.page == '#'+activePageId ) {
-				$( '#' + activePageId ).find( '#main-menu' ).panel("close");
-			}
-			//alert(href);
-			var $listviewContainer = $(data.page).find('ul.questions[data-role="listview"]');
-/*			if(data.page == '#page-ask-question' || data.query.order == 'favourites') {
-				if(qbApp.cookie === null){
-					checkAuthentication();
-					return false;
+			var $mainMenu = $(item).find('#main-menu');
+
+			$mainMenu.find( 'a' ).on( qbApp.clickEvent, function(event) {
+				alert(1);
+				var activePageId = $.mobile.activePage.attr( "id" );
+				var href = $(this).attr('href');
+				var data = parseUrl(href);
+				if( data.page == '#'+activePageId ) {
+					$( '#' + activePageId ).find( '#main-menu' ).panel("close");
 				}
-			}*/
-			if ( /favourites/.test(href) ) {
-				var loginCheck = checkAuthentication();
-				if(loginCheck !== true) {
-					event.preventDefault();
+				//alert(href);
+				var $listviewContainer = $(data.page).find('ul.questions[data-role="listview"]');
+	/*			if(data.page == '#page-ask-question' || data.query.order == 'favourites') {
+					if(qbApp.cookie === null){
+						checkAuthentication();
+						return false;
+					}
+				}*/
+				if ( /favourites/.test(href) ) {
+					var loginCheck = checkAuthentication();
+					if(loginCheck !== true) {
+						event.preventDefault();
+					}
 				}
-			}
-			if($listviewContainer.get(0) && data.query.order !== undefined) {
-				$(data.page).find('div.search-container').hide();
-				initQuestionsList(data.page, data.query, 'replace');
-			}
+				if($listviewContainer.get(0) && data.query.order !== undefined) {
+					$(data.page).find('div.search-container').hide();
+					initQuestionsList(data.page, data.query, 'replace');
+				}
+			});
+
+			/*$('a.main-menu').on('click tap', function(event) {
+				event.preventDefault();
+				var activePageId = $.mobile.activePage.attr( "id" );
+				$('#'+activePageId).find('#main-menu').panel( "open" );
+			});*/
+
+			$mainMenu.find('a.uncharted-digital-link').click(function( event ) {
+				event.preventDefault();
+				var $link = $(this),
+						url = $link.attr('href');
+	      if (url.indexOf('http://') !== -1) {
+	          window.open(url, '_system');
+	      }
+			});
+
 		});
 
-		/*$('a.main-menu').on('click tap', function(event) {
-			event.preventDefault();
-			var activePageId = $.mobile.activePage.attr( "id" );
-			$('#'+activePageId).find('#main-menu').panel( "open" );
-		});*/
-
-		$mainMenu.find('a.uncharted-digital-link').click(function( event ) {
-			event.preventDefault();
-			var $link = $(this),
-					url = $link.attr('href');
-      if (url.indexOf('http://') !== -1) {
-          window.open(url, '_system');
-      }
-		});
 	}
 
 	function setMainMenuHeight() {
