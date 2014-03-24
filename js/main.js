@@ -388,13 +388,12 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	//init Main Menu links
 	function initMainMenu() {
 		var $pages = $('div[data-role="page"]');
-		//var $mainMenu = $pages.find('#main-menu');
+		//var $mainMenu = $('#main-menu');
 		$pages.each(function(index,item){
 
 			var $mainMenu = $(item).find('#main-menu');
 
 			$mainMenu.find( 'a' ).on( qbApp.clickEvent, function(event) {
-				alert(1);
 				var activePageId = $.mobile.activePage.attr( "id" );
 				var href = $(this).attr('href');
 				var data = parseUrl(href);
