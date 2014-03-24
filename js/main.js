@@ -54,6 +54,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		setTimeout( function() { initGeolocation();}, 2200);
 		initCheckAuth();
 		initMainMenu();
+		alert(3)
 		initLogoNavigate();
 		initOrientationChange();
 		initLogOut();
@@ -911,15 +912,24 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			var $flag = $( this ).find( 'a.nav-flag' ),
 					flagResult;
 
-			if ( !$flag.hasClass( 'is-flagged' ) ){
-				toggleFlagContent( 'flag', question.nid, 'inappropriate', function( respond ) {
-					if ( respond.success ) $flag.addClass( 'is-flagged' );
-				});
+			if ( ! $flag.hasClass( 'in-progress' ) ) {
+				qbApp.showLoading( $flag );
+				$flag.addClass( 'in-progress' );
 
-			} else {
-				toggleFlagContent( 'unflag', question.nid, 'inappropriate', function( respond ) {
-					if ( respond.success ) $flag.removeClass( 'is-flagged' );
-				});
+				if ( !$flag.hasClass( 'is-flagged' ) ){
+					toggleFlagContent( 'flag', question.nid, 'inappropriate', function( respond ) {
+						if ( respond.success ) $flag.addClass( 'is-flagged' );
+						qbApp.hideLoading( $flag );
+						$flag.removeClass( 'in-progress' );
+					});
+
+				} else {
+					toggleFlagContent( 'unflag', question.nid, 'inappropriate', function( respond ) {
+						if ( respond.success ) $flag.removeClass( 'is-flagged' );
+						qbApp.hideLoading( $flag );
+						$flag.removeClass( 'in-progress' );
+					});
+				}
 			}
 		});
 
@@ -967,14 +977,10 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	 */
 	function toggleFlagContent( action, entry_id, flag_name, callback ) {
 		var uid = ( qbApp.cookie ) ? qbApp.cookie.user.uid : 0,
-				activePageId   = $.mobile.activePage.attr( "id" ),
 				data = 'action=' + action + '&entity-id=' + entry_id + '&uid=' + uid + '&flag-name=' + flag_name;
 
-		qbApp.showLoading( '#' + activePageId, true );
 		$.getJSON( qbApp.settings.restUrl + 'video/actions?jsoncallback=?&' + data,
 							function( response ){ //Object {success: true, anonymous_sid: "21"}
-								qbApp.hideLoading( '#' + activePageId );
-
 								if ( response.success === true ) {
 									if ( uid == 0 && response.anonymous_sid !== undefined ) {
 										window.localStorage.setItem('flagAnonymousSid', response.anonymous_sid);

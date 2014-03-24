@@ -855,6 +855,9 @@ body.logged-in li.log-out{
 	margin: 27px auto;
 	display: block;
 }
+.question .qiestion-navigation a.in-progress span {
+	display: none;
+}
 .question .qiestion-navigation a.is-flagged span {
 	background: url('../images/phone/phone-question-sprite-white1-active.png') no-repeat;
 	background-size: cover;
