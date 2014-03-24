@@ -54,7 +54,6 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		setTimeout( function() { initGeolocation();}, 2200);
 		initCheckAuth();
 		initMainMenu();
-		alert(3)
 		initLogoNavigate();
 		initOrientationChange();
 		initLogOut();
@@ -388,14 +387,14 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 	//init Main Menu links
 	function initMainMenu() {
-		var $mainMenu = $('#main-menu');
-		$mainMenu.find( 'a' ).on(qbApp.clickEvent, function(event) {
-			alert(1)
+		var $mainMenu = $( '#main-menu' );
+		alert( $mainMenu.length );
+		alert( qbApp.clickEvent );
+		$mainMenu.find( 'a' ).on( qbApp.clickEvent, function(event) {
 			var activePageId = $.mobile.activePage.attr( "id" );
 			var href = $(this).attr('href');
 			var data = parseUrl(href);
 			if( data.page == '#'+activePageId ) {
-				alert(2)
 				$( '#' + activePageId ).find( '#main-menu' ).panel("close");
 			}
 			//alert(href);
