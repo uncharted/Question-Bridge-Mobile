@@ -389,11 +389,12 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	function initMainMenu() {
 		var $mainMenu = $('#main-menu');
 		$mainMenu.find( 'a' ).on(qbApp.clickEvent, function(event) {
-
+			alert(1)
 			var activePageId = $.mobile.activePage.attr( "id" );
 			var href = $(this).attr('href');
 			var data = parseUrl(href);
 			if( data.page == '#'+activePageId ) {
+				alert(2)
 				$( '#' + activePageId ).find( '#main-menu' ).panel("close");
 			}
 			//alert(href);
@@ -966,10 +967,14 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	 */
 	function toggleFlagContent( action, entry_id, flag_name, callback ) {
 		var uid = ( qbApp.cookie ) ? qbApp.cookie.user.uid : 0,
+				activePageId   = $.mobile.activePage.attr( "id" ),
 				data = 'action=' + action + '&entity-id=' + entry_id + '&uid=' + uid + '&flag-name=' + flag_name;
 
+		qbApp.showLoading( '#' + activePageId, true );
 		$.getJSON( qbApp.settings.restUrl + 'video/actions?jsoncallback=?&' + data,
 							function( response ){ //Object {success: true, anonymous_sid: "21"}
+								qbApp.hideLoading( '#' + activePageId );
+
 								if ( response.success === true ) {
 									if ( uid == 0 && response.anonymous_sid !== undefined ) {
 										window.localStorage.setItem('flagAnonymousSid', response.anonymous_sid);
