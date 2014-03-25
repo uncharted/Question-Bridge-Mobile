@@ -531,6 +531,11 @@ ul.search-results > li.question .submitted {
 	margin: 10px 0 20px;
 	width: 100%;
 }
+.page-ask-question .content-hidden {
+	/*visibility: hidden !important;
+	display: none !important;*/
+	opacity: 0.01;
+}
 .no-results {
 	text-align: center;
 	color: white;

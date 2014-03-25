@@ -271,7 +271,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	}
 
 	function socialShare(){
-/*		window.plugins.socialsharing.available(function(isAvailable) {
+		window.plugins.socialsharing.available(function(isAvailable) {
 			if (isAvailable) {
 				var activePageId = $.mobile.activePage.attr( "id" );
 				var $activePage = $('#'+activePageId);
@@ -280,7 +280,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 				var thumbUrl =  $activePage.find('img.thumb').attr('src');
 				window.plugins.socialsharing.share(qbApp.settings.serverUrl+urlAlias, questionTheme, thumbUrl);
 			}
-		})*/
+		})
 	}
 
 	function initOrientationChange(){
