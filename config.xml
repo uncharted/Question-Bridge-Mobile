@@ -43,7 +43,7 @@
 
 		<access origin="*" />
 
-		<gap:plugin name="nl.x-services.plugins.socialsharing" />
+		<!-- <gap:plugin name="nl.x-services.plugins.socialsharing" /> -->
 		<!-- <gap:plugin name="nl.x-services.plugins.ipadlandscapeenabler" /> -->
 		<preference name="orienation" value="portrait" />
 

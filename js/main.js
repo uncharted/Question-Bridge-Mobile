@@ -8,7 +8,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	qbApp.settings.serverUrl = 'http://107.21.242.74/';
+	qbApp.settings.serverUrl = 'http://beta.questionbridge.com/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
@@ -271,7 +271,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	}
 
 	function socialShare(){
-		window.plugins.socialsharing.available(function(isAvailable) {
+/*		window.plugins.socialsharing.available(function(isAvailable) {
 			if (isAvailable) {
 				var activePageId = $.mobile.activePage.attr( "id" );
 				var $activePage = $('#'+activePageId);
@@ -280,7 +280,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 				var thumbUrl =  $activePage.find('img.thumb').attr('src');
 				window.plugins.socialsharing.share(qbApp.settings.serverUrl+urlAlias, questionTheme, thumbUrl);
 			}
-		})
+		})*/
 	}
 
 	function initOrientationChange(){
