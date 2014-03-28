@@ -36,7 +36,7 @@
 	    float: left;
 	    text-align: center;
 	    width: 100%;
-	    display: none;
+
 }
 	#ipad-login form{
 	    float: left;
@@ -88,7 +88,7 @@
 		width: 100%;
 		text-align: center;
 		margin-top: 20px;
-		display: none;
+
 }
 	#ipad-login .forgot{
 		font: 12px/18px 'Gotham Light';
