@@ -1427,8 +1427,8 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				console.log('getLoginStatus:' + response);
 				FB.login(
 					function(response) {
-						console.log(response);
-						FB.api('/me', function('login:' + response) {
+						console.log('login:' + response);
+						FB.api('/me', function(response) {
 							var me = {};
 							me.name       = response.name;
 							me.username   = response.username;
