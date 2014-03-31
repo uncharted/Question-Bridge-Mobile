@@ -1422,13 +1422,13 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		$(evt.target).find('a.facebook').on('click', function(event){
 			event.preventDefault();
 			qbApp.showLoading($('body > div.ui-loader'), 'html', true);
-			console.log(FB);
 			FB.init({ appId: "1397201370521243", nativeInterface: CDV.FB, useCachedDialogs: false });
-			console.log(FB);
 			FB.getLoginStatus(function(response){
+				console.log('getLoginStatus:' + response);
 				FB.login(
 					function(response) {
-						FB.api('/me', function(response) {
+						console.log(response);
+						FB.api('/me', function('login:' + response) {
 							var me = {};
 							me.name       = response.name;
 							me.username   = response.username;
