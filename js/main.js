@@ -1422,7 +1422,9 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		$(evt.target).find('a.facebook').on('click', function(event){
 			event.preventDefault();
 			qbApp.showLoading($('body > div.ui-loader'), 'html', true);
+			console.log(FB);
 			FB.init({ appId: "1397201370521243", nativeInterface: CDV.FB, useCachedDialogs: false });
+			console.log(FB);
 			FB.getLoginStatus(function(response){
 				FB.login(
 					function(response) {
@@ -1435,8 +1437,11 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 							me.last_name  = response.last_name;
 							me.link       = response.link;
 
+							console.log(me);
+
 							$.getJSON(qbApp.settings.restUrl + "social/facebook?jsoncallback=?&facebook-data=" + JSON.stringify(me),
 								function(response){
+									console.log(response);
 									if(response.status == 'success'){
 										finalizeUserLogin(response);
 									}
