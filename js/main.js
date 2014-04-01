@@ -57,7 +57,15 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		initLogoNavigate();
 		initOrientationChange();
 		initLogOut();
-		//FB.init({ appId: qbApp.facebookAppID, nativeInterface: CDV.FB, useCachedDialogs: false });
+		FB.init({
+			appId: qbApp.facebookAppID,
+			status: true, // check login status
+			cookie: true, // enable cookies to allow the server to access the session
+			xfbml: false,  // parse XFBML
+			oauth : true ,// enable OAuth 2.0
+			nativeInterface: CDV.FB,
+			useCachedDialogs: false
+		});
 	}
 
 	function initDevice() {
@@ -1422,8 +1430,17 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		$(evt.target).find('a.facebook').on('click', function(event){
 			event.preventDefault();
 			qbApp.showLoading($('body > div.ui-loader'), 'html', true);
-			//FB.init({ appId: "1397201370521243", nativeInterface: CDV.FB, useCachedDialogs: false });
+			FB.init({
+				appId: qbApp.facebookAppID,
+				status: true, // check login status
+				cookie: true, // enable cookies to allow the server to access the session
+				xfbml: false,  // parse XFBML
+				oauth : true ,// enable OAuth 2.0
+				nativeInterface: CDV.FB,
+				useCachedDialogs: false
+			});
 			FB.getLoginStatus(function(response){
+				console.log(response);
 				FB.login(
 					function(response) {
 						FB.api('/me', function(response) {
@@ -1437,6 +1454,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 
 							$.getJSON(qbApp.settings.restUrl + "social/facebook?jsoncallback=?&facebook-data=" + JSON.stringify(me),
 								function(response){
+
 									if(response.status == 'success'){
 										finalizeUserLogin(response);
 									}
