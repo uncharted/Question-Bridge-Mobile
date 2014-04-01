@@ -7,8 +7,8 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 
 	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
-	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	qbApp.settings.serverUrl = 'http://beta.questionbridge.com/';
+	qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
+	//qbApp.settings.serverUrl = 'http://beta.questionbridge.com/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
@@ -1392,6 +1392,12 @@ $(document).on("pagebeforechange", function(e, data) {
 				e.preventDefault();
 			}
 		}
+		if( /page-sing-in/i.test( requestPageUrl ) ) {
+			if ( $( 'body' ).hasClass( 'logged-in' ) ) {
+				e.preventDefault();
+				$.mobile.changePage( "#page-home", {transition: "slidefade", changeHash: false});
+			}
+		}
 	}
 
 	var $fromPage = data.options.fromPage;
@@ -1420,7 +1426,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		var data = event.data,
 				me = {};
 
-		console.log(data);
 		me.name       = data.name;
 		me.username   = data.username;
 		me.email      = data.email;
