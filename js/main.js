@@ -1417,17 +1417,31 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	});
 
 	function _onLogin( event ){
-	  //alert('status > '+event.status); // 1 - success, 0 - error
-	  console.log(event.data);
-/*	  alert('data > '+event.data); //Object response (id, name, email, etc);
-	  alert('token > '+event.token); // token user login
-	  alert('message > '+event.message);*/
+		var data = event.data,
+				me = {};
+
+		me.name       = data.name;
+		me.username   = data.username;
+		me.email      = data.email;
+		me.first_name = data.first_name;
+		me.last_name  = data.last_name;
+		me.link       = data.link;
+
+		$.getJSON(qbApp.settings.restUrl + "social/facebook?jsoncallback=?&facebook-data=" + JSON.stringify(me),
+			function(response){
+				if(response.status == 'success'){
+					finalizeUserLogin(response);
+				}
+				else{
+					alert('Sorry, login failed. Try again please.');
+				}
+				qbApp.hideLoading($('body > div.ui-loader'), 'html');
+			});
 	}
 
 	//Callback Logout
   function _onLogout( event ){
-    alert('status > '+event.status); // 1 - success, 0 - error
-    alert('message > '+event.message);
+
   }
 
 	$(document).on('pageinit', '#page-sing-in', function(evt, ui) {
@@ -1435,9 +1449,10 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 
 		$(evt.target).find('a.facebook').on('click', function(event){
 			event.preventDefault();
+			qbApp.showLoading($('body > div.ui-loader'), 'html', true);
 
 			var config = {
-	      app_id      : '315999478539121',
+	      app_id      : qbApp.facebookAppID,
 	      secret      : '1bb6e9e4d8b78cc9392fcbf40dc1d2d0',
 	      scope       : 'publish_stream,email',
 	      host        : 'http://beta.questionbridge.com/', //App Domain ( Facebook Developer ).
@@ -1446,42 +1461,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	    };
 
 	    $(document).FaceGap(config);
-
-			//qbApp.showLoading($('body > div.ui-loader'), 'html', true);
-			//FB.init({ appId: "1397201370521243", nativeInterface: CDV.FB, useCachedDialogs: false });
-/*			FB.getLoginStatus(function(response){
-				console.log(response);
-				FB.login(
-					function(response) {
-						console.log('login:' + response);
-						FB.api('/me', function(response) {
-							var me = {};
-							me.name       = response.name;
-							me.username   = response.username;
-							me.email      = response.email;
-							me.first_name = response.first_name;
-							me.last_name  = response.last_name;
-							me.link       = response.link;
-
-							console.log(me);
-
-							$.getJSON(qbApp.settings.restUrl + "social/facebook?jsoncallback=?&facebook-data=" + JSON.stringify(me),
-								function(response){
-									console.log(response);
-									if(response.status == 'success'){
-										finalizeUserLogin(response);
-									}
-									else{
-										alert('Sorry, login failed. Try again please.');
-									}
-									qbApp.hideLoading($('body > div.ui-loader'), 'html');
-								});
-						});
-
-					},
-					{ scope: "email" }
-				);
-			});*/
 		});
 
 		//Reset all registration form
