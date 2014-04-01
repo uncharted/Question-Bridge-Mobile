@@ -117,9 +117,8 @@
                 }
             }
         },logout: function() {
-          console.log(facebook_token);
             if (facebook_token != "") {
-                var url_logout = facebook_graph + "/logout.php?access_token=" + facebook_token + "&confirm=1&next=" + config.host + "/connect/logout_success.html";
+                var url_logout = facebook_graph + "/logout.php?access_token=" + facebook_token + "&confirm=1";
                 ref_logout = window.open(url_logout, "_blank", "location=no");
                 ref_logout.addEventListener("loadstart", function(event) {
                     methods.changeLogout(event.url)
