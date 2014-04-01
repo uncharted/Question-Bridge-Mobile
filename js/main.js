@@ -1694,6 +1694,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		//Log-out
 		$('li.log-out').on('click', function(event) {
 			event.preventDefault();
+			$(document).FaceGap('logout');
 
 			//Send URL to destroy drupal user session
 			var uid = qbApp.cookie.user.uid;
