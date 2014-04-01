@@ -1695,7 +1695,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		//Log-out
 		$('li.log-out').on('click', function(event) {
 			event.preventDefault();
-			$(document).FaceGap('logout');
 
 			//Send URL to destroy drupal user session
 			var uid = qbApp.cookie.user.uid;
@@ -1706,17 +1705,18 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 			$.removeCookie('drupal_sess');
 			qbApp.cookie = null;
 			$('body').removeClass('logged-in not-black-male');
+			location.reload();
 
 			//Some action after user logout
 			//var activePageId = $.mobile.activePage.attr( "id" );
 			//$('#'+activePageId).find('#main-menu').panel( "close" );
-			var activePageId = $.mobile.activePage.attr( "id" );
+/*			var activePageId = $.mobile.activePage.attr( "id" );
 			if(activePageId == 'page-home') {
 				initQuestionsList('#page-home', {order:'latest'}, 'replace');
 				$('#page-home #main-menu' ).panel("close");
 			} else {
 				$.mobile.changePage( "#page-home", {transition: "slide"});
-			}
+			}*/
 		});
 	}
 
