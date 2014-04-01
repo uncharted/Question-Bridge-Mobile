@@ -68,9 +68,6 @@
 		    <param name="APP_ID" value="1397201370521243" />
 		    <param name="APP_NAME" value="Questionbridge" />
 		</gap:plugin>
-		<feature name="org.apache.cordova.facebook.Connect">
-			<param name="ios-package" value="FacebookConnectPlugin" />
-		</feature>
 
 		<!-- <gap:plugin name="org.apache.cordova.media-capture" /> -->
 		<gap:plugin name="nl.x-services.plugins.videocaptureplus" />
