@@ -57,7 +57,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		initLogoNavigate();
 		initOrientationChange();
 		initLogOut();
-		FB.init({ appId: qbApp.facebookAppID, nativeInterface: CDV.FB, useCachedDialogs: false });
+		//FB.init({ appId: qbApp.facebookAppID, nativeInterface: CDV.FB, useCachedDialogs: false });
 	}
 
 	function initDevice() {
@@ -1422,12 +1422,10 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		$(evt.target).find('a.facebook').on('click', function(event){
 			event.preventDefault();
 			qbApp.showLoading($('body > div.ui-loader'), 'html', true);
-			FB.init({ appId: "1397201370521243", nativeInterface: CDV.FB, useCachedDialogs: false });
+			//FB.init({ appId: "1397201370521243", nativeInterface: CDV.FB, useCachedDialogs: false });
 			FB.getLoginStatus(function(response){
-				console.log(response);
 				FB.login(
 					function(response) {
-						console.log('login:' + response);
 						FB.api('/me', function(response) {
 							var me = {};
 							me.name       = response.name;
@@ -1437,11 +1435,8 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 							me.last_name  = response.last_name;
 							me.link       = response.link;
 
-							console.log(me);
-
 							$.getJSON(qbApp.settings.restUrl + "social/facebook?jsoncallback=?&facebook-data=" + JSON.stringify(me),
 								function(response){
-									console.log(response);
 									if(response.status == 'success'){
 										finalizeUserLogin(response);
 									}
