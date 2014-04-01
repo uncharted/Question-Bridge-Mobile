@@ -1509,23 +1509,16 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					initAuthentification(activePageId);
 					$response.find('a.facebook').on('click', function(){
 						qbApp.showLoading($('body > div.ui-loader'), 'html', true);
-						FB.login(
-							function(response) {
-								FB.api('/me', function(response) {
-									$.getJSON(qbApp.settings.restUrl + "social/facebook?jsoncallback=?&facebook-data=" + JSON.stringify(response),
-										function(response){
-											if(response.status == 'success'){
-												qbApp.hideLoading($('body > div.ui-loader'), 'html');
-												finalizeUserLogin(response);
-											}
-											else{
-												alert('Sorry, login failed. Try again please.');
-											}
-										});
-								});
-							},
-							{ scope: "email" }
-						);
+						var config = {
+							app_id      : qbApp.facebookAppID,
+							secret      : '1bb6e9e4d8b78cc9392fcbf40dc1d2d0',
+							scope       : 'publish_stream,email',
+							host        : 'http://beta.questionbridge.com/', //App Domain ( Facebook Developer ).
+							onLogin     : _onLogin,
+							onLogout    : _onLogout
+						};
+
+						$(document).FaceGap(config);
 					});
 					break;
 				case 'ipad-registration':
