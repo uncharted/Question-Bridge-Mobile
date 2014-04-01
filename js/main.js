@@ -1420,6 +1420,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		var data = event.data,
 				me = {};
 
+		console.log(data);
 		me.name       = data.name;
 		me.username   = data.username;
 		me.email      = data.email;
