@@ -1417,7 +1417,8 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	});
 
 	function _onLogin( event ){
-	  alert('status > '+event.status); // 1 - success, 0 - error
+	  //alert('status > '+event.status); // 1 - success, 0 - error
+	  console.log(event.data);
 /*	  alert('data > '+event.data); //Object response (id, name, email, etc);
 	  alert('token > '+event.token); // token user login
 	  alert('message > '+event.message);*/
