@@ -1455,7 +1455,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	      app_id      : qbApp.facebookAppID,
 	      secret      : '1bb6e9e4d8b78cc9392fcbf40dc1d2d0',
 	      scope       : 'publish_stream,email',
-	      host        : '', //App Domain ( Facebook Developer ).
+	      host        : 'http://beta.questionbridge.com/', //App Domain ( Facebook Developer ).
 	      onLogin     : _onLogin,
 	      onLogout    : _onLogout
 	    };

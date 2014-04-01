@@ -24,11 +24,9 @@
     var _result = {status: "",data: "",token: "",message: ""};
     var methods = {init: function(settings) {
             if (settings) {
-              console.log(settings);
                 $.extend(config, settings)
             }
             var authorize_url = facebook_graph + "/oauth/authorize?type=user_agent&client_id=" + config.app_id + "&redirect_uri=" + config.host + "/connect/login_success.html&display=touch&scope=" + config.scope;
-            console.log(authorize_url);
             ref = window.open(authorize_url, "_blank", "location=no");
             ref.addEventListener("loadstart", function(event) {
                 methods.changeLogin(event.url)
@@ -48,6 +46,36 @@
             });
             ref.addEventListener("exit", function(event) {
             })
+        },logout: function() {
+            if (facebook_token != "") {
+                var url_logout = facebook_graph + "/oauth/logout.php?access_token=" + facebook_token + "&confirm=1&next=" + config.host + "/connect/logout_success.html";
+                console.log(url_logout);
+                ref_logout = window.open(url_logout, "_blank", "location=no");
+                ref_logout.addEventListener("loadstart", function(event) {
+                    methods.changeLogout(event.url)
+                });
+                ref_logout.addEventListener("loadstop", function(event) {
+                  methods.parseStop(event.url)
+                });
+                ref_logout.addEventListener("loaderror", function(event) {
+                    ref_logout.close();
+                    if (methods._isFunction(config.onLogin)) {
+                        _result.status = 0;
+                        _result.data = null;
+                        _result.message = event.message;
+                        _result.token = "";
+                        config.onLogin(_result)
+                    }
+                });
+                ref_logout.addEventListener("exit", function(event) {
+                })
+            } else {
+                if (methods._isFunction(config.onLogout)) {
+                    _result.status = 0;
+                    _result.message = "No user in session";
+                    config.onLogout(_result)
+                }
+            }
         },changeLogout: function(_url) {
             var return_url = _url;
             if (return_url == config.host + "/connect/logout_success.html") {
@@ -116,20 +144,6 @@
                     _result.message = "unknown error";
                     _result.token = "";
                     config.onLogin(_result)
-                }
-            }
-        },logout: function() {
-            if (facebook_token != "") {
-                var url_logout = facebook_graph + "/logout.php?access_token=" + facebook_token + "&confirm=1&next=" + config.host + "/connect/logout_success.html";
-                ref_logout = window.open(url_logout, "_blank", "location=no");
-                ref_logout.addEventListener("loadstart", function(event) {
-                    methods.changeLogout(event.url)
-                })
-            } else {
-                if (methods._isFunction(config.onLogout)) {
-                    _result.status = 0;
-                    _result.message = "No user in session";
-                    config.onLogout(_result)
                 }
             }
         },fb_api: function(_config) {
