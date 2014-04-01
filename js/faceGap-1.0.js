@@ -118,11 +118,12 @@
             }
         },logout: function() {
             if (facebook_token != "") {
-                var url_logout = facebook_graph + "/logout.php?access_token=" + facebook_token + "&confirm=1";
-                ref_logout = window.open(url_logout, "_blank", "location=no");
+                var url_logout = facebook_graph + "/logout.php?access_token=" + facebook_token + "&confirm=1&next=" + config.host + "/connect/logout_success.html";
+                console.log(url_logout);
+/*                ref_logout = window.open(url_logout, "_blank", "location=no");
                 ref_logout.addEventListener("loadstart", function(event) {
                     methods.changeLogout(event.url)
-                })
+                })*/
             } else {
                 if (methods._isFunction(config.onLogout)) {
                     _result.status = 0;
