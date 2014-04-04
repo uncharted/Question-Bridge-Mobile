@@ -1438,11 +1438,17 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				if(response.status == 'success'){
 					finalizeUserLogin(response);
 				}
+				else if ( response.new_user == true ) {
+					facebookRegistration( me );
+				}
 				else{
 					alert('Sorry, login failed. Try again please.');
 				}
 				qbApp.hideLoading($('body > div.ui-loader'), 'html');
 			});
+	}
+	function facebookRegistration( me ) {
+		$.mobile.changePage( "#page-sing-in", {transition: "slide", changeHash: false});
 	}
 
 	//Callback Logout
