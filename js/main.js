@@ -1425,7 +1425,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	function _onLogin( event ){
 		var data = event.data,
 				me = {};
-
+		console.log(me);
 		me.name       = data.name;
 		me.username   = data.username;
 		me.email      = data.email;
@@ -1455,20 +1455,19 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	 * @return {[type]}
 	 */
 	qbApp.behaviors.facebookRegistration = function( me ) {
-/*		if ( me == undefined ) {
-			var me = {};
-			me.name       = '';
-			me.username   = 'Shpilman';
-			me.email      = 'Shpilman@ukr.net';
-			me.first_name = 'Nick';
-			me.last_name  = 'Shpilevskyy';
-			me.link       = '@Shpilman';
-		}*/
-		$.mobile.changePage( "#registration-step-0", {transition: "slide", changeHash: false});
-		var $step1 = $( '#registration-step-1' );
-		$step1.find( 'input[name="user_first_name"]' ).val( me.first_name );
-		$step1.find( 'input[name="user_last_name"]' ).val( me.last_name );
-		$step1.find( 'input[name="email"]' ).val( me.email );
+		var $registerForm
+
+		if ( window.width < 768 ) {
+			$registerForm = $( '#registration-step-1' );
+			$.mobile.changePage( "#registration-step-0", {transition: "slide", changeHash: false});
+		} else {
+			$registerForm = $( '#ipadForm' );
+			$( '#open_popup' ).trigger( 'click' );
+		}
+
+		$registerForm.find( 'input[name="user_first_name"]' ).val( me.first_name );
+		$registerForm.find( 'input[name="user_last_name"]' ).val( me.last_name );
+		$registerForm.find( 'input[name="email"]' ).val( me.email );
 	}
 
 	//Callback Logout
@@ -1533,8 +1532,9 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				case 'ipad-login':
 					var activePageId = $.mobile.activePage.attr( "id" );
 					initAuthentification(activePageId);
-					$response.find('a.facebook').on('click', function(){
-						qbApp.showLoading($('body > div.ui-loader'), 'html', true);
+					$response.find('a.facebook').on('click', function( e ){
+						e.preventDefault();
+						//qbApp.showLoading($('body > div.ui-loader'), 'html', true);
 						var config = {
 							app_id      : qbApp.facebookAppID,
 							secret      : '1bb6e9e4d8b78cc9392fcbf40dc1d2d0',
