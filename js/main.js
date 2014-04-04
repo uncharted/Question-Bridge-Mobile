@@ -1439,7 +1439,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					finalizeUserLogin(response);
 				}
 				else if ( response.new_user == true ) {
-					facebookRegistration( me );
+					qbApp.behaviors.facebookRegistration( me );
 				}
 				else{
 					alert('Sorry, login failed. Try again please.');
@@ -1447,8 +1447,28 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				qbApp.hideLoading($('body > div.ui-loader'), 'html');
 			});
 	}
-	function facebookRegistration( me ) {
-		$.mobile.changePage( "#page-sing-in", {transition: "slide", changeHash: false});
+
+	/**
+	 * [facebookRegistration -> If user login via facebook, but do not have account - he redirect to register page. Field with
+	 *  available data from facebook will be complete. ]
+	 * @param  {obj} me [ list of user data ]
+	 * @return {[type]}
+	 */
+	qbApp.behaviors.facebookRegistration = function( me ) {
+/*		if ( me == undefined ) {
+			var me = {};
+			me.name       = '';
+			me.username   = 'Shpilman';
+			me.email      = 'Shpilman@ukr.net';
+			me.first_name = 'Nick';
+			me.last_name  = 'Shpilevskyy';
+			me.link       = '@Shpilman';
+		}*/
+		$.mobile.changePage( "#registration-step-0", {transition: "slide", changeHash: false});
+		var $step1 = $( '#registration-step-1' );
+		$step1.find( 'input[name="user_first_name"]' ).val( me.first_name );
+		$step1.find( 'input[name="user_last_name"]' ).val( me.last_name );
+		$step1.find( 'input[name="email"]' ).val( me.email );
 	}
 
 	//Callback Logout
