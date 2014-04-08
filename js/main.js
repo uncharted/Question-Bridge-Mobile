@@ -1425,21 +1425,21 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	function _onLogin( event ){
 		var data = event.data,
 				me = {};
-		console.log(me);
+
 		me.name       = data.name;
 		me.username   = data.username;
 		me.email      = data.email;
 		me.first_name = data.first_name;
 		me.last_name  = data.last_name;
 		me.link       = data.link;
-		console.log(qbApp.settings.restUrl + "social/facebook?jsoncallback=?&facebook-data=" + JSON.stringify(me));
+
 		$.getJSON(qbApp.settings.restUrl + "social/facebook?jsoncallback=?&facebook-data=" + JSON.stringify(me),
 			function(response){
-				console.log(response);
 				if(response.status == 'success'){
 					finalizeUserLogin(response);
 				}
 				else if ( response.new_user == true ) {
+					console.log(1);
 					qbApp.behaviors.facebookRegistration( me );
 				}
 				else{
@@ -1456,9 +1456,10 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	 * @return {[type]}
 	 */
 	qbApp.behaviors.facebookRegistration = function( me ) {
-		var $registerForm
+		var $registerForm;
 
 		if ( window.width < 768 ) {
+			console.log(2);
 			$registerForm = $( '#registration-step-1' );
 			$.mobile.changePage( "#registration-step-0", {transition: "slide", changeHash: false});
 		} else {
