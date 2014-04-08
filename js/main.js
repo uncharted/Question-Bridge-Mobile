@@ -1432,9 +1432,10 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		me.first_name = data.first_name;
 		me.last_name  = data.last_name;
 		me.link       = data.link;
-
+		console.log(qbApp.settings.restUrl + "social/facebook?jsoncallback=?&facebook-data=" + JSON.stringify(me));
 		$.getJSON(qbApp.settings.restUrl + "social/facebook?jsoncallback=?&facebook-data=" + JSON.stringify(me),
 			function(response){
+				console.log(response);
 				if(response.status == 'success'){
 					finalizeUserLogin(response);
 				}
