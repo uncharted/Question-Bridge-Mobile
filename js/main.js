@@ -1439,6 +1439,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					finalizeUserLogin(response);
 				}
 				else if ( response.new_user == true ) {
+					console.log(response);
 					qbApp.behaviors.facebookRegistration( me );
 				}
 				else{
@@ -1456,8 +1457,8 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	 */
 	qbApp.behaviors.facebookRegistration = function( me ) {
 		var $registerForm;
-		console.log(window.width);
-		console.log($( window ).width());
+		console.log(2);
+
 		if ( window.width < 768 ) {
 			$registerForm = $( '#registration-step-1' );
 			$.mobile.changePage( "#registration-step-0", {transition: "slide", changeHash: false});
