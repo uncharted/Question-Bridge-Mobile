@@ -2130,7 +2130,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
 			};
 			qbApp.captureType = 'picture';
-			console.log('picture');
 			navigator.camera.getPicture( uploadPhoto, getPictureFail, options);
 		});
 	}
@@ -2164,10 +2163,11 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		options.fileName = imageURI.substr(imageURI.lastIndexOf('/')+1)+'.png';
 		options.mimeType = "image/jpg";
 		options.params = qbApp.capture;
-		console.log( qbApp.capture );
+		console.log( options );
 		$( '#ipad-create-avatar-popup' ).hide();
 		$( "#create-avatar-popup" ).popup( "close" );
 		var ft = new FileTransfer();
+		console.log( ft );
 		ft.upload(imageURI, encodeURI(qbApp.settings.restUrl + 'user/pre-pregistration?&user-photo='+imageURI), uploadPhotoSuccessCallback, uploadPhotoFailCallback, options);
 	}
 
