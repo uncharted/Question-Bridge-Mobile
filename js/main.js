@@ -2158,13 +2158,14 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		}
 	}
 	function uploadPhoto(imageURI){
-		console.log( qbApp.settings.restUrl + 'user/pre-pregistration?&user-photo='+imageURI );
 		var options = new FileUploadOptions();
 		options.fileKey = "file";
 		options.fileName = imageURI.substr(imageURI.lastIndexOf('/')+1)+'.png';
+		console.log( options );
 		options.mimeType = "image/jpg";
-
+		console.log( options );
 		options.params = qbApp.capture;
+		console.log( qbApp.capture );
 		$( '#ipad-create-avatar-popup' ).hide();
 		$( "#create-avatar-popup" ).popup( "close" );
 		console.log(options);
