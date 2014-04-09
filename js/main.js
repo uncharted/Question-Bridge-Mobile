@@ -1453,7 +1453,10 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				});
 		} else {
 			if ( $( window ).width() < 768 ) {
-				$( '#page-sing-in' ).find( '.facebook' ).trigger( 'click' );
+				setTimeout(function() {
+					console.log($( '#page-sing-in' ).find( '.facebook' ));
+					$( '#page-sing-in' ).find( '.facebook' ).trigger( 'click' );
+				}, 1000);
 			} else {
 
 			}
