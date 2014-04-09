@@ -2163,7 +2163,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		options.fileName = imageURI.substr(imageURI.lastIndexOf('/')+1)+'.png';
 		options.mimeType = "image/jpg";
 		options.params = qbApp.capture;
-		console.log( options );
+		console.log( 1 );
 		$( '#ipad-create-avatar-popup' ).hide();
 		$( "#create-avatar-popup" ).popup( "close" );
 		var ft = new FileTransfer();
