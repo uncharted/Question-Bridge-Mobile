@@ -2164,11 +2164,12 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		options.fileName = imageURI.substr(imageURI.lastIndexOf('/')+1)+'.png';
 		options.mimeType = "image/jpg";
 		options.params = qbApp.capture;
-		console.log( 2 );
-/*		$( '#ipad-create-avatar-popup' ).hide();
-		$( "#create-avatar-popup" ).popup( "close" );*/
+		if ( $( window ).width() < 768 ) {
+			$( "#create-avatar-popup" ).popup( "close" );
+		} else {
+			$( '#ipad-create-avatar-popup' ).hide();
+		}
 		var ft = new FileTransfer();
-		console.log( ft );
 		ft.upload(imageURI, encodeURI(qbApp.settings.restUrl + 'user/pre-pregistration?&user-photo='+imageURI), uploadPhotoSuccessCallback, uploadPhotoFailCallback, options);
 	}
 
