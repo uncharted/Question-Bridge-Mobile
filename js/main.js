@@ -1428,6 +1428,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	});
 
 	function _onLogin( event ){
+		console.log( event );
 		var data = event.data,
 				me = {};
 
@@ -1487,7 +1488,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		$(evt.target).find('a.facebook').on('click', function(event){
 			event.preventDefault();
 			qbApp.showLoading($('body > div.ui-loader'), 'html', true);
-
+			console.log('fb');
 			var config = {
 	      app_id      : qbApp.facebookAppID,
 	      secret      : '1bb6e9e4d8b78cc9392fcbf40dc1d2d0',
@@ -1496,7 +1497,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	      onLogin     : _onLogin,
 	      onLogout    : _onLogout
 	    };
-
+	    console.log(config);
 	    $(document).FaceGap(config);
 		});
 
@@ -2177,7 +2178,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		var response = jQuery.parseJSON(r.response),
 				$profileAvatar,
 				$inputProfileFid;
-
+		console.log( response );
 		if(qbApp.requestingPage == 'ipad-registration') {
 			var $requestingPage = $('#' + qbApp.requestingPage);
 			$inputProfileFid = $requestingPage.find('input#ipad-user-profile-photo-id');
