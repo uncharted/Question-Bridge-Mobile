@@ -1437,9 +1437,10 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		me.first_name = data.first_name;
 		me.last_name  = data.last_name;
 		me.link       = data.link;
-
+		console.log( me );
 		$.getJSON(qbApp.settings.restUrl + "social/facebook?jsoncallback=?&facebook-data=" + JSON.stringify(me),
 			function(response){
+				console.log(response);
 				if(response.status == 'success'){
 					finalizeUserLogin(response);
 				}
@@ -1770,6 +1771,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					var $form = $( form );
 					qbApp.showLoading($('body > div.ui-loader'), 'html', true);
 					var userImageID = $form.find('input#ipad-user-profile-photo-id').attr('value');
+					console.log( userImageID );
 					if( userImageID != 0 ) {
 						//Submit registration form
 						var formData = $form.serialize();
@@ -1793,8 +1795,10 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					}
 					else {
 						var formData = $form.serialize();
+						console.log(qbApp.settings.restUrl + "user/pre-pregistration?jsoncallback=?&"+formData);
 						$.getJSON(qbApp.settings.restUrl + "user/pre-pregistration?jsoncallback=?&"+formData,
 							function(response){
+								console.log(response);
 								if(response.error === true){
 									qbApp.hideLoading($('body > .ui-loader'));
 									$.each(response, function(index, row) {
