@@ -1452,7 +1452,11 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					//qbApp.hideLoading($('body > div.ui-loader'), 'html');
 				});
 		} else {
-			alert('Sorry, login failed. Try again please.');
+			if ( $( window ).width() < 768 ) {
+				$( '#page-sing-in' ).find( '.facebook' ).trigger( 'click' );
+			} else {
+
+			}
 			//qbApp.hideLoading($('body > div.ui-loader'), 'html');
 		}
 	}
@@ -2174,7 +2178,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	}
 
 	function uploadPhotoSuccessCallback(r) {
-		console.log(r);
 		var response = jQuery.parseJSON(r.response),
 				$profileAvatar,
 				$inputProfileFid;
