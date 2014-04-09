@@ -2130,6 +2130,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
 			};
 			qbApp.captureType = 'picture';
+			console.log('picture');
 			navigator.camera.getPicture( uploadPhoto, getPictureFail, options);
 		});
 	}
@@ -2161,14 +2162,11 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		var options = new FileUploadOptions();
 		options.fileKey = "file";
 		options.fileName = imageURI.substr(imageURI.lastIndexOf('/')+1)+'.png';
-		console.log( options );
 		options.mimeType = "image/jpg";
-		console.log( options );
 		options.params = qbApp.capture;
 		console.log( qbApp.capture );
 		$( '#ipad-create-avatar-popup' ).hide();
 		$( "#create-avatar-popup" ).popup( "close" );
-		console.log(options);
 		var ft = new FileTransfer();
 		ft.upload(imageURI, encodeURI(qbApp.settings.restUrl + 'user/pre-pregistration?&user-photo='+imageURI), uploadPhotoSuccessCallback, uploadPhotoFailCallback, options);
 	}
@@ -2178,7 +2176,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		var response = jQuery.parseJSON(r.response),
 				$profileAvatar,
 				$inputProfileFid;
-		console.log( response );
 		if(qbApp.requestingPage == 'ipad-registration') {
 			var $requestingPage = $('#' + qbApp.requestingPage);
 			$inputProfileFid = $requestingPage.find('input#ipad-user-profile-photo-id');
