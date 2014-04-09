@@ -6,9 +6,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.buttonMarkup.hoverDelay = 25;
 
 
-	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
+	qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	qbApp.settings.serverUrl = 'http://beta.questionbridge.com/';
+	//qbApp.settings.serverUrl = 'http://beta.questionbridge.com/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
@@ -1428,7 +1428,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	});
 
 	function _onLogin( event ){
-		console.log( event );
 		if ( event.data != null ) {
 			var data = event.data,
 					me = {};
@@ -1450,11 +1449,11 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 					else{
 						alert('Sorry, login failed. Try again please.');
 					}
-					qbApp.hideLoading($('body > div.ui-loader'), 'html');
+					//qbApp.hideLoading($('body > div.ui-loader'), 'html');
 				});
 		} else {
 			alert('Sorry, login failed. Try again please.');
-			qbApp.hideLoading($('body > div.ui-loader'), 'html');
+			//qbApp.hideLoading($('body > div.ui-loader'), 'html');
 		}
 	}
 
@@ -1490,8 +1489,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 
 		$(evt.target).find('a.facebook').on('click', function(event){
 			event.preventDefault();
-			qbApp.showLoading($('body > div.ui-loader'), 'html', true);
-			console.log('fb');
+			//qbApp.showLoading($('body > div.ui-loader'), 'html', true);
 			var config = {
 	      app_id      : qbApp.facebookAppID,
 	      secret      : '1bb6e9e4d8b78cc9392fcbf40dc1d2d0',
@@ -1500,7 +1498,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	      onLogin     : _onLogin,
 	      onLogout    : _onLogout
 	    };
-	    console.log(config);
 	    $(document).FaceGap(config);
 		});
 
