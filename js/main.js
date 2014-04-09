@@ -6,9 +6,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.buttonMarkup.hoverDelay = 25;
 
 
-	qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
+	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	//qbApp.settings.serverUrl = 'http://beta.questionbridge.com/';
+	qbApp.settings.serverUrl = 'http://beta.questionbridge.com/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
@@ -1454,10 +1454,9 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		} else {
 			if ( $( window ).width() < 768 ) {
 				setTimeout(function() {
-					console.log($( '#page-sing-in' ).find( '.facebook' ));
 					$( '#page-sing-in' ).find( '.facebook' ).trigger( 'click' );
 				}, 1000);
-			} else {
+			} else { // iPad version work for some reason . . . WTF?
 
 			}
 			//qbApp.hideLoading($('body > div.ui-loader'), 'html');
@@ -2143,7 +2142,6 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 
 	qbApp.behaviors.submitHandlerCapturePicture = function() {
 		qbApp.showLoading($('body > div.ui-loader'), 'html', true);
-			console.log(1);
 			navigator.camera.getPicture(uploadPhoto, getPictureFail, { quality: 50,
 				destinationType: navigator.camera.DestinationType.FILE_URI,
 				correctOrientation: true
@@ -2151,20 +2149,18 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 	}
 
 	function getPictureFail(){
+		qbApp.hideLoading($('body > .ui-loader'));
 		if(qbApp.requestingPage == 'ipad-registration') {
 			var $requestingPage = $('#ipad-registration');
-
 			$requestingPage.find('div.left-block, div.right-block').show();
 			$requestingPage.find('div.ipad-profile-image-wrapper').hide();
-
 			alert('Image capture was canceled.');
-			qbApp.hideLoading($('body > .ui-loader'));
 		}
 		else {
-			qbApp.hideLoading($('body > div.ui-loader'));
 			$( "#create-avatar-popup" ).popup( "close" );
 		}
 	}
+
 	function uploadPhoto(imageURI){
 		var options = new FileUploadOptions();
 		options.fileKey = "file";
