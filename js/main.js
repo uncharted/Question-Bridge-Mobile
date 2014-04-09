@@ -2136,6 +2136,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 
 	qbApp.behaviors.submitHandlerCapturePicture = function() {
 		qbApp.showLoading($('body > div.ui-loader'), 'html', true);
+			console.log(1);
 			navigator.camera.getPicture(uploadPhoto, getPictureFail, { quality: 50,
 				destinationType: navigator.camera.DestinationType.FILE_URI,
 				correctOrientation: true
@@ -2163,9 +2164,9 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		options.fileName = imageURI.substr(imageURI.lastIndexOf('/')+1)+'.png';
 		options.mimeType = "image/jpg";
 		options.params = qbApp.capture;
-		console.log( 1 );
-		$( '#ipad-create-avatar-popup' ).hide();
-		$( "#create-avatar-popup" ).popup( "close" );
+		console.log( 2 );
+/*		$( '#ipad-create-avatar-popup' ).hide();
+		$( "#create-avatar-popup" ).popup( "close" );*/
 		var ft = new FileTransfer();
 		console.log( ft );
 		ft.upload(imageURI, encodeURI(qbApp.settings.restUrl + 'user/pre-pregistration?&user-photo='+imageURI), uploadPhotoSuccessCallback, uploadPhotoFailCallback, options);
