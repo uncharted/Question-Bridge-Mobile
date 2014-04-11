@@ -64,10 +64,7 @@
 		<gap:plugin name="org.apache.cordova.camera" />
 		<gap:plugin name="org.apache.cordova.splashscreen" />
 
-		<gap:plugin name="com.phonegap.plugins.facebookconnect">
-		    <param name="APP_ID" value="1397201370521243" />
-		    <param name="APP_NAME" value="Questionbridge" />
-		</gap:plugin>
+
 
 		<!-- <gap:plugin name="org.apache.cordova.media-capture" /> -->
 		<gap:plugin name="nl.x-services.plugins.videocaptureplus" />
