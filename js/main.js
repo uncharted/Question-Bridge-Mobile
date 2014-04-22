@@ -6,9 +6,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.buttonMarkup.hoverDelay = 25;
 
 
-	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
+	qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
-	qbApp.settings.serverUrl = 'http://beta.questionbridge.com/';
+	//qbApp.settings.serverUrl = 'http://beta.questionbridge.com/';
 	qbApp.settings.restUrl = qbApp.settings.serverUrl + 'qb/rest/';
 	qbApp.settings.kaltura = {};
 	qbApp.settings.kaltura.serviceUrl = 'http://107.22.246.60';
