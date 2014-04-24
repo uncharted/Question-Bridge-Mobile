@@ -1097,6 +1097,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 							$video.on('play', function() {
 									var $this = this;
+									$( this ).addClass( 'playing' );
 									setTimeout(function() {
 										$this.webkitEnterFullscreen();
 									}, 250);
@@ -1125,7 +1126,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 							$video.on('pause ended', function() {
 								$thumb.show();
 								this.webkitExitFullscreen();
-								$(this).get(0).pause();
+								$( this ).removeClass( 'playing' ).get(0).pause();
 								$video.css('visibility', 'hidden');
 							});
 
@@ -1172,13 +1173,13 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 					var $theme = $('<li class="theme"></li>');
 					var $themeLink = $('<a href="#page-theme" data-tid="'+theme.tid+'">'+theme.name+'</a>');
 					$theme.append($themeLink);
-					$theme.on(qbApp.clickEvent, function(event){
-						if(qbApp.searchResultsInLoading == true ) return false;
-						qbApp.searchResultsInLoading = true;
-						var keywords = $(this).children('a').text();
-						updateSearchResults(keywords);
-					});
 					$themesContainer.append($theme);
+				});
+				$themesContainer.on(qbApp.clickEvent, 'li', function(event){
+					if(qbApp.searchResultsInLoading == true ) return false;
+					qbApp.searchResultsInLoading = true;
+					var keywords = $(this).children('a').text();
+					updateSearchResults(keywords);
 				});
 				$themesWrapper.append($themesTitle);
 				$themesWrapper.append($themesContainer);
@@ -1408,9 +1409,14 @@ $(document).on("pagebeforechange", function(e, data) {
 	var $fromPage = data.options.fromPage;
 	if ( $fromPage instanceof jQuery ) {
 		if ( $fromPage.hasClass( 'page-question' ) ) {
-			var $questionVideo = $fromPage.find( '.question video' );
+			var $questionVideo = $fromPage.find( '.question video' ),
+					$activeAnswerVideo = $fromPage.find( '.answers video.playing' );
+
 			if ( $questionVideo.find( 'source' ).length ) {
 				$questionVideo.get( 0 ).pause();
+			}
+			if ( $activeAnswerVideo.find( 'source' ).length ) {
+				$activeAnswerVideo.get( 0 ).pause();
 			}
 		}
 	}
