@@ -273,12 +273,23 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	function socialShare(){
 		window.plugins.socialsharing.available(function(isAvailable) {
 			if (isAvailable) {
-				var activePageId = $.mobile.activePage.attr( "id" );
-				var $activePage = $('#'+activePageId);
-				var urlAlias = $activePage.find('div.question').data('url');
-				var questionTheme = $activePage.find('h2').html();
-				var thumbUrl =  $activePage.find('img.thumb').attr('src');
-				window.plugins.socialsharing.share(qbApp.settings.serverUrl+urlAlias, questionTheme, thumbUrl);
+				var activePageId = $.mobile.activePage.attr( "id" ),
+						$activePage = $('#'+activePageId),
+						urlAlias = $activePage.find('div.question').data('url'),
+						questionTheme = $activePage.find('h2').html(),
+						thumbUrl =  $activePage.find('img.thumb').attr('src');
+
+				$.getJSON('http://api.bit.ly/v3/shorten',
+				{
+					login: 'o_510t43dbjk',
+					apiKey: 'R_593f1b669f7644fc9df3b8a8add618fa',
+					format: 'json',
+					longUrl: qbApp.settings.serverUrl + urlAlias,
+				},
+				function(json, textStatus) {
+					console.log(json.data.url);
+						//window.plugins.socialsharing.share( json.data.url, questionTheme, thumbUrl );
+				});
 			}
 		})
 	}
