@@ -287,8 +287,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 					longUrl: qbApp.settings.serverUrl + urlAlias,
 				},
 				function(json, textStatus) {
-					console.log(json.data.url);
-						//window.plugins.socialsharing.share( json.data.url, questionTheme, thumbUrl );
+						window.plugins.socialsharing.share( json.data.url, questionTheme, thumbUrl );
 				});
 			}
 		})
