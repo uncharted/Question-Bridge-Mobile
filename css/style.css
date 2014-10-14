@@ -1376,6 +1376,11 @@ body.not-black-male div.page-question .video-respond {
 .page-tutorial .ui-panel-content-wrap {
 	box-shadow: none;
 }
+.page-tutorial {
+	overflow: hidden !important;
+	width: 100% !important;
+	height: 100% !important;
+}
 .page-tutorial img {
 	display: block;
 	height: 100%;
