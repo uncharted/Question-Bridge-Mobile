@@ -414,6 +414,14 @@ ul.search-results > li.question .submitted {
 	color: #FFFFFF;
 	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
+.page-about .content-primary strong,
+.page-privacy-policy .content-primary strong,
+.page-terms-conditions .content-primary strong,
+.page-about .content-primary b,
+.page-privacy-policy .content-primary b,
+.page-terms-conditions .content-primary b {
+	font-weight: bold;
+}
 .page-terms-conditions h2,
 .page-terms-conditions h3 {
 	text-align: center;
