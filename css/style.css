@@ -420,6 +420,7 @@ ul.search-results > li.question .submitted {
 .page-about .content-primary b,
 .page-privacy-policy .content-primary b,
 .page-terms-conditions .content-primary b {
+	font-family: 'Gotham Book',Arial,sans-serif;
 	font-weight: bold;
 }
 .page-terms-conditions h2,
