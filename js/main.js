@@ -48,8 +48,8 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	}
 
 	function initApp() {
-		//initDevice();
-		$( 'body' ).children( '.page-tutorial' ).remove();
+		initDevice();
+		//$( 'body' ).children( '.page-tutorial' ).remove();
 
 		copyMainMenu();
 		$.mobile.initializePage();
