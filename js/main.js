@@ -4,6 +4,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 (function ($) {
 	$.mobile.autoInitializePage = false;
 	$.mobile.buttonMarkup.hoverDelay = 25;
+	$.mobile.allowSamePageTransition = true;
 
 
 	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
@@ -128,10 +129,10 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 					$img = $( '#' + activePageId ).find( 'img' ),
 					forwardPage = $img.data( 'slide-forward' );
 					if( forwardPage != undefined ) {
-						$.mobile.changePage( forwardPage, {transition: "slide"});
+						$.mobile.changePage( forwardPage, {transition: "slide", allowSamePageTransition: true});
 					}
 					else {
-						$.mobile.changePage( '#page-home', {transition: "slide"});
+						$.mobile.changePage( '#page-home', {transition: "slide", allowSamePageTransition: true});
 					}
 
 /*						$nextPageLink = $('#' + activePageId).find('ul.tutorial-slide li.active a').parent().next().find('a');
@@ -149,7 +150,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 					$img = $( '#' + activePageId ).find( 'img' ),
 					backPage = $img.data( 'slide-back' );
 					if( backPage != undefined ) {
-						$.mobile.changePage( backPage, {transition: "slide", reverse: true});
+						$.mobile.changePage( backPage, {transition: "slide", reverse: true, allowSamePageTransition: true});
 					}
 /*		        var activePageId = $.mobile.activePage.attr( "id" ),
 						$prevPageLink = $('#' + activePageId).find('ul.tutorial-slide li.active a').parent().prev().find('a');
@@ -360,7 +361,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 	function initLogoNavigate(){
 		$('h1.logo').on(qbApp.clickEvent, function(event) {
-			$.mobile.changePage('#page-home', {transition: "slidefade"});
+			$.mobile.changePage('#page-home', {transition: "slidefade", allowSamePageTransition: true});
 			initQuestionsList('#page-home', {order:'latest'}, 'replace');
 
 			/*var activePageId = $.mobile.activePage.attr( "id" );
@@ -397,6 +398,13 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 	//init Main Menu links
 	function initMainMenu() {
+		$('div[data-role="page"]').bind('pageshow', function(e) { 
+			$page = $(this);
+			setTimeout(function(){
+				$page.addClass('ui-page-active'); 
+			}, 0);
+		});
+
 		var $pages = $('div[data-role="page"]');
 
 		$pages.not( '.page-tutorial' ).each(function(index,item){
@@ -585,7 +593,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 						setTimeout(function() {
 							$respond.on('click', function(event){
 								event.preventDefault();
-								$.mobile.changePage( '#page-ask-question-step-1', {transition: "slidefade"});
+								$.mobile.changePage( '#page-ask-question-step-1', {transition: "slidefade", allowSamePageTransition: true});
 							});
 						}, 600);
 						$noResults.append($respond);
@@ -755,7 +763,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		var $content = $(data.page).find('div.content-primary');
 		$content.html('');
 
-		$.mobile.changePage( data.page, {transition: "slidefade"});
+		$.mobile.changePage( data.page, {transition: "slidefade", allowSamePageTransition: true});
 
 
 		/*buildQuestion(question, data);
@@ -1261,7 +1269,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		$page.find('ul.search-results').html('');
 
 		$page.find("div.search-container").show();
-		$.mobile.changePage( $page, {transition: "slidefade"});
+		$.mobile.changePage( $page, {transition: "slidefade", allowSamePageTransition: true});
 		$page.find("div.search-container input").val(keywords);
 		qbApp.showLoading($page.find('div.content'));
 		$.getJSON( qbApp.settings.restUrl + "questions/search?jsoncallback=?&keywords="+keywords,
@@ -1411,7 +1419,7 @@ $(document).on("pagebeforechange", function(e, data) {
 		if( /page-sing-in/i.test( requestPageUrl ) ) {
 			if ( $( 'body' ).hasClass( 'logged-in' ) ) {
 				e.preventDefault();
-				$.mobile.changePage( "#page-home", {transition: "slidefade", changeHash: false});
+				$.mobile.changePage( "#page-home", {transition: "slidefade", changeHash: false, allowSamePageTransition: true});
 			}
 		}
 	}
@@ -1490,7 +1498,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 
 		if ( $( window ).width() < 768 ) {
 			$registerForm = $( '#registration-step-1' );
-			$.mobile.changePage( "#registration-step-0", {transition: "slide", changeHash: false});
+			$.mobile.changePage( "#registration-step-0", {transition: "slide", changeHash: false, allowSamePageTransition: true});
 		} else {
 			$registerForm = $( '#ipadForm' );
 			$( '#open_popup' ).trigger( 'click' );
@@ -1670,7 +1678,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 									if(response.status == 'success'){
 										$form.get(0).reset();
 										alert("Account information was send to your e-mail. Please check it.");
-										$.mobile.changePage( "#page-sing-in", {transition: "slide", changeHash: false});
+										$.mobile.changePage( "#page-sing-in", {transition: "slide", changeHash: false, allowSamePageTransition: true});
 									}
 							});
 					}
@@ -1737,10 +1745,10 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		var activePageId   = $.mobile.activePage.attr( "id" );
 		var $returnBtn = $('#'+activePageId).find('a[data-rel="back"]');
 		if(qbApp.pageComeFrom){
-			$.mobile.changePage( qbApp.pageComeFrom, {transition: "slidefade"});
+			$.mobile.changePage( qbApp.pageComeFrom, {transition: "slidefade", allowSamePageTransition: true});
 		}
 		else{
-			$returnBtn.length ? $returnBtn.trigger('click') : $.mobile.changePage( "#page-home", {transition: "slidefade", changeHash: false});
+			$returnBtn.length ? $returnBtn.trigger('click') : $.mobile.changePage( "#page-home", {transition: "slidefade", changeHash: false, allowSamePageTransition: true});
 		}
 	}
 
@@ -1989,7 +1997,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 													nextPage;
 
 											blackIdentify ? nextPage = $form.data('next') : nextPage = '#registration-step-3';
-											$.mobile.changePage( nextPage, {transition: "slidefade"});
+											$.mobile.changePage( nextPage, {transition: "slidefade", allowSamePageTransition: true});
 										}
 									}
 								);
@@ -2007,7 +2015,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 						return false;  // suppresses error message text
 					},
 					submitHandler: function(form) {
-						$.mobile.changePage( $form.data('next'), {transition: "slidefade"});
+						$.mobile.changePage( $form.data('next'), {transition: "slidefade", allowSamePageTransition: true});
 					}
 				});
 
@@ -2045,9 +2053,9 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 											qbApp.cookie = response;
 											if(response.user.field_black_identity.und[0].value == 0) $('body').addClass('not-black-male');
 											if(qbApp.pageComeFrom){
-												$.mobile.changePage( qbApp.pageComeFrom, {transition: "slidefade"});
+												$.mobile.changePage( qbApp.pageComeFrom, {transition: "slidefade", allowSamePageTransition: true});
 											}else{
-												$.mobile.changePage( "#page-home", {transition: "slidefade"});
+												$.mobile.changePage( "#page-home", {transition: "slidefade", allowSamePageTransition: true});
 											}
 										}
 										else{
@@ -2075,7 +2083,7 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 							return false;  // suppresses error message text
 						},
 						submitHandler: function(form) {
-							$.mobile.changePage( $form.data('next'), {transition: "slidefade"});
+							$.mobile.changePage( $form.data('next'), {transition: "slidefade", allowSamePageTransition: true});
 						}
 					})
 			break;
