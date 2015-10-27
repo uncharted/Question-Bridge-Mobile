@@ -63,6 +63,10 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	}
 
 	function initDevice() {
+		if ( device.platform === "iOS" ) {
+		  $.mobile.hashListeningEnabled=false;
+		}
+		
 		var $body = $('body');
 
 		if(navigator.userAgent.match(/Android/i)){
