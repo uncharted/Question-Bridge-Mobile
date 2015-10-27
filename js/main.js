@@ -398,12 +398,12 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 	//init Main Menu links
 	function initMainMenu() {
-		$('div[data-role="page"]').bind('pageshow', function(e) { 
+		/*$('div[data-role="page"]').bind('pageshow', function(e) { 
 			$page = $(this);
 			setTimeout(function(){
 				$page.addClass('ui-page-active'); 
 			}, 0);
-		});
+		});*/
 
 		var $pages = $('div[data-role="page"]');
 
