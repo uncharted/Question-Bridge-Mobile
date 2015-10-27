@@ -6,7 +6,6 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.buttonMarkup.hoverDelay = 25;
 	$.mobile.allowSamePageTransition = true;
 
-
 	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
 	qbApp.settings.serverUrl = 'http://107.21.242.74/';
@@ -50,6 +49,8 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 	function initApp() {
 		initDevice();
+		//$( 'body' ).children( '.page-tutorial' ).remove();
+
 		copyMainMenu();
 		$.mobile.initializePage();
 		setTimeout( function() { initGeolocation();}, 2200);
