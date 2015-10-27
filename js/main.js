@@ -5,6 +5,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.autoInitializePage = false;
 	$.mobile.buttonMarkup.hoverDelay = 25;
 	$.mobile.allowSamePageTransition = true;
+	$.mobile.hashListeningEnabled=false;
 
 	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
@@ -63,10 +64,6 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	}
 
 	function initDevice() {
-		if ( device.platform === "iOS" ) {
-		  $.mobile.hashListeningEnabled=false;
-		}
-		
 		var $body = $('body');
 
 		if(navigator.userAgent.match(/Android/i)){
