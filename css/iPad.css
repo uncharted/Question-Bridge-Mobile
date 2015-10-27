@@ -161,16 +161,16 @@
 		text-indent: -9999px;
 		height: 18px;
 		width: 18px;
-		margin: 0;
+		/*margin: 0;
 		border: none;
 		text-shadow: none;
 		box-shadow: 0;
-		border-radius: 0;
+		border-radius: 0;*/
 	}
-	.registration-close .ui-btn-inner, 
+	/*.registration-close .ui-btn-inner, 
 	.login-close .ui-btn-inner {
 		display: none;
-	}
+	}*/
 	#ipad-registration h2,
 	#ipad-page-forgot-password h2{
 		color: white;
