@@ -5,7 +5,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.autoInitializePage = false;
 	$.mobile.buttonMarkup.hoverDelay = 25;
 	$.mobile.allowSamePageTransition = true;
-	$.mobile.hashListeningEnabled=false;
+	//$.mobile.hashListeningEnabled=false;
 
 	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
@@ -49,8 +49,8 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	}
 
 	function initApp() {
-		initDevice();
-		//$( 'body' ).children( '.page-tutorial' ).remove();
+		//initDevice();
+		$( 'body' ).children( '.page-tutorial' ).remove();
 
 		copyMainMenu();
 		$.mobile.initializePage();
@@ -58,6 +58,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		initCheckAuth();
 		initMainMenu();
 		initLogoNavigate();
+		initHeader();
 		initOrientationChange();
 		initLogOut();
 		//FB.init({ appId: qbApp.facebookAppID, nativeInterface: CDV.FB, useCachedDialogs: false });
@@ -368,6 +369,14 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 			/*var activePageId = $.mobile.activePage.attr( "id" );
 			$('#'+activePageId).find('a[href="#page-home?order=latest"]').trigger('tap');*/
+		});
+	}
+
+	function initHeader(){
+		$('.header a[data-rel="back"]').on(qbApp.clickEvent, function(event) {
+			event.preventDefault();
+			history.back();
+			return false;
 		});
 	}
 
