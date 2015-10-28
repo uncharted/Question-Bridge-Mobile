@@ -1581,3 +1581,7 @@ max-width: 400px;
 #flagging.unflagging .flagging-msg.unflag {
 	display: block;
 }
+*:not(input,textarea) {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none; /* Disable selection/Copy of UIWebView */
+}
