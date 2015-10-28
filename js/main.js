@@ -5,7 +5,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$.mobile.autoInitializePage = false;
 	$.mobile.buttonMarkup.hoverDelay = 25;
 	$.mobile.allowSamePageTransition = true;
-	$.mobile.hashListeningEnabled=false;
+	//$.mobile.hashListeningEnabled=false;
 
 	//qbApp.settings.serverUrl = 'http://drupal7.dev/qbridge/';
 	//qbApp.settings.serverUrl = 'http://dev.uncharteddigital.com/questionbridge/';
@@ -27,6 +27,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	qbApp.question = null;
 	qbApp.data = null;
 	qbApp.pageComeFrom = null;
+	qbApp.prevPage = null;
 	qbApp.captureType = null;
 	qbApp.requestingPage = null;
 	qbApp.formReset = false;
@@ -172,6 +173,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	$(document).bind('pagechange', function(e, data) {
 		//remove animation
 		if($('div#orientation-message').length) $('div#orientation-message').remove();
+		var activePage = $.mobile.activePage;
 /*		var activePageId = $.mobile.activePage.attr( "id" );
 		var $activePage = $('#'+activePageId);
 		var pageHeight = $activePage.height();
@@ -375,7 +377,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	function initHeader(){
 		$('.header a[data-rel="back"]').on(qbApp.clickEvent, function(event) {
 			event.preventDefault();
-			history.back();
+			if(qbApp.prevPage){
+				$.mobile.changePage( qbApp.prevPage, {transition: "slidefade", reverse: true, allowSamePageTransition: true});
+			}
 			return false;
 		});
 	}
@@ -1444,16 +1448,26 @@ $(document).on("pagebeforechange", function(e, data) {
 	}
 });
 
+$(document).on('pagebeforeshow', function(event, data) {
+	var prevPageID = data.prevPage.attr('id');
+	if(prevPageID !== undefined){
+		qbApp.prevPage = '#'+prevPageID;
+	}
+	else {
+		qbApp.prevPage = '#page-home';
+	}
+});
+
 $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
-		var prevPageID = data.prevPage.attr('id');
-		$( '#page-sing-in' ).find( 'form' ).get( 0 ).reset();
-		if($(data.prevPage).hasClass("page-registration")){
-			qbApp.pageComeFrom = '#page-home';
-		}
-		else{
-			qbApp.pageComeFrom = '#'+prevPageID;
-		}
-	});
+	var prevPageID = data.prevPage.attr('id');
+	$( '#page-sing-in' ).find( 'form' ).get( 0 ).reset();
+	if($(data.prevPage).hasClass("page-registration")){
+		qbApp.pageComeFrom = '#page-home';
+	}
+	else{
+		qbApp.pageComeFrom = '#'+prevPageID;
+	}
+});
 
 	function _onLogin( event ){
 		if ( event.data != null ) {
