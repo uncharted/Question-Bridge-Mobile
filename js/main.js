@@ -219,7 +219,8 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 		var $newTag = $newTagForm.find('.new-tag');
 		$newTagForm.show();
-		$newTag.select();
+		//$newTag.select();
+    $newTag.focus();
 		/*$(document).delegate('.ui-content', 'touchmove', false);
 
 		//Load data for submit
