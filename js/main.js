@@ -219,7 +219,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 		var $newTag = $newTagForm.find('.new-tag');
 		$newTagForm.show();
-		$newTag.select();
+		/*$newTag.select();
 		$(document).delegate('.ui-content', 'touchmove', false);
 
 		//Load data for submit
@@ -262,7 +262,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			$newTagForm.hide();
 			$(document).undelegate('.ui-content', 'touchmove', false);
 			$.mobile.silentScroll(1);
-		});
+		});*/
 	}
 
 	function homepageImgVerticalAlign($thumb){
@@ -924,8 +924,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		var $theme = $('<li><a href="#" class="nav-theme"><span>Theme</span></a></li>');
 		$theme.on('click', function(event) {
 			event.preventDefault();
-      $newTagFormWrapper.show();
-			//createNewTag($newTagFormWrapper);
+			createNewTag($newTagFormWrapper);
 		});
 
 		var $favorite = $('<li><a href="#" class="nav-favorite"><span>Favorite</span></a></li>');
