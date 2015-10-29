@@ -220,7 +220,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		var $newTag = $newTagForm.find('.new-tag');
 		$newTagForm.show();
 		$newTag.select();
-		//$(document).delegate('.ui-content', 'touchmove', false);
+		$(document).delegate('.ui-content', 'touchmove', false);
 
 		//Load data for submit
 		var activePageId = $.mobile.activePage.attr( "id" );
@@ -260,9 +260,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 		$newTag.focusout(function(){
 			$newTagForm.hide();
-			//$(document).undelegate('.ui-content', 'touchmove', false);
+			$(document).undelegate('.ui-content', 'touchmove', false);
 			$.mobile.silentScroll(1);
-		})
+		});
 	}
 
 	function homepageImgVerticalAlign($thumb){
@@ -924,7 +924,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		var $theme = $('<li><a href="#" class="nav-theme"><span>Theme</span></a></li>');
 		$theme.on('click', function(event) {
 			event.preventDefault();
-			createNewTag($newTagFormWrapper);
+			//createNewTag($newTagFormWrapper);
 		});
 
 		var $favorite = $('<li><a href="#" class="nav-favorite"><span>Favorite</span></a></li>');
