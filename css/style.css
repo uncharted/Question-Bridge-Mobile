@@ -1586,7 +1586,7 @@ max-width: 400px;
 	-webkit-user-select: none; /* Disable selection/Copy of UIWebView */
 }
 div[data-role="page"] {
-	overflow: auto;
-	-webkit-overflow-scrolling: touch;
+	overflow: auto !important;
+	-webkit-overflow-scrolling: touch !important;
 }
 
