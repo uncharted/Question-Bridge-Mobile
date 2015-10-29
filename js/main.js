@@ -220,7 +220,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 		var $newTag = $newTagForm.find('.new-tag');
 		$newTagForm.show();
-		/*$newTag.select();
+		$newTag.select();
 		$(document).delegate('.ui-content', 'touchmove', false);
 
 		//Load data for submit
@@ -258,11 +258,11 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 				return false;
 			});
 		}
-    */
+    
 		$newTag.focusout(function(){
-			//$newTagForm.hide();
-			//$(document).undelegate('.ui-content', 'touchmove', false);
-			//$.mobile.silentScroll(1);
+			$newTagForm.hide();
+			$(document).undelegate('.ui-content', 'touchmove', false);
+			$.mobile.silentScroll(1);
 		});
 	}
 
