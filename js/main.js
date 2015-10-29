@@ -924,6 +924,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		var $theme = $('<li><a href="#" class="nav-theme"><span>Theme</span></a></li>');
 		$theme.on('click', function(event) {
 			event.preventDefault();
+      $newTagFormWrapper.show();
 			//createNewTag($newTagFormWrapper);
 		});
 
