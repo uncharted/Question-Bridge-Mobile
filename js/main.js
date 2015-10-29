@@ -260,9 +260,9 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		}
     */
 		$newTag.focusout(function(){
-			$newTagForm.hide();
+			//$newTagForm.hide();
 			//$(document).undelegate('.ui-content', 'touchmove', false);
-			$.mobile.silentScroll(1);
+			//$.mobile.silentScroll(1);
 		});
 	}
 
