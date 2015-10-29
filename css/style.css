@@ -1590,3 +1590,10 @@ div[data-role="page"] {
 	-webkit-overflow-scrolling: touch;
 }
 
+.new-tag-form-helptext {
+	position: relative;
+}
+.new-tag-form {
+	position: relative;
+}
+
