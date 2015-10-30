@@ -1712,11 +1712,14 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 		var authentificationLoading = false,
 				$form = $( '#'+activePageId ).find( "#login-form" );
 		$form.find( 'input.login' ).on( 'focus', function( event ) {
+			$.mobile.silentScroll(200);
 			$( this ).css('color', '#666666');
 			$(document).delegate('.ui-content', 'touchmove', false);
+			$form.css('paddingBottom', '500px');
 		});
 		$form.find( 'input.login' ).on('focusout', function(){
 			$(document).undelegate('.ui-content', 'touchmove', false);
+			form.css('paddingBottom', '50px');
 			$.mobile.silentScroll(1);
 		});
 
