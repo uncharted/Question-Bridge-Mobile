@@ -388,9 +388,10 @@ div.content-primary div.question ul.navigation:after{
 		margin: 0;
 		padding: 0;
 		/*position: absolute;*/
-		bottom: 0;
+		/*bottom: 0;*/
 		width: 100%;
 		text-align: center;
+		position: relative;
 	}
 	.page-sing-in input.log-in{
 		background: url('../images/bg-sing-in.png') no-repeat;
