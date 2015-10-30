@@ -707,3 +707,17 @@ div.content-primary div.question ul.navigation:after{
 @media only screen and (min-width: 480px) and (max-width: 760px) {
 
 }
+
+/*Phone < 5:*/
+ @media screen and (device-aspect-ratio: 2/3) {
+  .content {
+   height: 416px !important;
+ }
+}
+
+ /*iPhone 5:*/
+@media screen and (device-aspect-ratio: 40/71) {
+  .content {
+    height: 504px !important;
+  }
+}
