@@ -1713,12 +1713,12 @@ $(document).on('pagebeforeshow', '#page-sing-in', function(event, data) {
 				$form = $( '#'+activePageId ).find( "#login-form" );
 		$form.find( 'input.login' ).on( 'focus', function( event ) {
 			$(document).delegate('.ui-content', 'touchmove', false);
-			$form.addClass('focused');
+			$form.parent().addClass('focused');
 			$( this ).css('color', '#666666');
 		});
 		$form.find( 'input.login' ).on('focusout', function(){
 			$(document).undelegate('.ui-content', 'touchmove', false);
-			$form.removeClass('focused');
+			$form.parent().removeClass('focused');
 			$.mobile.silentScroll(1);
 		});
 
