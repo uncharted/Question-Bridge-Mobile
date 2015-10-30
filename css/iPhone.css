@@ -330,6 +330,10 @@ div.content-primary div.question ul.navigation:after{
 		padding: 0 0 50px 0;
 		margin: 15px auto 0;
 	}
+	.page-sing-in form.focused {
+		position: absolute;
+		top: 0;
+	}
 	.page-sing-in .content form input.login{
 		font: 18px 'Gotham Light';
 		padding: 10px 0;
