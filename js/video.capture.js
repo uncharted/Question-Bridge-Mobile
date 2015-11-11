@@ -115,12 +115,12 @@ function initAsqQuestion(){
 					function(acceleration) {
 						var accelerationX = acceleration.x;
 						$('body').children('.acceleration-value').text(accelerationX);
-						/*if(accelerationX < 8) {
+						if( (accelerationX > 0 && accelerationX < 8) || (accelerationX < 0 && accelerationX > -8)) {
 							showDeviceRotateMessage();
 						}
 						else {
 							submitHandlerCaptureVideo();
-						}*/
+						}
 					},
 					function() {
 						alert('onError!');
