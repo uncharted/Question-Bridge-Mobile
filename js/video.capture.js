@@ -39,7 +39,7 @@ function showDeviceRotateMessage(){
 					navigator.accelerometer.getCurrentAcceleration(
 						function(acceleration) {
 							var accelerationX = acceleration.x;
-							if(accelerationX >= 8) {
+							if(accelerationX >= 8 || accelerationX <= -8) {
 								autoCaptureOnCorrectRotate();
 							}
 						},
@@ -105,16 +105,10 @@ function initAsqQuestion(){
 				 $(field).val('');
 			});
 			qbApp.captureType = 'question';
-
-			if(!$('body').children('.acceleration-value').get(0)) {
-				$('body').append('<div class="acceleration-value">0</div>');
-			}
-
 			if(/iPhone/i.test(navigator.userAgent)){
 				navigator.accelerometer.getCurrentAcceleration(
 					function(acceleration) {
 						var accelerationX = acceleration.x;
-						$('body').children('.acceleration-value').text(accelerationX);
 						if( (accelerationX > 0 && accelerationX < 8) || (accelerationX < 0 && accelerationX > -8)) {
 							showDeviceRotateMessage();
 						}
@@ -195,7 +189,7 @@ function prosessAnswer(){
 			navigator.accelerometer.getCurrentAcceleration(
 				function(acceleration) {
 					var accelerationX = acceleration.x;
-					if(accelerationX < 8) {
+					if( (accelerationX > 0 && accelerationX < 8) || (accelerationX < 0 && accelerationX > -8)) {
 						showDeviceRotateMessage();
 					}
 					else {
