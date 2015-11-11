@@ -105,16 +105,22 @@ function initAsqQuestion(){
 				 $(field).val('');
 			});
 			qbApp.captureType = 'question';
+
+			if(!$('body').children('.acceleration-value').get(0)) {
+				$('body').append('<div class="acceleration-value">0</div>');
+			}
+
 			if(/iPhone/i.test(navigator.userAgent)){
 				navigator.accelerometer.getCurrentAcceleration(
 					function(acceleration) {
 						var accelerationX = acceleration.x;
-						if(accelerationX < 8) {
+						$('body').children('.acceleration-value').text(accelerationX);
+						/*if(accelerationX < 8) {
 							showDeviceRotateMessage();
 						}
 						else {
 							submitHandlerCaptureVideo();
-						}
+						}*/
 					},
 					function() {
 						alert('onError!');

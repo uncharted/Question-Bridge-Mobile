@@ -1608,3 +1608,11 @@ div[data-role="page"] {
 	position: relative;
 }
 
+.acceleration-value {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #fff;
+	color: #f00;
+	z-index: 9999;
+}
