@@ -857,6 +857,11 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 				$videoWrapper.css({'height':qbApp.wideWidthHeight});
 			}
 
+			var videoHeight = qbApp.wideWidthHeight;
+			if ( $( window ).width() > 768 ) {
+				videoHeight = 380;
+			}
+
 			//Set thumb size depend on video size
 			$("<img/>").attr("src", thumbnailPath).load(function() {
 				var height = parseInt(this.width/optionHash.aspectRatio);
@@ -865,18 +870,19 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 					var thumbWidth = 'auto';
 					var width = '100%';
 					var height = parseInt($video.parent('.video-wrapper').height());
-					if(height > qbApp.wideWidthHeight) height = qbApp.wideWidthHeight;
+					if(height > videoHeight) height = videoHeight;
 					$thumb.css({'width':thumbWidth, 'height':height});
 					$thumb.css({'left':'50%', 'marginLeft': -$thumb.width()/2});
 				}
 				else{
 					var width = $video.parent('.video-wrapper').width();
 					var height = parseInt(this.width/optionHash.aspectRatio);
-					if(height > qbApp.wideWidthHeight) height = qbApp.wideWidthHeight;
+					console.log(height);
+					if(height > videoHeight) height = videoHeight;
 					$thumb.css({'width':width, 'height':height});
 				}
 
-				if(height > qbApp.wideWidthHeight) height = qbApp.wideWidthHeight;
+				if(height > videoHeight) height = videoHeight;
 				$video.parent('.video-wrapper').css({'height':height});
 				$video.css({'width':width, 'height':height});
 				$thumb.css({'visibility':'visible'});
