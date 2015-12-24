@@ -849,8 +849,10 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			var $video = $('video[data-entryId='+optionHash.entryId+']');
 			var $thumb = $('<img class="thumb" src="'+thumbnailPath+'" alt="'+question.title+'" data-partnerId="'+question.partner_id+'" data-entryId="'+question.kaltura_id+'">');
 			var $videoWrapper = $video.parent();
-			$thumb.css({'width':'auto', 'height':qbApp.wideWidthHeight});
 			$videoWrapper.append($thumb);
+			$thumb.css({'width':'auto', 'height':qbApp.wideWidthHeight, 'visibility':'hidden'});
+			$video.css({'height':qbApp.wideWidthHeight});
+			$videoWrapper.css({'height':qbApp.wideWidthHeight});
 
 			//Set thumb size depend on video size
 			$("<img/>").attr("src", thumbnailPath).load(function() {
@@ -874,6 +876,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 				if(height > qbApp.wideWidthHeight) height = qbApp.wideWidthHeight;
 				$video.parent('.video-wrapper').css({'height':height});
 				$video.css({'width':width, 'height':height});
+				$thumb.css({'visibility':'visible'});
 			});
 
 
