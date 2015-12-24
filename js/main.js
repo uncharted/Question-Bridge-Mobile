@@ -851,15 +851,16 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			var $videoWrapper = $video.parent();
 			$videoWrapper.append($thumb);
 			$thumb.css({'visibility':'hidden'});
-			if ( $( window ).width() < 768 ) {
-				$thumb.css({'width':'auto', 'height':qbApp.wideWidthHeight});
-				$video.css({'height':qbApp.wideWidthHeight});
-				$videoWrapper.css({'height':qbApp.wideWidthHeight});
-			}
-
+			
 			var videoHeight = qbApp.wideWidthHeight;
 			if ( $( window ).width() > 768 ) {
 				videoHeight = 380;
+			}
+			
+			if ( $( window ).width() < 768 ) {
+				$thumb.css({'width':'auto', 'height':videoHeight});
+				$video.css({'height':videoHeight});
+				$videoWrapper.css({'height':videoHeight});
 			}
 
 			//Set thumb size depend on video size
