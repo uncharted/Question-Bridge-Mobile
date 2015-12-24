@@ -856,12 +856,12 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			if ( $( window ).width() > 768 ) {
 				videoHeight = 380;
 			}
-			
-			if ( $( window ).width() < 768 ) {
+
+			//if ( $( window ).width() < 768 ) {
 				$thumb.css({'width':'auto', 'height':videoHeight});
 				$video.css({'height':videoHeight});
 				$videoWrapper.css({'height':videoHeight});
-			}
+			//}
 
 			//Set thumb size depend on video size
 			$("<img/>").attr("src", thumbnailPath).load(function() {
@@ -878,7 +878,6 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 				else{
 					var width = $video.parent('.video-wrapper').width();
 					var height = parseInt(this.width/optionHash.aspectRatio);
-					console.log(height);
 					if(height > videoHeight) height = videoHeight;
 					$thumb.css({'width':width, 'height':height});
 				}
