@@ -850,9 +850,12 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			var $thumb = $('<img class="thumb" src="'+thumbnailPath+'" alt="'+question.title+'" data-partnerId="'+question.partner_id+'" data-entryId="'+question.kaltura_id+'">');
 			var $videoWrapper = $video.parent();
 			$videoWrapper.append($thumb);
-			$thumb.css({'width':'auto', 'height':qbApp.wideWidthHeight, 'visibility':'hidden'});
-			$video.css({'height':qbApp.wideWidthHeight});
-			$videoWrapper.css({'height':qbApp.wideWidthHeight});
+			$thumb.css({'visibility':'hidden'});
+			if ( $( window ).width() < 768 ) {
+				$thumb.css({'width':'auto', 'height':qbApp.wideWidthHeight});
+				$video.css({'height':qbApp.wideWidthHeight});
+				$videoWrapper.css({'height':qbApp.wideWidthHeight});
+			}
 
 			//Set thumb size depend on video size
 			$("<img/>").attr("src", thumbnailPath).load(function() {
