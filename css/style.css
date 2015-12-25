@@ -1058,6 +1058,7 @@ background-size: 22px; */
 	margin: 0 0 0px 0;
 	padding: 0 20px 25px 10px;
 	height: 90px;
+	clear: both;
 }
 .question-additional-wrapper ul.answers li.answer{
 	overflow: hidden;
