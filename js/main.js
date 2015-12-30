@@ -413,6 +413,12 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 				var $mainMenuPanel = $('#page-home #main-menu').clone();
 				$page.append($mainMenuPanel);
 			}
+
+			$page.find('#main-menu a[href="#ipad-login-link"]').on('click', function(event) {
+				event.preventDefault();
+				$(this).parents('.page').find('#ipad-login').popup('open');
+			});
+
 		});
 	}
 
