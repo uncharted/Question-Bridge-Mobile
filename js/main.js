@@ -42,6 +42,13 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	//qbApp.facebookAppID = '1397201370521243'; //Local
 	qbApp.facebookAppID = '315999478539121'; // dev
 
+	qbApp.console = function(str) {
+		if(!$('body').children('.debug-popup').get(0)) {
+			$('body').append('<span class="debug-popup"></span>');
+		}
+		$('body').children('.debug-popup').html(str);
+	}
+
 	if("deviceready" in window) {
 		document.addEventListener("deviceready", function(){
 			initApp();
@@ -1173,13 +1180,15 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 									setTimeout(function() {
 										$this.webkitEnterFullscreen();
 									}, 250);
-
+									//$this.webkitEnterFullscreen();
 									//this.webkitEnterFullscreen();
 							});
 
 							/*TODO FIXME:
 							*Check, if video is playing, but not in full screen. Fix bug in iPad when answer playing in small
-							*window .*/
+							*window .
+							*P.S. "durationchange" fixes this.
+							*/
 							var enterFullScreenCheck = 0;
 							$video.on('webkitbeginfullscreen', function() {
 								enterFullScreenCheck = 1;
@@ -1189,8 +1198,10 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 								$(this).get(0).pause();
 							});
 							$video.on('durationchange', function() {
-								if(enterFullScreenCheck === 0) {
-									this.webkitEnterFullscreen();
+								if(enterFullScreenCheck === 0 ) {
+									if(/iPhone/i.test(navigator.userAgent) != true){
+										this.webkitEnterFullscreen();
+									}
 								}
 							});
 							/*HARDCODE END*/

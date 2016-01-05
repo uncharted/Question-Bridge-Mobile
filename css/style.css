@@ -1608,3 +1608,10 @@ div[data-role="page"] {
 .new-tag-form {
 	position: relative;
 }
+.debug-popup {
+	position: absolute;
+	padding: 5px;
+	background: #FCC;
+	color: #000;
+	z-index: 1000;
+}
