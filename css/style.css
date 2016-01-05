@@ -97,6 +97,7 @@ div.content-primary li.answer {
 	background: url('../images/bg-body.jpg') no-repeat 0 -20px;
 	background-size:100% 1136px;
 	border: none;
+	z-index: 1000;
 }
 
 /*Menu*/
