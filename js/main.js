@@ -37,6 +37,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 	qbApp.formSubmitAccess = false;
 	qbApp.captureCounter = 0;
 	qbApp.wideWidthHeight = ($(window).width()/16)*9;
+	qbApp.ContentTopCoordinate = 0;
 
 	//qbApp.facebookAppID = '1397201370521243'; //Local
 	qbApp.facebookAppID = '315999478539121'; // dev
@@ -432,6 +433,7 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 			if( $mainMenu.length === 1) {
 				$mainMenu.find( 'a' ).on( qbApp.clickEvent, function(event) {
+					qbApp.ContentTopCoordinate = 0;
 					var activePageId = $.mobile.activePage.attr( "id" );
 					var href = $(this).attr('href');
 					var data = parseUrl(href);
@@ -472,6 +474,25 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		          window.open(url, '_system');
 		      }
 				});
+
+				//fix scrolling after open/close
+				$mainMenu.panel({
+				  beforeopen: function( event, ui ) {
+				  	if($.mobile.activePage.attr("id") == "page-home"){
+						  qbApp.ContentTopCoordinate =  $(this).offset().top;
+						  $.mobile.silentScroll(qbApp.ContentTopCoordinate);
+						}
+				  }
+				});
+
+				$mainMenu.panel({
+					beforeclose: function( event, ui ) {
+						if($.mobile.activePage.attr("id") == "page-home" && qbApp.ContentTopCoordinate !== 0){
+							$.mobile.silentScroll(qbApp.ContentTopCoordinate);
+						}
+					}
+				});
+
 			}
 		});
 	}
