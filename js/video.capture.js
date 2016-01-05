@@ -89,7 +89,9 @@ function videoRecordReturnBack(){
 		else {
 			$.mobile.changePage('#page-home', {transition: "slidefade"});
 		}
-		$.mobile.silentScroll(1);
+		setTimeout(function() {
+			$.mobile.silentScroll(1);
+		}, 100);
 	});
 }
 
