@@ -483,20 +483,16 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 				});
 
 				//fix scrolling after open/close
-				$mainMenu.panel({
-				  beforeopen: function( event, ui ) {
-				  	if($.mobile.activePage.attr("id") == "page-home"){
-						  qbApp.ContentTopCoordinate =  $(this).offset().top;
-						  $.mobile.silentScroll(qbApp.ContentTopCoordinate);
-						}
-				  }
+				$mainMenu.on( "panelbeforeopen", function( event, ui ) {
+					if($.mobile.activePage.attr("id") == "page-home"){
+					  qbApp.ContentTopCoordinate =  $(this).offset().top;
+					  $.mobile.silentScroll(qbApp.ContentTopCoordinate);
+					}
 				});
 
-				$mainMenu.panel({
-					beforeclose: function( event, ui ) {
-						if($.mobile.activePage.attr("id") == "page-home" && qbApp.ContentTopCoordinate !== 0){
-							$.mobile.silentScroll(qbApp.ContentTopCoordinate);
-						}
+				$mainMenu.on( "panelbeforeclose", function( event, ui ) {
+					if($.mobile.activePage.attr("id") == "page-home" && qbApp.ContentTopCoordinate !== 0){
+						$.mobile.silentScroll(qbApp.ContentTopCoordinate);
 					}
 				});
 
@@ -850,9 +846,8 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 		}
 
     if(activePageId == 'page-home') {
-      console.log(activePageId);
       setTimeout(function() {
-        $.mobile.silentScroll(100);
+        $.mobile.silentScroll(1);
       }, 250);
     }
 
