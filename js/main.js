@@ -712,9 +712,10 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 			//scroll down by 1px ( search input fix )
 			var windowScrollTop = $(window).scrollTop();
-			if(windowScrollTop == 0) {
+			/*if(windowScrollTop == 0) {
 				$.mobile.silentScroll(1);
-			}
+			}*/
+			$.mobile.silentScroll(1);
 
 			//init scroll
 			var scrollEvent = 'scroll';
@@ -845,11 +846,13 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 
 		}
 
-    if(activePageId == 'page-home') {
+    /*if(activePageId == 'page-home') {
+      console.log(123);
       setTimeout(function() {
         $.mobile.silentScroll(1);
-      }, 250);
-    }
+        console.log(123);
+      }, 1000);
+    }*/
 
 		$('body > .page').not('#'+activePageId).removeClass('ui-page-active');
 	});
