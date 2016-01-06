@@ -848,6 +848,14 @@ var qbApp = qbApp || { 'settings': {}, 'behaviors': {} };
 			}
 
 		}
+
+    if(activePageId == 'page-home') {
+      console.log(activePageId);
+      setTimeout(function() {
+        $.mobile.silentScroll(100);
+      }, 250);
+    }
+
 		$('body > .page').not('#'+activePageId).removeClass('ui-page-active');
 	});
 
