@@ -93,6 +93,16 @@ function videoRecordReturnBack(){
 			$.mobile.silentScroll(1);
 		}, 250);*/
 		$.mobile.changePage('#page-about', {transition: "slidefade"});
+		setTimeout(function() {
+			if(qbApp.returnPageId.length){
+				$(qbApp.returnPageId).find('div.content-primary').css('visibility', 'visible');
+				$.mobile.changePage(qbApp.returnPageId, {transition: "slidefade", changeHash: false});
+			}
+			else {
+				$.mobile.changePage('#page-home', {transition: "slidefade"});
+			}
+		}, 250);
+		
 	});
 }
 
