@@ -91,7 +91,7 @@ function videoRecordReturnBack(){
 		}
 		setTimeout(function() {
 			$.mobile.silentScroll(1);
-		}, 100);
+		}, 250);
 	});
 }
 
