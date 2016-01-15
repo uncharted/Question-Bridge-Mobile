@@ -83,6 +83,7 @@ function videoRecordReturnBack(){
 		event.preventDefault();
 		$.mobile.silentScroll(1);
 		$.mobile.changePage('#page-about', {transition: "slidefade"});
+		$.mobile.silentScroll(1);
 		/*if(qbApp.returnPageId.length){
 			$(qbApp.returnPageId).find('div.content-primary').css('visibility', 'visible');
 			$.mobile.changePage(qbApp.returnPageId, {transition: "slidefade", changeHash: false});
