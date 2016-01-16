@@ -82,7 +82,7 @@ function videoRecordReturnBack(){
 	$('#take-me-back').find('a.return-back').on('click', function(event) {
 		event.preventDefault();
 		//$.mobile.silentScroll(1);
-		$.mobile.changePage('#page-about', {transition: "slidefade"});
+		$.mobile.changePage('#page-about', {transition: "slidefade", changeHash: false});
 		//$.mobile.silentScroll(1);
 		/*if(qbApp.returnPageId.length){
 			$(qbApp.returnPageId).find('div.content-primary').css('visibility', 'visible');
