@@ -84,13 +84,14 @@ function videoRecordReturnBack(){
 		//$.mobile.silentScroll(1);
 		//$.mobile.changePage('#page-about', {transition: "slidefade", changeHash: false});
 		//$.mobile.silentScroll(1);
-		if(qbApp.returnPageId.length){
+		/*if(qbApp.returnPageId.length){
 			$(qbApp.returnPageId).find('div.content-primary').css('visibility', 'visible');
 			$.mobile.changePage(qbApp.returnPageId, {transition: "slidefade", changeHash: false});
 		}
 		else {
 			$.mobile.changePage('#page-home', {transition: "slidefade", changeHash: false});
-		}
+		}*/
+		$.mobile.changePage('#take-me-back-thanks', {transition: "slidefade", changeHash: false});
 	});
 }
 
