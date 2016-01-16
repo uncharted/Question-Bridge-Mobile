@@ -81,9 +81,9 @@ function autoCaptureOnCorrectRotate(){
 function videoRecordReturnBack(){
 	$('#take-me-back').find('a.return-back').on('click', function(event) {
 		event.preventDefault();
-		$.mobile.silentScroll(1);
+		//$.mobile.silentScroll(1);
 		$.mobile.changePage('#page-about', {transition: "slidefade"});
-		$.mobile.silentScroll(1);
+		//$.mobile.silentScroll(1);
 		/*if(qbApp.returnPageId.length){
 			$(qbApp.returnPageId).find('div.content-primary').css('visibility', 'visible');
 			$.mobile.changePage(qbApp.returnPageId, {transition: "slidefade", changeHash: false});
