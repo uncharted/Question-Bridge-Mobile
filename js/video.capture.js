@@ -91,7 +91,8 @@ function videoRecordReturnBack(){
 		else {
 			$.mobile.changePage('#page-home', {transition: "slidefade", changeHash: false});
 		}*/
-		$.mobile.changePage('#take-me-back-thanks', {transition: "slidefade", changeHash: false});
+		//$.mobile.changePage('#take-me-back-thanks', {transition: "slidefade", changeHash: false});
+		$.mobile.changePage('#page-home', {transition: "none", changeHash: false});
 	});
 }
 
