@@ -175,7 +175,7 @@ function askQuestionAftercapture(mediaFiles){
 				$.getJSON(requestUrl, function(response) {
 					if(response.success === true) {
 						qbApp.hideLoading($('body > .ui-loader'));
-						$.mobile.changePage('#take-me-back', {transition: "slide", changeHash: false});
+						$.mobile.changePage('#take-me-back', {transition: "slidefade", changeHash: false});
 						qbApp.formSubmitAccess = false;
 					}
 				});
@@ -228,7 +228,7 @@ function checkAuthentication(){
 			//$('#'+activePageId).find('div#ipad-login').popup('open');
 		}
 		else{
-			$.mobile.changePage( "#page-sing-in", {transition: "slide", changeHash: false, reverse: true});
+			$.mobile.changePage( "#page-sing-in", {transition: "slidefade", changeHash: false, reverse: true});
 		}
 	}
 	else{
@@ -295,7 +295,7 @@ function captureVideo(type) {
   	);
 	}
 	else{
-		$.mobile.changePage('#take-me-back', {transition: "slide", changeHash: false});
+		$.mobile.changePage('#take-me-back', {transition: "slidefade", changeHash: false});
 	}
 
 }
