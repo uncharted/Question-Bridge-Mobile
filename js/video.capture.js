@@ -177,7 +177,7 @@ function askQuestionAftercapture(mediaFiles){
 				$.getJSON(requestUrl, function(response) {
 					if(response.success === true) {
 						qbApp.hideLoading($('body > .ui-loader'));
-						$.mobile.changePage('#take-me-back', {transition: "slidefade", changeHash: false});
+						$.mobile.changePage('#take-me-back', {transition: "none", changeHash: false});
 						qbApp.formSubmitAccess = false;
 					}
 				});
@@ -250,7 +250,7 @@ function captureSuccess(mediaFiles) {
 			qbApp.capture.url = qbApp.settings.serverUrl + 'qb/rest/video/answer';
 			qbApp.returnPageId = '#'+activePageId;
 			qbApp.captureType = null;
-			$.mobile.changePage('#take-me-back', {transition: "fade", changeHash: false});
+			$.mobile.changePage('#take-me-back', {transition: "none", changeHash: false});
 			setTimeout(function() {
 				$('#'+activePageId).find( '.content' ).show().removeClass( 'content-hidden' );
 			}, 1000);
